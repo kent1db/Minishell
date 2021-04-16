@@ -6,13 +6,13 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/04/16 15:19:08 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/04/16 17:52:04 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= 
-FILES			= 
-INC_FILES		= main.h
+NAME			= minishell
+FILES			= $(addprefix display/, print_banner.c)
+INC_FILES		= minishell.h
 INC_PATH		= ./includes/
 INC				= $(addprefix ${INC_PATH}, ${INC_FILES})
 SRC_PATH		= ./srcs/
@@ -20,7 +20,7 @@ SRC				= $(addprefix ${SRC_PATH}, ${FILES})
 
 CC				= clang
 OBJS 			= ${SRC:.c=.o}
-FLAGS			= -Wall -Wextra -Werror
+FLAGS			= #-Wall -Wextra -Werror
 
 #LIBRARY
 NAME_LIBFT 		= libft.a
