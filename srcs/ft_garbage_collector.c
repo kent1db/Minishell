@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_garbage_collector.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/15 15:18:36 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/17 18:18:27 by alafranc         ###   ########lyon.fr   */
+/*   Created: 2021/04/17 17:50:37 by alafranc          #+#    #+#             */
+/*   Updated: 2021/04/17 18:16:17 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strchr(const char *s, int c)
+void	*malloc_gc(t_list **gc, size_t size)
 {
-	int	i;
+	void	*malloc_ptr;
 
-	i = 0;
-	while (s[i] != c && s[i])
-		i++;
-	if (s[i] == c)
-		return ((char *)s + i);
-	else
+	malloc_ptr = malloc(size);
+	if (!malloc_ptr)
 		return (NULL);
+	ft_lstadd_front(gc, ft_lstnew(malloc_ptr));
+	return (malloc_ptr);
 }
 
-int	ft_strchr_index(const char *s, int c)
+char	*ft_strdup_gc(t_list **gc, char *src)
 {
-	int	i;
+	char	*dest;
 
-	i = 0;
-	while (s[i] != c && s[i])
-		i++;
-	if (s[i] == c)
-		return (i);
-	return (-1);
+	dest = ft_strdup(src);
+	if (!dest)
+		return (NULL);
+	ft_lstadd_front(gc, ft_lstnew(dest));
+	return (dest);
 }

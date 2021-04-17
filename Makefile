@@ -6,12 +6,14 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/04/16 17:52:04 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/04/17 18:58:50 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
-FILES			= $(addprefix display/, print_banner.c)
+FILES			= ft_garbage_collector.c \
+			$(addprefix display/, print_banner.c) \
+			$(addprefix env/, parse_env.c ft_lst_env.c ft_env.c)
 INC_FILES		= minishell.h
 INC_PATH		= ./includes/
 INC				= $(addprefix ${INC_PATH}, ${INC_FILES})

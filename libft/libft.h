@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:23:42 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/16 15:11:09 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/04/17 18:18:47 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-
+# include <stdio.h>
 typedef struct s_list
 {
 	void			*content;
@@ -43,6 +43,7 @@ void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr_fd(char *s, int fd);
 char				**ft_split(char const *s, char c);
 char				*ft_strchr(const char *s, int c);
+int					ft_strchr_index(const char *s, int c);
 char				*ft_strdup(char *src);
 char				*ft_strjoin(char const *s1, char const *s2);
 size_t				ft_strlcat(char *dest, const char *src, size_t dstsize);

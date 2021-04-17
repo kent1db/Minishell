@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/15 15:18:36 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/17 18:18:27 by alafranc         ###   ########lyon.fr   */
+/*   Created: 2021/04/17 16:01:46 by alafranc          #+#    #+#             */
+/*   Updated: 2021/04/17 16:05:23 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_strchr(const char *s, int c)
+#ifndef STRUCT_H
+# define STRUCT_H
+typedef struct s_env
 {
-	int	i;
-
-	i = 0;
-	while (s[i] != c && s[i])
-		i++;
-	if (s[i] == c)
-		return ((char *)s + i);
-	else
-		return (NULL);
-}
-
-int	ft_strchr_index(const char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != c && s[i])
-		i++;
-	if (s[i] == c)
-		return (i);
-	return (-1);
-}
+	char			*key;
+	char			*content;
+	struct s_env	*next;
+}					t_env;
+#endif
