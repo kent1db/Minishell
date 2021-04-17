@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 15:12:11 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/17 19:13:28 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/04/17 19:47:23 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av, char **envp)
 	gc = NULL;
 	env = parse_env(envp, &gc);
 	print_banner();
-	read_command_line(env, gc);
+	read_command_line(&env, &gc);
 	ft_lstclear(&gc, free);
 	return (0);
 }

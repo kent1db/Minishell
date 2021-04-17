@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/17 19:11:52 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/04/17 19:52:54 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 */
 void	*malloc_gc(t_list **gc, size_t size);
 char	*ft_strdup_gc(t_list **gc, char *src);
+/*
+**	FT_ERROR
+*/
+void	ft_error_msg(char *msg_error, t_list *gc);
 /*	
 ** ---------- DISPLAY ----------
 **	PRINT_BANNER
