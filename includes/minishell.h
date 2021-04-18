@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/17 19:52:54 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/04/18 20:41:28 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,14 @@ t_env	*pick_key_and_content(char *envp, t_list **gc);
 /*
 **	FT_LST_ENV
 */
-t_env	*ft_lstnew_env(char *key, char *content);
+t_env	*ft_lstnew_env(char *key, char *content, int is_push);
 t_env	*ft_lstlast_env(t_env *lst);
 void	ft_lstadd_back_env(t_env **alst, t_env *new);
+void	ft_lst_remove_key(t_env **env, char *key);
 /*
-**	FT_ENV
+**	FT_CLI_ENV
 */
 void	ft_env(t_env *env);
+void	ft_export(t_env **env, char **args);
+void	ft_unset(t_env **env, char **args);
 #endif

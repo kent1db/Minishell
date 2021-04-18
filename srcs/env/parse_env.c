@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 16:15:54 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/17 19:57:59 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/04/18 17:56:59 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_env	*pick_key_and_content(char *envp, t_list **gc)
 	ft_lstadd_front(gc, ft_lstnew(content));
 	if (!key || !content)
 		ft_error_msg("Malloc error", *gc);
-	return (ft_lstnew_env(key, content));
+	return (ft_lstnew_env(key, content, 1));
 }
 
 t_env	*parse_env(char **envp, t_list **gc)

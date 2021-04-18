@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 16:01:46 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/17 16:05:23 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/04/18 17:55:44 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ typedef struct s_env
 {
 	char			*key;
 	char			*content;
+	int				is_push;
 	struct s_env	*next;
 }					t_env;
 #endif
