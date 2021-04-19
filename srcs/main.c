@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 15:12:11 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/18 20:46:40 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/04/19 17:34:09 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,13 @@ int	main(int ac, char **av, char **envp)
 	t_env *env;
 	t_list *gc;
 
+	char **args = ft_split("var=content var=contenu", ' ');
 	gc = NULL;
 	env = parse_env(envp, &gc);
 	print_banner();
+	ft_export(&env, args, &gc);
 	ft_env(env);
+	free_all(args, 2);
 	// read_command_line(&env, &gc);
 	ft_lstclear(&gc, free);
 	return (0);

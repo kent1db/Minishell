@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_garbage_collector.c                             :+:      :+:    :+:   */
+/*   ft_utility_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/17 17:50:37 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/19 15:43:18 by alafranc         ###   ########lyon.fr   */
+/*   Created: 2021/04/19 15:24:37 by alafranc          #+#    #+#             */
+/*   Updated: 2021/04/19 16:47:33 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*malloc_gc(t_list **gc, size_t size)
+t_env	*ft_keyshr(t_env *env, char *key)
 {
-	void	*malloc_ptr;
-
-	malloc_ptr = malloc(size);
-	if (!malloc_ptr)
-		ft_error_msg("Malloc error", *gc);
-	ft_lstadd_front(gc, ft_lstnew(malloc_ptr));
-	return (malloc_ptr);
-}
-
-char	*ft_strdup_gc(t_list **gc, char *src)
-{
-	char	*dest;
-
-	dest = ft_strdup(src);
-	if (!dest)
-		ft_error_msg("Malloc error", *gc);
-	ft_lstadd_front(gc, ft_lstnew(dest));
-	return (dest);
+	while (env)
+	{
+		if (!ft_strcmp(env->key, key))
+			return (env);
+		env = env->next;
+	}
+	return (NULL);
 }

@@ -6,13 +6,13 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 16:15:54 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/18 17:56:59 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/04/19 16:57:43 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*pick_key_and_content(char *envp, t_list **gc)
+t_env	*pick_key_and_content(char *envp, t_list **gc, int is_push)
 {
 	char	*key;
 	char	*content;
@@ -27,7 +27,7 @@ t_env	*pick_key_and_content(char *envp, t_list **gc)
 	ft_lstadd_front(gc, ft_lstnew(content));
 	if (!key || !content)
 		ft_error_msg("Malloc error", *gc);
-	return (ft_lstnew_env(key, content, 1));
+	return (ft_lstnew_env(key, content, is_push));
 }
 
 t_env	*parse_env(char **envp, t_list **gc)
@@ -38,7 +38,7 @@ t_env	*parse_env(char **envp, t_list **gc)
 	env = NULL;
 	while (*envp)
 	{
-		new_elem = pick_key_and_content(*envp, gc);
+		new_elem = pick_key_and_content(*envp, gc, 1);
 		if (!new_elem)
 			ft_error_msg("Malloc error", *gc);
 		ft_lstadd_back_env(&env, new_elem);
