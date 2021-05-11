@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/19 16:53:33 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 15:23:00 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	print_banner(void);
 **	PARSE_ENV
 */
 t_env	*parse_env(char **env, t_list **gc);
-t_env	*pick_key_and_content(char *envp, t_list **gc, int is_push);
+t_env	*pick_key_and_content(char *envp, t_list **gc, status_env status);
 /*
 **	FT_LST_ENV
 */
-t_env	*ft_lstnew_env(char *key, char *content, int is_push);
+t_env	*ft_lstnew_env(char *key, char *content, status_env status);
 t_env	*ft_lstlast_env(t_env *lst);
 void	ft_lstadd_back_env(t_env **alst, t_env *new);
 void	ft_lst_remove_key(t_env **env, char *key);

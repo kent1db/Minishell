@@ -6,13 +6,13 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:08:50 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/18 20:27:32 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 15:21:38 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*ft_lstnew_env(char *key, char *content, int is_push)
+t_env	*ft_lstnew_env(char *key, char *content, status_env status)
 {
 	t_env	*elem;
 
@@ -21,7 +21,7 @@ t_env	*ft_lstnew_env(char *key, char *content, int is_push)
 		return (NULL);
 	elem->key = key;
 	elem->content = content;
-	elem->is_push = is_push;
+	elem->status = status;
 	elem->next = NULL;
 	return (elem);
 }
