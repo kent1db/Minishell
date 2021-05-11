@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:23:42 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/17 18:18:47 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 12:56:02 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdio.h>
+# include <limits.h>
 typedef struct s_list
 {
 	void			*content;
@@ -96,6 +97,9 @@ char				*ft_strjoin_free(char *s1, char *s2);
 int					ft_strchr_gnl(char *file, int c);
 char				*ft_substr_line(char *s);
 int					free_error_gnl(char *str_temp);
+int					ft_memchr_g(const void *s, int c, size_t n);
+char				*ft_supstr(char *s, unsigned int start, size_t len, int b);
+void				*ft_c(size_t count, size_t size);
 typedef struct s_flags {
 	int				display_zero;
 	int				space_reverse;

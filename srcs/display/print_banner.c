@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_banner.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:25:39 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/17 14:37:24 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 12:48:02 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,4 @@ void	print_banner(void)
 	ft_printf("/_/  /_/___/_/ |_/___//____/_/ /_/_____/_____/_____/%s\n\n", RESET);
 	ft_printf("             by qurobert and alafranc\n\n\n");
 }
-
-
-
-
-
-
-
-
-
-
-
-					
+			
