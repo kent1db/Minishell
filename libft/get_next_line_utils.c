@@ -3,95 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 00:03:45 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/08 15:38:53 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 12:52:23 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin_free(char *s1, char *s2)
+char	*ft_supstr(char *s, unsigned int start, size_t len, int b)
 {
-	int		i;
-	int		j;
-	char	*buf;
+	size_t	i;
+	char	*str;
 
 	i = 0;
-	j = 0;
-	if (s1 == NULL)
-		return (ft_strdup(s2));
-	if (s2 == NULL)
-		return (ft_strdup(s1));
-	buf = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!buf)
+	if (s == NULL)
 		return (NULL);
-	while (s1[j])
-		buf[i++] = s1[j++];
-	j = 0;
-	while (s2[j])
-		buf[i++] = s2[j++];
-	buf[i] = '\0';
-	free(s1);
-	return (buf);
+	if (start >= ft_strlen(s))
+	{
+		str = malloc(1);
+		str[0] = 0;
+		if (b)
+			free(s);
+		return (str);
+	}
+	str = ft_c(len + 1, 1);
+	if (!(str))
+		return (NULL);
+	while (s[start] != '\0' && (i < len))
+		str[i++] = s[start++];
+	if (b && s)
+		free(s);
+	str[i] = '\0';
+	return (str);
 }
 
-int	ft_strchr_gnl(char *file, int c)
+int	ft_memchr_g(const void *s, int c, size_t n)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	if (file == NULL)
-		return (-1);
-	while (file[i])
+	while (i < n)
 	{
-		if (file[i] == c)
+		if (((unsigned char *)s)[i] == (unsigned char)c)
 			return (i);
 		i++;
 	}
 	return (-1);
 }
 
-static void	ft_substr_end(int *end, char *s)
+char	*ft_strjoin_free(char *s1, char *s2)
 {
-	if (ft_strchr_gnl(s, '\n') == -1)
-		*end = ft_strlen(s);
-	else
-		*end = ft_strchr_gnl(s, '\n');
-}
-
-char	*ft_substr_line(char *s)
-{
-	char	*buf;
-	int		size;
+	char	*str;
 	int		i;
-	int		end;
+	int		c1;
 
 	i = 0;
-	size = 0;
-	if (!s)
+	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	ft_substr_end(&end, s);
-	if (end == 0)
-		return (ft_strdup(""));
-	while (i < end && s[i])
-		i++;
-	buf = malloc(sizeof(char) * (i + 1));
-	if (!buf)
+	c1 = ft_strlen(s1) + ft_strlen(s2);
+	str = ft_c(c1 + 1, 1);
+	if (!(str))
 		return (NULL);
-	i = 0;
-	while (s[i] && i < end)
+	while (s1[i] != '\0')
 	{
-		buf[i] = s[i];
+		str[i] = s1[i];
 		i++;
 	}
-	buf[i] = '\0';
-	return (buf);
-}
-
-int	free_error_gnl(char *str_temp)
-{
-	free(str_temp);
-	return (-1);
+	c1 = 0;
+	while (s2[c1] != '\0' && c1 < BUFFER_SIZE)
+		str[i++] = s2[c1++];
+	str[i] = '\0';
+	free(s1);
+	return (str);
 }
