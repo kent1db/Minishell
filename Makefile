@@ -6,50 +6,63 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/04/19 16:29:20 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/05/11 15:12:24 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
-FILES			= ft_garbage_collector.c ft_error.c \
-			$(addprefix display/, print_banner.c) \
-			$(addprefix env/, parse_env.c ft_lst_env.c ft_cli_env.c ft_utility_env.c)
-INC_FILES		= minishell.h
+
+FILES_DISPLAY	= print_banner.c
+FILES_PARSE_CMD	= ft_parse_arg.c
+FILES_ENV		= parse_env.c ft_lst_env.c ft_cli_env.c ft_utility_env.c
+FILES_GENERAL	= ft_garbage_collector.c ft_error.c main.c
+
+FILES			= $(addprefix display/, ${FILES_DISPLAY}) \
+				  ${addprefix env/, ${FILES_ENV}} \
+				  ${addprefix parse_cmd/, ${FILES_PARSE_CMD}} \
+				  ${FILES_GENERAL}
+				  
+
+INC_FILES		= minishell.h color.h struct.h
 INC_PATH		= ./includes/
 INC				= $(addprefix ${INC_PATH}, ${INC_FILES})
-SRC_PATH		= ./srcs/
-SRC				= $(addprefix ${SRC_PATH}, ${FILES})
 
-CC				= clang
-OBJS 			= ${SRC:.c=.o}
-FLAGS			= #-Wall -Wextra -Werror
+SRC_PATH		= srcs
+SRC				= $(addprefix ${SRC_PATH}/, ${FILES})
 
-#LIBRARY
+OBJS_PATH		= objs
+OBJS 			= $(addprefix $(OBJS_PATH)/, $(SRC:.c=.o))
+OBJS_FINAL		= $(addprefix ${OBJS_PATH}/, $(notdir $(OBJS)))
+
 NAME_LIBFT 		= libft.a
 LIBFT_PATH 		= libft/
 LIBFT			= $(addprefix ${LIBFT_PATH}, ${NAME_LIBFT})
 
-all: 			${NAME}	
+CC				= clang
+RM				= rm -rf
+FLAGS			= #-Wall -Wextra -Werror
 
-lib: 
+all: 			${NAME}
+
+init:
+				$(shell mkdir -p $(OBJS_PATH))
 				make -C ${LIBFT_PATH}
 				cp ${LIBFT} .
 
-%.o: %.c 		${INC}
-				${CC} ${FLAGS} -c $< -o $@ -I ${INC_PATH}
+$(OBJS_PATH)/%.o: %.c  $(INC)
+				$(CC) $(FLAGS) -I ${INC_PATH} -c $< -o $(addprefix ${OBJS_PATH}/, $(notdir $@))
 
-${NAME}: 		lib ${OBJS}
-				${CC} ${FLAGS} ${OBJS} $(addprefix ${SRC_PATH}, main.c) -o ${NAME} ${NAME_LIBFT} -I ${INC_PATH}
+${NAME}: 		init ${OBJS}
+				${CC} ${FLAGS} ${OBJS_FINAL} -o ${NAME} ${NAME_LIBFT} -I ${INC_PATH}
 
 clean:
 				make -C ${LIBFT_PATH} clean
-				${RM} ${OBJS} ${OBJS_BONUS}
+				${RM} ${OBJS_PATH}
 
 fclean:			clean
-				${RM} ${NAME}
-				${RM} ${LIBFT}
+				make -C ${LIBFT_PATH} fclean
 				${RM} ${NAME_LIBFT}
 re:				fclean all
 
 
-.PHONY: all clean fclean re lib
+.PHONY: all clean fclean re bonus init
