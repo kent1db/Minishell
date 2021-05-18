@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/16 15:12:11 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/18 10:58:57 by qurobert         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -35,8 +24,9 @@ int	main(int ac, char **av, char **envp)
 
 	gc = NULL;
 	env = parse_env(envp, &gc);
-	print_banner();
-    read_command_line(&env, &gc);
+	// print_banner();
+    // read_command_line(&env, &gc);
+	ft_lauch_cmd(NULL, &gc);
 	ft_lstclear(&gc, free);
 	return (0);
 }
