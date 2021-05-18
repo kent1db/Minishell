@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_garbage_collector.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 17:50:37 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/19 15:43:18 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/18 09:58:30 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_env.c                                        :+:      :+:    :+:   */
+/*   ft_parse_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 16:15:54 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/11 15:22:28 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/17 15:47:27 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*pick_key_and_content(char *envp, t_list **gc, status_env status)
+t_env	*pick_key_and_content(char *envp, t_list **gc, status status)
 {
 	char	*key;
 	char	*content;
@@ -38,7 +38,7 @@ t_env	*parse_env(char **envp, t_list **gc)
 	env = NULL;
 	while (*envp)
 	{
-		new_elem = pick_key_and_content(*envp, gc, s_env);
+		new_elem = pick_key_and_content(*envp, gc, status_env);
 		if (!new_elem)
 			ft_error_msg("Malloc error", *gc);
 		ft_lstadd_back_env(&env, new_elem);

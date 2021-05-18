@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/23 15:02:38 by alafranc          #+#    #+#              #
-#    Updated: 2021/05/11 15:10:02 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/05/17 13:48:52 by qurobert         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 

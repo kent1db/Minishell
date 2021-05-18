@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:08:50 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/11 15:21:38 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/17 10:49:58 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*ft_lstnew_env(char *key, char *content, status_env status)
+t_env	*ft_lstnew_env(char *key, char *content, status status)
 {
 	t_env	*elem;
 
