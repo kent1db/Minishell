@@ -1,25 +1,15 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/05/11 15:26:39 by alafranc         ###   ########lyon.fr    #
-#                                                                              #
-# **************************************************************************** #
-
 NAME			= minishell
 
 FILES_DISPLAY	= print_banner.c
 FILES_PARSING	= ft_parse_arg.c ft_parse_env.c
 FILES_ENV		= ft_lst_env.c ft_cli_env.c ft_utility_env.c
 FILES_GENERAL	= ft_garbage_collector.c ft_error.c main.c
+FILES_CMD		= ft_cmd.c
 
 FILES			= $(addprefix display/, ${FILES_DISPLAY}) \
 				  ${addprefix env/, ${FILES_ENV}} \
 				  ${addprefix parsing/, ${FILES_PARSING}} \
+				  ${addprefix cmd/, ${FILES_CMD}} \
 				  ${FILES_GENERAL}
 				  
 
@@ -59,9 +49,11 @@ clean:
 				make -C ${LIBFT_PATH} clean
 				${RM} ${OBJS_PATH}
 
-fclean:			clean
+fclean:			
 				make -C ${LIBFT_PATH} fclean
 				${RM} ${NAME_LIBFT}
+				${RM} ${OBJS_PATH}
+				${RM} ${NAME}
 				
 re:				fclean all
 
