@@ -10,7 +10,7 @@ void	read_command_line(t_env **env, t_list **gc)
 	ft_printf(RED "➜ " BLU "minishell " YEL "✗ " RESET);
 	while (get_next_line(0, &line))
 	{
-		ft_parse_command_line(gc, line);
+		// ft_parse_command_line(gc, line);
 		ft_printf(RED "➜ " BLU "minishell " YEL "✗ " RESET);
 		free(line);
 	}

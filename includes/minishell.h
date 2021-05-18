@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/18 10:57:31 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/05/18 13:04:07 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,9 @@ void	ft_unset(t_env **env, char **args);
 **	FT_UTILITY_ENV
 */
 t_env	*ft_keyshr(t_env *env, char *key);
+/*
+** ---------- CMD ----------
+**	FT_CMD
+*/
+void ft_lauch_cmd(char *cmds, t_list **gc);
 #endif

@@ -20,11 +20,15 @@ char	**list_cmd_done(t_list **gc)
 	return (cmd_done);
 }
 
-void ft_lauch_cmd(void *cmds, t_list **gc)
+void ft_lauch_cmd(char *cmds, t_list **gc)
 {
-	void	(**ft_instruction)(t_list **, t_list **, int);
+	void	(**ft_cmd)();
 	char	**cmd_done;
+	int		i;
 
+	i = -1;
 	cmd_done = list_cmd_done(gc);
-	printf("%s\n", cmd_done[1]);
+	while (cmds[++i])
+	{
+	}
 }
