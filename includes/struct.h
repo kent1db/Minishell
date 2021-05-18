@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/17 16:01:46 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/17 10:43:08 by qurobert         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
@@ -27,5 +16,19 @@ typedef struct s_env
 	status			status;
 	struct s_env	*next;
 }					t_env;
+
+typedef	struct		s_btree
+{	
+	struct s_btree	*left;
+	struct s_btree	*right;
+	void			*item;
+}					t_btree;
+
+
+typedef struct		s_command
+{
+	char			*com;
+	char			*arg;
+}					t_command;
 
 #endif
