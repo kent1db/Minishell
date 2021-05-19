@@ -28,21 +28,23 @@ AR				=	ar rcs
 CC				=	clang
 
 
-all: 				${NAME}	
+all: 				${NAME}
 
 $(OBJS_PATH)/%.o: 	%.c libft.h
-					$(CC) $(FLAGS) -c $< -o $(addprefix ${OBJS_PATH}/, $(notdir $@))
+					@$(CC) $(FLAGS) -c $< -o $(addprefix ${OBJS_PATH}/, $(notdir $@))
+					@printf "\e[?25l\e[JLIBFT : \e[92m$(notdir $<)\e[0m\r"
 
 $(NAME):			init ${OBJS}
-					${AR} ${NAME} ${OBJS_FINAL}
+					@${AR} ${NAME} ${OBJS_FINAL}
+					@printf '\033[?25l\033[JLIBFT CREATED \033[92m✔ \033[?25h\n'
 
 init:
-					${shell mkdir -p ${OBJS_PATH}}
+					@${shell mkdir -p ${OBJS_PATH}}
 clean:
-					${RM} ${OBJS_PATH}
+					@${RM} ${OBJS_PATH}
 
 fclean:				clean
-					${RM} ${NAME}
+					@${RM} ${NAME}
 
 re:					fclean all
 
