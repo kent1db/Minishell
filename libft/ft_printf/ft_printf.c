@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 13:28:19 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/18 15:45:26 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/19 10:05:36 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ void	ft_init_flags(t_flags *flags)
 	flags->nb_precision = -1;
 }
 
-int	main_printf(const char *format, t_flags flags, va_list ap)
+int	main_printf(const char *format, va_list ap)
 {
 	int		count;
+	t_flags	flags;
 
 	count = 0;
 	while (*format)
@@ -68,14 +69,13 @@ int	main_printf(const char *format, t_flags flags, va_list ap)
 int	ft_printf(int fd, const char *format, ...)
 {
 	va_list	ap;
-	t_flags	flags;
 	int		fd_stdout;
 	int		count;
 
 	fd_stdout = dup(STDOUT_FILENO);
 	dup2(fd, STDOUT_FILENO);
 	va_start(ap, format);
-	count = main_printf(format, flags, ap);
+	count = main_printf(format, ap);
 	dup2(fd_stdout, STDOUT_FILENO);
 	va_end(ap);
 	return (count);

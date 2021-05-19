@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:23:42 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/18 16:04:05 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/19 10:05:03 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct s_flags {
 	int				nb_precision;
 }					t_flags;
 int					ft_printf(int fd, const char *format, ...)
-					 __attribute__((format(printf, 1, 2)));
+					 __attribute__((format(printf, 2, 3)));
 int					ft_print_address(va_list ap, t_flags flags);
 int					ft_print_char(va_list ap, t_flags flags);
 int					ft_print_decimal(va_list ap, t_flags flags);

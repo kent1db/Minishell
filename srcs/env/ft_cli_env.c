@@ -6,7 +6,7 @@ void	ft_env(t_env *env)
 	while (env)
 	{
 		if (env->status == status_env)
-			ft_printf("%s=%s\n", env->key, env->content);
+			ft_printf(1, "%s=%s\n", env->key, env->content);
 		env = env->next;
 	}
 }
