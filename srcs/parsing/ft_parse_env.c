@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-t_env	*pick_key_and_content(char *envp, t_list **gc, status status)
+t_env	*pick_key_and_content(char *envp, t_list **gc, t_status status)
 {
 	char	*key;
 	char	*content;

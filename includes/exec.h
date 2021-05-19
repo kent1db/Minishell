@@ -1,40 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/19 12:32:14 by qurobert         ###   ########lyon.fr   */
+/*   Created: 2021/05/19 11:44:55 by qurobert          #+#    #+#             */
+/*   Updated: 2021/05/19 12:33:08 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
-# include "exec.h"
+#ifndef EXEC_H
+# define EXEC_H
 
-typedef enum		e_status
+typedef enum		e_type_enum
 {
-	status_env,
-	status_export,
-	none
-}					t_status;
+	type_command,
+	type_operator,
+	type_file
+}					t_type_enum;
 
-typedef struct		s_env
+typedef struct		s_command
 {
-	char			*key;
-	char			*content;
-	t_status		status;
-	struct s_env	*next;
-}					t_env;
+	char 			*cmd;
+	char 			*args;
+}					t_command;
 
-typedef	struct		s_tree
-{	
-	struct s_btree	*left;
-	struct s_btree	*right;
-	t_type_enum		type;
-	t_type_union	exec;
-}					t_tree;
+typedef struct		s_operator
+{
+	char			*op;
+}					t_operator;
+
+typedef struct		s_file
+{
+	char			*file;
+}					t_file;
+
+typedef union		u_type_union
+{
+	t_command		cmd;
+	t_operator		op;
+	t_file			file;
+}					t_type_union;
 
 #endif
