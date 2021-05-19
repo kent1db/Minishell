@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/05/18 16:05:12 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/05/19 10:50:47 by qurobert         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,25 +47,27 @@ FLAGS			= #-Wall -Wextra -Werror
 all: 			${NAME}
 
 init:
-				$(shell mkdir -p $(OBJS_PATH))
-				make -C ${LIBFT_PATH}
-				cp ${LIBFT} .
+				@$(shell mkdir -p $(OBJS_PATH))
+				@make -C ${LIBFT_PATH}
+				@cp ${LIBFT} .
 
 $(OBJS_PATH)/%.o: %.c  $(INC)
-				$(CC) $(FLAGS) -I ${INC_PATH} -c $< -o $(addprefix ${OBJS_PATH}/, $(notdir $@))
+				@$(CC) $(FLAGS) -I ${INC_PATH} -c $< -o $(addprefix ${OBJS_PATH}/, $(notdir $@))
+				@printf "\e[?25l\e[JMINISHELL : \e[92m$(notdir $<)\e[0m\r"
 
 ${NAME}: 		init ${OBJS}
-				${CC} ${FLAGS} ${OBJS_FINAL} -o ${NAME} ${NAME_LIBFT} -I ${INC_PATH}
+				@${CC} ${FLAGS} ${OBJS_FINAL} -o ${NAME} ${NAME_LIBFT} -I ${INC_PATH}
+				@printf '\033[?25l\033[JMINISHELL CREATED \033[92m✔ \033[?25h\n'
 
 clean:
-				make -C ${LIBFT_PATH} clean
-				${RM} ${OBJS_PATH}
+				@make -C ${LIBFT_PATH} clean
+				@${RM} ${OBJS_PATH}
 
 fclean:			
-				make -C ${LIBFT_PATH} fclean
-				${RM} ${NAME_LIBFT}
-				${RM} ${OBJS_PATH}
-				${RM} ${NAME}
+				@make -C ${LIBFT_PATH} fclean
+				@${RM} ${NAME_LIBFT}
+				@${RM} ${OBJS_PATH}
+				@${RM} ${NAME}
 				
 re:				fclean all
 
