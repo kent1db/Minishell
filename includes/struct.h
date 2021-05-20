@@ -6,12 +6,13 @@ typedef enum	e_status
 {
 	status_env,
 	status_export,
-	none
+	status_none
 }				status;
 
 typedef enum	e_error
 {
-	cmd_not_found
+	error_none,
+	cmd_not_found = 127
 }				t_error;
 
 
@@ -42,6 +43,7 @@ typedef struct s_all
 {
 	t_env	*env;
 	t_list	*gc;
+	t_error	error;
 }				t_all;
 
 #endif

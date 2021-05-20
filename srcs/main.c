@@ -16,18 +16,28 @@ void	read_command_line(t_env **env, t_list **gc)
 	}
 }
 
-int	main(int ac, char **av, char **envp)
+t_all	*init_all(char **envp)
 {
 	t_all *a;
 
 	a = malloc(sizeof(t_all));
 	a->gc = NULL;
 	ft_lstadd_front(&a->gc, ft_lstnew(a));
+	a->error = 0;
 	a->env = parse_env(envp, &a->gc);
-	ft_printf(1, "%s\n", a->env->key);
+	return (a);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_all *a;
+
+	errno = 0;
+	a = init_all(envp);
 	// print_banner();
     // read_command_line(&env, &gc);
-	ft_lauch_cmd(NULL, a);
+	ft_lauch_cmd("./ls", a, av[0]);
+	ft_printf(1, "%d\n", a->error);
 	ft_lstclear(&a->gc, free);
 	return (0);
 }

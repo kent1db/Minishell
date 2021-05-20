@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 00:03:45 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/11 12:52:23 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/05/20 15:00:39 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_supstr(char *s, unsigned int start, size_t len, int b)
 			free(s);
 		return (str);
 	}
-	str = ft_c(len + 1, 1);
+	str = ft_calloc(len + 1, 1);
 	if (!(str))
 		return (NULL);
 	while (s[start] != '\0' && (i < len))
@@ -63,7 +63,8 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
 	c1 = ft_strlen(s1) + ft_strlen(s2);
-	str = ft_c(c1 + 1, 1);
+	str = ft_calloc(c1 + 1, 1);
+	// str = NULL;
 	if (!(str))
 		return (NULL);
 	while (s1[i] != '\0')
@@ -72,7 +73,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 		i++;
 	}
 	c1 = 0;
-	while (s2[c1] != '\0' && c1 < BUFFER_SIZE)
+	while (s2[c1] != '\0')
 		str[i++] = s2[c1++];
 	str[i] = '\0';
 	free(s1);

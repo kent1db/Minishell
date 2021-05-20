@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 11:59:28 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/11 12:51:45 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/05/20 14:53:06 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void	*ft_c(size_t count, size_t size)
-{
-	void		*p;
-
-	p = malloc(size * count);
-	if (!(p))
-		return (NULL);
-	ft_memset(p, 0, (count * size));
-	return (p);
-}
 
 static int	ft_read(int *ret, int fd, char **buff)
 {
@@ -60,14 +49,14 @@ void	ft_init_var(int *ret, int *nl, char **t)
 	*ret = 1;
 	*nl = 0;
 	if (!(*t))
-		*t = ft_c(1, 1);
+		*t = ft_calloc(1, 1);
 }
 
 int	get_next_line(int fd, char **line)
 {
 	int			ret;
 	int			nl;
-	static char	*t[OPEN_MAX];
+	static char	*t[FOPEN_MAX];
 
 	ft_init_var(&ret, &nl, &t[fd]);
 	if (fd < 0 || !line || BUFFER_SIZE < 1 || !t[fd])

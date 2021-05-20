@@ -6,15 +6,20 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/19 11:13:01 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/20 11:33:49 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include <errno.h>
 # include "../libft/libft.h"
 # include "color.h"
 # include "struct.h"
+
 /*
 **	GARBAGE COLLECTOR
 */
@@ -45,9 +50,9 @@ void	ft_lst_remove_key(t_env **env, char *key);
 /*
 **	FT_CLI_ENV
 */
-void	ft_env(t_env *env);
-void	ft_export(t_env **env, char **args, t_list **gc);
-void	ft_unset(t_env **env, char **args);
+int		ft_env(t_all *a);
+int		ft_export(t_all *a);
+int		ft_unset(t_all *a);
 /*
 **	FT_UTILITY_ENV
 */
@@ -56,5 +61,10 @@ t_env	*ft_keyshr(t_env *env, char *key);
 ** ---------- CMD ----------
 **	FT_CMD
 */
-void ft_lauch_cmd(char *cmds, t_all *a);
+void ft_lauch_cmd(char *cmd, t_all *a, char *name_prg);
+/*
+**	FT_FILL_ARRAY_OUR_CMD
+*/
+char	**list_cmd_done(t_list **gc);
+void	*init_array_instruction_function(t_list **gc);
 #endif
