@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
+/*   Updated: 2021/05/20 15:58:29 by alafranc         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -10,7 +21,7 @@ void	read_command_line(t_env **env, t_list **gc)
 	ft_printf(1, RED "➜ " BLU "minishell " YEL "✗ " RESET);
 	while (get_next_line(0, &line))
 	{
-		// ft_parse_command_line(gc, line);
+		ft_lexing_command_line(line, gc);
 		ft_printf(1, RED "➜ " BLU "minishell " YEL "✗ " RESET);
 		free(line);
 	}
@@ -36,7 +47,7 @@ int	main(int ac, char **av, char **envp)
 	a = init_all(envp);
 	// print_banner();
     // read_command_line(&env, &gc);
-	ft_lauch_cmd("./ls", a, av[0]);
+	ft_launch_cmd("./ls", a, av[0]);
 	ft_printf(1, "%d\n", a->error);
 	ft_lstclear(&a->gc, free);
 	return (0);

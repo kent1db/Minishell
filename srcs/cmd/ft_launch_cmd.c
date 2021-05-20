@@ -84,7 +84,7 @@ void	ft_launch_execve(char *cmd, t_all *a, char *name_prg)
 	a->error = cmd_not_found;
 }
 
-void ft_lauch_cmd(char *cmd, t_all *a, char *name_prg)
+void ft_launch_cmd(char *cmd, t_all *a, char *name_prg)
 {
 	char	**cmd_done;
 	int	(**ft_cmd)(t_all *a);

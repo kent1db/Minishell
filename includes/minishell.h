@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/20 11:33:49 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/20 16:00:55 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	print_banner(void);
 **	PARSE_ENV
 */
 t_env	*parse_env(char **env, t_list **gc);
-t_env	*pick_key_and_content(char *envp, t_list **gc, status status);
+t_env	*pick_key_and_content(char *envp, t_list **gc, t_status status);
 /*
 **	FT_LST_ENV
 */
-t_env	*ft_lstnew_env(char *key, char *content, status status);
+t_env	*ft_lstnew_env(char *key, char *content, t_status status);
 t_env	*ft_lstlast_env(t_env *lst);
 void	ft_lstadd_back_env(t_env **alst, t_env *new);
 void	ft_lst_remove_key(t_env **env, char *key);
@@ -59,12 +59,16 @@ int		ft_unset(t_all *a);
 t_env	*ft_keyshr(t_env *env, char *key);
 /*
 ** ---------- CMD ----------
-**	FT_CMD
-*/
-void ft_lauch_cmd(char *cmd, t_all *a, char *name_prg);
-/*
 **	FT_FILL_ARRAY_OUR_CMD
 */
 char	**list_cmd_done(t_list **gc);
 void	*init_array_instruction_function(t_list **gc);
+/*
+**	FT_LAUNCH_CMD
+*/
+void ft_launch_cmd(char *cmd, t_all *all, char *name_prg);
+/*	
+** ---------- PARSING ----------
+*/
+void	ft_lexing_command_line(char *line, t_list **gc);
 #endif

@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
+/*   Updated: 2021/05/20 15:57:09 by alafranc         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+# include "exec.h"
 
-typedef enum	e_status
+typedef enum		e_status
 {
 	status_env,
 	status_export,
 	status_none
-}				status;
+}				t_status;
 
 typedef enum	e_error
 {
@@ -15,29 +27,22 @@ typedef enum	e_error
 	cmd_not_found = 127
 }				t_error;
 
-
-
 typedef struct s_env
+
 {
 	char			*key;
 	char			*content;
-	status			status;
+	t_status		status;
 	struct s_env	*next;
 }					t_env;
 
-typedef	struct		s_btree
+typedef	struct		s_tree
 {	
 	struct s_btree	*left;
 	struct s_btree	*right;
-	void			*item;
-}					t_btree;
-
-
-typedef struct		s_command
-{
-	char			*com;
-	char			*arg;
-}					t_command;
+	t_type_enum		type;
+	t_type_union	exec;
+}					t_tree;
 
 typedef struct s_all
 {

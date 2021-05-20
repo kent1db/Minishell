@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-t_env	*ft_lstnew_env(char *key, char *content, status status)
+t_env	*ft_lstnew_env(char *key, char *content, t_status status)
 {
 	t_env	*elem;
 
