@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
+/*   Updated: 2021/05/20 09:39:49 by qurobert         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -18,15 +29,16 @@ void	read_command_line(t_env **env, t_list **gc)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_env *env;
-	t_list *gc;
-	int		i = 0;
+	t_all *a;
 
-	gc = NULL;
-	env = parse_env(envp, &gc);
+	a = malloc(sizeof(t_all));
+	a->gc = NULL;
+	ft_lstadd_front(&a->gc, ft_lstnew(a));
+	a->env = parse_env(envp, &a->gc);
+	ft_printf(1, "%s\n", a->env->key);
 	// print_banner();
-    read_command_line(&env, &gc);
-	ft_lauch_cmd(NULL, &gc);
-	ft_lstclear(&gc, free);
+    // read_command_line(&env, &gc);
+	ft_lauch_cmd(NULL, a);
+	ft_lstclear(&a->gc, free);
 	return (0);
 }

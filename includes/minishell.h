@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/19 12:49:22 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/05/20 09:40:28 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,5 @@ void ft_lauch_cmd(char *cmds, t_list **gc);
 ** ---------- PARSING ----------
 */
 void	ft_lexing_command_line(char *line, t_list **gc);
-
 
 #endif
