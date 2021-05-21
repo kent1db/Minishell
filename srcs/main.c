@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/20 15:58:29 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/21 10:37:31 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int ac, char **av, char **envp)
 	a = init_all(envp);
 	// print_banner();
     // read_command_line(&env, &gc);
-	ft_launch_cmd("./ls", a, av[0]);
+	ft_launch_cmd("ls", a, av[0]);
 	ft_printf(1, "%d\n", a->error);
 	ft_lstclear(&a->gc, free);
 	return (0);
