@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:23:42 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/19 10:05:03 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/20 14:36:41 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int					ft_even(int nb);
 int					ft_abs(int nb);
 int					ft_strslen(char **strs);
 void				free_all(char **strs, int j);
-char				**ft_strsjoin(char **s1, char *s2);
+char				**ft_strsjoin_free(char **s1, char *s2);
 char				**ft_strsdup(char **s1);
 char				*ft_strcpy(char *dest, char *src);
 void				*malloc_gc(t_list **gc, size_t size);

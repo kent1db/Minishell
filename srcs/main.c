@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/20 11:36:26 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/05/21 10:06:09 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,28 @@ void	read_command_line(t_all *a)
 	}
 }
 
-int	main(int ac, char **av, char **envp)
+t_all	*init_all(char **envp)
 {
 	t_all *a;
 
 	a = malloc(sizeof(t_all));
 	a->gc = NULL;
 	ft_lstadd_front(&a->gc, ft_lstnew(a));
+	a->error = 0;
 	a->env = parse_env(envp, &a->gc);
+	return (a);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_all *a;
+
+	errno = 0;
+	a = init_all(envp);
 	// print_banner();
-    read_command_line(a);
-	ft_lauch_cmd(NULL, a);
+    // read_command_line(&env, &gc);
+	ft_launch_cmd("./ls", a, av[0]);
+	ft_printf(1, "%d\n", a->error);
 	ft_lstclear(&a->gc, free);
 	return (0);
 }

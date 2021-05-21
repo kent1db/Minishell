@@ -14,7 +14,7 @@ FILES			= 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii
 					ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
 					ft_convert_base.c ft_putnbr_base.c ft_maths.c ft_maths_2.c ft_atoi_base.c ft_check_base.c \
 					ft_swap.c ft_strrev.c ft_putchar.c ft_putstr.c ft_putnbr.c ft_size_nb.c \
-					get_next_line.c get_next_line_utils.c ft_strcpy.c \
+					get_next_line.c get_next_line_utils.c ft_strcpy.c ft_strs.c \
 					$(addprefix ft_printf/, ${FILES_PRINTF})
 
 
@@ -36,7 +36,7 @@ $(OBJS_PATH)/%.o: 	%.c libft.h
 
 $(NAME):			init ${OBJS}
 					@${AR} ${NAME} ${OBJS_FINAL}
-					@printf '\033[?25l\033[JLIBFT CREATED \033[92m✔ \033[?25h\n'
+					@printf '\033[?25l\033[JLIBFT CREATED \033[92m✔ \033[0m\033[?25h\n'
 
 init:
 					@${shell mkdir -p ${OBJS_PATH}}

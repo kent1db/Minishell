@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:19 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/20 15:58:28 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/05/21 10:07:59 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_is_delimiter(char c)
 			return (1);
 	}
 	if (c == '\0')
-		return (1);
+		return(1) ;
 	return (0);
 }
 
