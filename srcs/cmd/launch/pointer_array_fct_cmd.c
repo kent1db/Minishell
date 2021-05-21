@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fill_array_our_cmd.c                            :+:      :+:    :+:   */
+/*   pointer_array_fct_cmd.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 10:50:09 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/20 10:50:33 by alafranc         ###   ########lyon.fr   */
+/*   Created: 2021/05/21 13:12:49 by alafranc          #+#    #+#             */
+/*   Updated: 2021/05/21 13:38:59 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 char	**list_cmd_done(t_list **gc)
 {
@@ -47,4 +46,14 @@ void	*init_array_instruction_function(t_list **gc)
 	ft_cmd[5] = &ft_env;
 	ft_cmd[6] = NULL;
 	return (ft_cmd);
+}
+
+char	**pick_argument_and_add_name_prg(t_all *a, char *name_prg)
+{
+	char	**arg;
+
+	arg = malloc_gc(&a->gc, sizeof(char *) * 2);
+	arg[0] = ft_strdup_gc(&a->gc, name_prg);
+	arg[1] = NULL;
+	return (arg);
 }
