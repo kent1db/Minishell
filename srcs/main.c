@@ -6,22 +6,21 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/21 10:37:31 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/21 10:41:53 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	read_command_line(t_env **env, t_list **gc)
+void	read_command_line(t_all *a)
 {
 	char	*line;
 
-	(void)env;
 	line = NULL;
 	ft_printf(1, RED "➜ " BLU "minishell " YEL "✗ " RESET);
 	while (get_next_line(0, &line))
 	{
-		ft_lexing_command_line(line, gc);
+		ft_lexing_command_line(line, a);
 		ft_printf(1, RED "➜ " BLU "minishell " YEL "✗ " RESET);
 		free(line);
 	}
