@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/20 09:38:13 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/05/20 14:22:18 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,10 @@ typedef enum		e_status
 	none
 }					t_status;
 
-typedef struct		s_env
 typedef enum	e_error
 {
 	cmd_not_found
 }				t_error;
-
-
 
 typedef struct s_env
 
@@ -50,6 +47,7 @@ typedef struct s_all
 {
 	t_env	*env;
 	t_list	*gc;
+	t_tree	*tree;
 }				t_all;
 
 #endif
