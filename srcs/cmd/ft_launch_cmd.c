@@ -83,7 +83,6 @@ void	ft_launch_execve(char *cmd, t_all *a, char *name_prg)
 	}
 	i = -1;
 	path_cmd = ft_split(ft_keyshr(a->env, "PATH")->content, ':');
-	path_cmd = ft_strsjoin_free(path_cmd, "./");
 	while (path_cmd[++i])
 	{
 		if (path_cmd[i][ft_strlen(path_cmd[i]) - 1] != '/')
