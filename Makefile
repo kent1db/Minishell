@@ -6,20 +6,21 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/05/24 20:01:03 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/05/25 14:05:16 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 
-FILES_DISPLAY	= print_banner.c
-FILES_PARSING	= ft_parse_arg.c ft_parse_env.c
-FILES_GENERAL	= ft_garbage_collector.c ft_error.c main.c ft_pick_signal.c
-FILES_CMD		= ft_launch_cmd.c ft_lst_env.c ft_cli_env.c ft_utility_env.c ft_fill_array_our_cmd.c
+FILES_PARSING	= parse_arg.c parse_env.c
+FILES_GENERAL	= garbage_collector.c error.c main.c print_banner.c pick_signal.c
+FILES_CMD		= 
+FILES_LAUNCH	= pointer_array_fct_cmd.c launch_cmd.c launch_execve.c
+FILES_ENV		= cli_env.c lst_env.c
 
 FILES			= $(addprefix display/, ${FILES_DISPLAY}) \
 				  ${addprefix parsing/, ${FILES_PARSING}} \
-				  ${addprefix cmd/, ${FILES_CMD}} \
+				  ${addprefix cmd/, ${FILES_CMD} ${addprefix env/, ${FILES_ENV}} ${addprefix launch/, ${FILES_LAUNCH}}} \
 				  ${FILES_GENERAL}
 				  
 

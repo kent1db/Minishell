@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/21 10:06:25 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/05/21 11:26:06 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@ typedef enum		e_status
 	status_export,
 	status_none
 }				t_status;
-
-typedef enum	e_error
-{
-	error_none,
-	cmd_not_found = 127
-}				t_error;
 
 typedef struct s_env
 
@@ -49,7 +43,7 @@ typedef struct s_all
 	t_env	*env;
 	t_list	*gc;
 	t_tree	*tree;
-	t_error	error;
+	int		status_cmd;
 }				t_all;
 
 #endif
