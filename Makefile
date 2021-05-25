@@ -6,7 +6,7 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/05/20 10:50:08 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/05/24 20:01:03 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			= minishell
 
 FILES_DISPLAY	= print_banner.c
 FILES_PARSING	= ft_parse_arg.c ft_parse_env.c
-FILES_GENERAL	= ft_garbage_collector.c ft_error.c main.c
+FILES_GENERAL	= ft_garbage_collector.c ft_error.c main.c ft_pick_signal.c
 FILES_CMD		= ft_launch_cmd.c ft_lst_env.c ft_cli_env.c ft_utility_env.c ft_fill_array_our_cmd.c
 
 FILES			= $(addprefix display/, ${FILES_DISPLAY}) \

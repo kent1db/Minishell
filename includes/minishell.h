@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/21 10:08:30 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/05/24 20:21:54 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ char	*ft_strdup_gc(t_list **gc, char *src);
 **	FT_ERROR
 */
 void	ft_error_msg(char *msg_error, t_list *gc);
+/*
+**	FT_PICK_SIGNAL
+*/
+void    ft_pick_signal(t_all *a);
+/*
+**	MAIN
+*/
+void	read_command_line(t_all *a);
+t_all	*init_all(char **envp);
 /*	
 ** ---------- DISPLAY ----------
 **	PRINT_BANNER
