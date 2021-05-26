@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/21 10:33:27 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 08:18:10 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ int	main(int ac, char **av, char **envp)
 	errno = 0;
 	a = init_all(envp);
 	// print_banner();
-    read_command_line(a);
+    // read_command_line(&env, &gc);
+	// strerror()
 	ft_launch_cmd("./ls", a, av[0]);
-	ft_printf(1, "%d\n", a->error);
+	// ft_printf(1, "%d\n", a->error);
 	ft_lstclear(&a->gc, free);
 	return (0);
 }

@@ -51,31 +51,45 @@ void	ft_point_on_split(t_list **gc, char **split)
 	ft_lstadd_front(gc, ft_lstnew(split));
 }
 
-// IMPROVE ./ because it works with => ./ls alors que normalement ERROR
+int		ft_launch_execve_with_path(char *path_cmd, t_all *a, char **arg)
+{
+	struct	stat 	buf;
+	int				status;
+
+	if (lstat(path_cmd, &buf) == 0)
+	{
+		if (fork() == 0)
+			execve(path_cmd, arg, NULL);
+		wait(&status);
+		if (WIFEXITED(status))
+			a->error = WEXITSTATUS(status);
+		return (1);
+	}
+	return (0);
+}
+
 void	ft_launch_execve(char *cmd, t_all *a, char *name_prg)
 {
-	char	**arg;
-	char	**path_cmd;
-	int		i;
-	struct	stat buf;
-	int			status;
+	char			**arg;
+	char			**path_cmd;
+	int				i;
 
+	arg = pick_argument_and_add_name_prg(a, name_prg);
+	if (ft_strchr(cmd, '/'))
+	{
+		if (!ft_launch_execve_with_path(cmd, a, arg))
+			a->error = cmd_not_found;
+		return ;
+	}
 	i = -1;
 	path_cmd = ft_split(ft_keyshr(a->env, "PATH")->content, ':');
-	path_cmd = ft_strsjoin_free(path_cmd, "./");
-	arg = pick_argument_and_add_name_prg(a, name_prg);
 	while (path_cmd[++i])
 	{
 		if (path_cmd[i][ft_strlen(path_cmd[i]) - 1] != '/')
 			path_cmd[i] = ft_strjoin_free(path_cmd[i], "/");
 		path_cmd[i] = ft_strjoin_free(path_cmd[i], cmd);
-		if (lstat(path_cmd[i], &buf) == 0)
+		if (ft_launch_execve_with_path(path_cmd[i], a, arg))
 		{
-			if (fork() == 0)
-				execve(path_cmd[i], arg, NULL);
-			wait(&status);
-			if (WIFEXITED(status))
-				a->error = WEXITSTATUS(status);
 			ft_point_on_split(&a->gc, path_cmd);
 			return ;
 		}
