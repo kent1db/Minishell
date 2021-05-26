@@ -19,8 +19,8 @@ FILES			= 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii
 
 
 OBJS_PATH		=	objs
-OBJS 			=	$(addprefix $(OBJS_PATH)/, $(FILES:.c=.o))
-OBJS_FINAL		= 	$(addprefix ${OBJS_PATH}/, $(notdir $(OBJS)))
+OBJS 			=	$(FILES:%.c=$(OBJS_PATH)/%.o)
+# OBJS_FINAL		= 	$(addprefix ${OBJS_PATH}/, $(notdir $(OBJS)))
 
 FLAGS			= 	-Wall -Wextra -Werror
 RM				=	rm -rf
@@ -30,12 +30,13 @@ CC				=	clang
 
 all: 				${NAME}
 
-$(OBJS_PATH)/%.o: 	%.c libft.h
-					@$(CC) $(FLAGS) -c $< -o $(addprefix ${OBJS_PATH}/, $(notdir $@))
-					@printf "\e[?25l\e[JLIBFT : \e[92m$(notdir $<)\e[0m\r"
+$(OBJS): 			$(OBJS_PATH)/%.o: %.c libft.h
+					@mkdir -p $(@D)
+					@$(CC) $(FLAGS) -I ${INC_PATH} -o $@ -c $<
+					@printf "\e[?25l\e[LIBFT : \e[92m$(notdir $<)\e[0m\r"
 
 $(NAME):			init ${OBJS}
-					@${AR} ${NAME} ${OBJS_FINAL}
+					@${AR} ${NAME} ${OBJS}
 					@printf '\033[?25l\033[JLIBFT CREATED \033[92m✔ \033[0m\033[?25h\n'
 
 init:

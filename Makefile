@@ -6,7 +6,7 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/05/26 15:31:11 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/05/26 16:28:05 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ FILES			= $(addprefix display/, ${FILES_DISPLAY}) \
 				  ${addprefix cmd/, ${FILES_CMD} ${addprefix env/, ${FILES_ENV}} ${addprefix launch/, ${FILES_LAUNCH}}} \
 				  ${addprefix termcap/, ${FILES_TERMCAP}} \
 				  ${FILES_GENERAL}
-				  
 
 INC_FILES		= minishell.h color.h struct.h
 INC_PATH		= ./includes/
@@ -33,8 +32,7 @@ SRC_PATH		= srcs
 SRC				= $(addprefix ${SRC_PATH}/, ${FILES})
 
 OBJS_PATH		= objs
-OBJS 			= $(addprefix $(OBJS_PATH)/, $(SRC:.c=.o))
-OBJS_FINAL		= $(addprefix ${OBJS_PATH}/, $(notdir $(OBJS)))
+OBJS 			= $(SRC:%.c=$(OBJS_PATH)/%.o)
 
 NAME_LIBFT 		= libft.a
 LIBFT_PATH 		= libft/
@@ -51,12 +49,14 @@ init:
 				@make -C ${LIBFT_PATH}
 				@cp ${LIBFT} .
 
-$(OBJS_PATH)/%.o: %.c  $(INC)
-				@$(CC) $(FLAGS) -I ${INC_PATH} -c $< -o $(addprefix ${OBJS_PATH}/, $(notdir $@))
-				@printf "\e[?25l\e[JMINISHELL : \e[92m$(notdir $<)\e[0m\r"
+
+$(OBJS): $(OBJS_PATH)/%.o: %.c ${INC}
+				@mkdir -p $(@D)
+				@$(CC) $(FLAGS) -I ${INC_PATH} -o $@ -c $<
+				@printf "\e[?25l\e[MINISHELL : \e[92m$(notdir $<)\e[0m\r"
 
 ${NAME}: 		init ${OBJS}
-				@${CC} ${FLAGS} ${OBJS_FINAL} -o ${NAME} ${NAME_LIBFT} -I ${INC_PATH} -lncurses
+				@${CC} ${FLAGS} ${OBJS} -o ${NAME} ${NAME_LIBFT} -I ${INC_PATH} -lncurses
 				@printf '\033[?25l\033[JMINISHELL CREATED \033[92m✔ \033[0m\033[?25h\n'
 
 clean:
