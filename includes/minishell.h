@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/25 14:04:47 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/25 15:54:46 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <string.h>
+#include <curses.h>
+#include <term.h>
 # include "../libft/libft.h"
 # include "color.h"
 # include "struct.h"

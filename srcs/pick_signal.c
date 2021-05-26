@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 23:23:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/25 14:05:48 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/25 15:49:56 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,13 @@ void    ft_pick_signal(t_all *a)
         ft_error_msg("signal have a error", a->gc);
         return ;
     }
-    struct termios saved;
-    struct termios attributes;
+    // struct termios saved;
+    // struct termios attributes;
 
-    tcgetattr(STDIN_FILENO, &saved);
+    // tcgetattr(STDIN_FILENO, &saved);
 
-    tcgetattr(STDIN_FILENO, &attributes);
-    attributes.c_lflag &= ~ ECHO;
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);
-    while (1);
-
+    // tcgetattr(STDIN_FILENO, &attributes);
+    // attributes.c_lflag &= ~ ECHO;
+    // tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);
+    // while (1);
 }
