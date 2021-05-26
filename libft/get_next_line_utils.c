@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 00:03:45 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/20 15:00:39 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 14:49:28 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	*ft_strjoin_free(char *s1, char *s2)
 		return (NULL);
 	c1 = ft_strlen(s1) + ft_strlen(s2);
 	str = ft_calloc(c1 + 1, 1);
-	// str = NULL;
 	if (!(str))
 		return (NULL);
 	while (s1[i] != '\0')

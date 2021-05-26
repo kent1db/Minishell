@@ -6,17 +6,15 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 14:36:00 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/20 14:38:26 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 14:49:14 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#include "libft.h"
-
-int		ft_strslen(char **strs)
+int	ft_strslen(char **strs)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!strs)
@@ -32,14 +30,17 @@ char	**ft_strsjoin_free(char **s1, char *s2)
 	int		i;
 
 	i = 0;
-	if (!(strs = malloc(sizeof(char*) * (ft_strslen(s1) + 2))))
+	strs = malloc(sizeof(char *) * (ft_strslen(s1) + 2));
+	if (!(strs))
 		return (NULL);
 	if (s1)
+	{	
 		while (s1[i])
 		{
 			strs[i] = ft_strdup(s1[i]);
 			i++;
 		}
+	}
 	strs[i++] = ft_strdup(s2);
 	strs[i] = NULL;
 	free_all(s1, ft_strslen(s1));
@@ -56,7 +57,8 @@ char	**ft_strsdup(char **s1)
 	j = 0;
 	if (!s1)
 		return (NULL);
-	if (!(strs = malloc(sizeof(char*) * (ft_strslen(s1) + 2))))
+	strs = malloc(sizeof(char *) * (ft_strslen(s1) + 2));
+	if (!(strs))
 		return (NULL);
 	while (s1[i])
 	{

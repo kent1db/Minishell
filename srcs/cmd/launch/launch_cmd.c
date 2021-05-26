@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/21 14:14:54 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 14:53:37 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int	launch_if_is_our_cmd(char *cmd, t_all *a, char **cmd_done,
 							int	(**ft_cmd)(t_all *a))
 {
-	int	i;
-	i = -1;
-	t_env *new_status;
+	int		i;
+	t_env	*new_status;
 
+	i = -1;
 	while (cmd_done[++i])
 	{
 		if (!ft_strcmp(cmd, cmd_done[i]))
@@ -35,7 +35,7 @@ int	launch_if_is_our_cmd(char *cmd, t_all *a, char **cmd_done,
 
 void	ft_exit_status_cmd(t_all *a)
 {
-	t_env *new_status;
+	t_env	*new_status;
 
 	new_status = ft_keyshr(a->env, "?");
 	if (!new_status)

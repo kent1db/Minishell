@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/21 11:26:06 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 14:46:15 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define STRUCT_H
 # include "exec.h"
 
-typedef enum		e_status
+typedef enum e_status
 {
 	status_env,
 	status_export,
@@ -22,7 +22,6 @@ typedef enum		e_status
 }				t_status;
 
 typedef struct s_env
-
 {
 	char			*key;
 	char			*content;
@@ -30,7 +29,7 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
-typedef	struct		s_tree
+typedef struct s_tree
 {	
 	struct s_btree	*left;
 	struct s_btree	*right;
@@ -40,10 +39,11 @@ typedef	struct		s_tree
 
 typedef struct s_all
 {
-	t_env	*env;
-	t_list	*gc;
-	t_tree	*tree;
-	int		status_cmd;
+	t_env			*env;
+	t_list			*gc;
+	t_tree			*tree;
+	struct termios	saved;
+	int				status_cmd;
 }				t_all;
 
 #endif

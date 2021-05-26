@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_env.c                                       :+:      :+:    :+:   */
+/*   lst_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:38:18 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/21 11:44:56 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 14:53:09 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_lstadd_back_env(t_env **alst, t_env *new)
 
 void	ft_lst_remove_key(t_env **env, char *key)
 {
-	t_env *begin;
+	t_env	*begin;
 
 	begin = *env;
 	if (!ft_strcmp((*env)->key, key))

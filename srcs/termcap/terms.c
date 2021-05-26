@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   terms.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/17 19:50:43 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/26 14:57:51 by alafranc         ###   ########lyon.fr   */
+/*   Created: 2021/05/26 11:11:34 by alafranc          #+#    #+#             */
+/*   Updated: 2021/05/26 11:11:40 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_error_msg(char *msg_error, t_list *gc)
+void	init_terms(t_all *a)
 {
-	ft_printf(1, "Error:\n%s\n", msg_error);
-	exit(EXIT_FAILURE);
-	ft_lstclear(&gc, free);
+	a->saved = save_termios();
+	delete_special_characters();
+	ft_pick_signal(a);
 }

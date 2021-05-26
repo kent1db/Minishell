@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/21 13:55:29 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 15:03:09 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,13 @@ void	ft_cmd_not_found(t_all *a, char *name_prg, char *cmd)
 	ft_printf(1, "%s: %s: %s\n", ft_strchr(name_prg, '/') + 1, cmd, strerror(2));
 }
 
-void	ft_launch_execve(char *cmd, t_all *a, char *name_prg)
+void	ft_launch_execve_path_cmd(char **arg, t_all *a
+		, char *name_prg, char *cmd)
 {
-	char	**arg;
 	char	**path_cmd;
 	int		i;
 
 	i = -1;
-	arg = pick_argument_and_add_name_prg(a, name_prg);
-	if (ft_strchr(cmd, '/'))
-	{
-		if (!ft_launch_execve_with_path(cmd, a, arg))
-			ft_cmd_not_found(a, name_prg, cmd);
-		return ;
-	}
 	path_cmd = ft_split(ft_keyshr(a->env, "PATH")->content, ':');
 	while (path_cmd[++i])
 	{
@@ -73,4 +66,18 @@ void	ft_launch_execve(char *cmd, t_all *a, char *name_prg)
 	}
 	ft_point_gc_on_split(&a->gc, path_cmd);
 	ft_cmd_not_found(a, name_prg, cmd);
+}
+
+void	ft_launch_execve(char *cmd, t_all *a, char *name_prg)
+{
+	char	**arg;
+
+	arg = pick_argument_and_add_name_prg(a, name_prg);
+	if (ft_strchr(cmd, '/'))
+	{
+		if (!ft_launch_execve_with_path(cmd, a, arg))
+			ft_cmd_not_found(a, name_prg, cmd);
+		return ;
+	}
+	ft_launch_execve_path_cmd(arg, a, name_prg, cmd);
 }
