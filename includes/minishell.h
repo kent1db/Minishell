@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/21 11:08:07 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 10:01:06 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,10 @@ void ft_launch_cmd(char *cmd, t_all *all, char *name_prg);
 ** ---------- PARSING ----------
 */
 void	ft_lexing_command_line(char *line, t_all *a);
+
+/* UTILS_PARSING */
+void	ft_skip_whitespace(char *line, int *i);
+void	ft_is_quote(char c, int *quote);
+int	ft_delimiter(char c, char *del);
+
 #endif

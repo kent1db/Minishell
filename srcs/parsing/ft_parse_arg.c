@@ -6,81 +6,73 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:19 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/21 14:49:09 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 13:30:15 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_skip_whitespace(char *line, int *i)
-{
-	while (line[*i] && (line[*i] == ' ' || line[*i] == '\t'))
-		(*i)++;
-}
-
-int	ft_delimiter_arg(char c)
-{
-	char		*del;
-	int			i;
-	static int	quote;
-
-	i = -1;
-	del = ";><|";
-	if (!quote && (c ==  '\'' || c == '\"'))
-		quote = 1;
-	else if (quote && (c ==  '\'' || c == '\"'))
-		quote = 0;
-	while (del[++i])
-	{
-		if (del[i] == c && !quote)
-			return (1);
-	}
-	if (c == '\0')
-		return(1);
-	return (0);
-}
-
-int	ft_delimiter_cmd(char c)
-{
-	char	*del;
-	int		i;
-
-	i = -1;
-	del = " ;><|\t";
-	while (del[++i])
-	{
-		if (del[i] == c)
-			return (1);
-	}
-	if (c == '\0')
-		return(1) ;
-	return (0);
-}
-
-int		ft_count_malloc(char *line, int *i, int (*f)(char c))
+int	ft_count_malloc(char *line, int *i, int (*f)(char c, char *str), char *del)
 {
 	int	size;
+	int	quote;
 
 	size = 0;
-	while (!f(line[*i]))
+	quote = 0;
+	while (!f(line[*i], del) && line[*i])
 	{
-		// if (line[*i] == ' ')
-		// {
-		// 	(*i)++;
-		// 	while (line[*i] == ' ')
-		// 		(*i)++;
-		// }
-		size++;
-		(*i)++;
+		ft_is_quote(line[*i], &quote);
+		if (line[*i] == ' ' && !quote)
+		{
+			(*i)++;
+			size++;
+			ft_skip_whitespace(line, i);
+		}
+		else
+		{
+			size++;
+			(*i)++;
+		}
 	}
+	if (f(line[*i], del) && line[*i - 1] && line[*i - 1] == ' ')
+		size--;
 	return (size);
+}
+
+char	*ft_substr_sw(char *s, int w, size_t len)
+{
+	char	*buf;
+	size_t	size;
+	size_t	i;
+
+	i = 0;
+	size = 0;
+	if (s == NULL)
+		return (NULL);
+	if (w >= ft_strlen(s))
+		return (ft_calloc(1, sizeof(char)));
+	while (size < len && s[w + size])
+		size++;
+	buf = malloc(sizeof(char) * (size + 1));
+	if (!buf)
+		return (NULL);
+	size = 0;
+	while (s[w] && i < len)
+	{
+		ft_is_quote(s[w], (int *)&size);
+		buf[i++] = s[w++];
+		if (s[w] && s[w - 1] && s[w - 1] == ' ' && s[w] == ' ' && !size)
+			ft_skip_whitespace(s, &w);
+	}
+	buf[i] = '\0';
+	return (buf);
 }
 
 char	*ft_malloc_size(char *line, int size, t_all *a, int start)
 {
 	char	*ptr;
 
-	ptr = ft_substr(line, start, size);
+	ptr = ft_substr_sw(line, start, size);
 	ft_lstadd_front(&a->gc, ft_lstnew(ptr));
 	return (ptr);
 }
@@ -98,10 +90,10 @@ void	ft_malloc_argument(char *line, int *i, t_all *a, char *cmd)
 	// if (ft_strcmp("echo", cmd))
 	// 	ft_malloc_option(line, i, a);
 	start = *i;
-	size = ft_count_malloc(line, i, ft_delimiter_arg);
+	size = ft_count_malloc(line, i, ft_delimiter, ";><|");
 	if (size)
 		arg = ft_malloc_size(line, size, a, start);
-	ft_printf(1, "size = %d arg = %s\n", size, arg);
+	printf("2 size = %d arg = %s\n", size, arg);
 }
 
 void	ft_malloc_command(char *line, int *i, t_all *a, int *bool)
@@ -115,11 +107,13 @@ void	ft_malloc_command(char *line, int *i, t_all *a, int *bool)
 	*bool = 0;
 	ft_skip_whitespace(line, i);
 	start = *i;
-	size = ft_count_malloc(line, i, ft_delimiter_cmd);
+	size = ft_count_malloc(line, i, ft_delimiter, " ;><|\t");
 	if (size)
+	{
 		cmd = ft_malloc_size(line, size, a, start);
-	ft_malloc_argument(line, i, a, cmd);
-	ft_printf(1, "size = %d cmd = %s\n", size,  cmd);
+		ft_malloc_argument(line, i, a, cmd);
+	}
+	printf("1 size = %d cmd = %s\n", size, cmd);
 }
 
 void	ft_lexing_command_line(char *line, t_all *a)
@@ -128,14 +122,16 @@ void	ft_lexing_command_line(char *line, t_all *a)
 	int	count;
 	int	bool;
 
-	i = -1;
+	i = 0;
 	bool = 1;
 	count = 0;
-	while (line[++i])
+	while (line[i])
 	{
 		if (bool)
 			ft_malloc_command(line, &i, a, &bool);
-		if (line[i] == ';' || line[i] == '|')
+		if (line[i] && (line[i] == ';' || line[i] == '|'))
 			bool = 1;
+		if (line[i])
+			i++;
 	}
 }
