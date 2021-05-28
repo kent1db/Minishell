@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/26 15:18:46 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/27 16:01:36 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,54 @@ t_all	*init_all(char **envp)
 	a->gc = NULL;
 	ft_lstadd_front(&a->gc, ft_lstnew(a));
 	a->status_cmd = 0;
+	a->do_gnl = 1;
 	a->env = parse_env(envp, &a->gc);
 	set_all(a);
 	return (a);
 }
-
 void	read_command_line(t_all *a)
 {
-	char	*line;
+	char buf[256];
+	char c;
 
-	line = NULL;
-	ft_printf(1, RED "➜ " BLU "minishell " YEL "✗ " RESET);
-	while (get_next_line(0, &line))
-	{
-		// ft_lexing_command_line(line, a);
-		ft_printf(1, RED "➜ " BLU "minishell " YEL "✗ " RESET);
-		free(line);
-	}
+	// while (buf[0] != '\n')
+	// {
+		while (1)
+		{
+			read(0, buf, 1);
+			ft_printf(1, "%c", buf[0]);
+			// c = getchar();
+			// if (buf[0] == 279167)
+				// ft_printf(1, "ohh dude");
+			// ft_printf(1, "%d", buf[0]);
+		}
+		// read(0, &buf, 1);
+		// printf("%c", buf[0]);
+		// 		read(0, &buf, 1);
+		// printf("%c", buf[0]);	
+		// 		read(0, &buf, 1);
+		// printf("%c", buf[0]);	
+		// 		read(0, &buf, 1);
+		// printf("%c", buf[0]);	
+		// 		read(0, &buf, 1);
+		// printf("%c", buf[0]);	
+		// 		read(0, &buf, 1);
+		// printf("%c", buf[0]);	
+	// }
 }
+// void	read_command_line(t_all *a)
+// {
+// 	char	*line;
+
+// 	line = NULL;
+// 	display_line(a);
+// 	while (get_next_line(0, &line))
+// 	{
+// 		// ft_lexing_command_line(line, a);
+// 		display_line(a);
+// 		free(line);
+// 	}
+// }
 
 int	main(int ac, char **av, char **envp)
 {
@@ -60,6 +90,7 @@ int	main(int ac, char **av, char **envp)
 	errno = 0;
 	a = init_all(envp);
 	init_terms(a);
+	
 	// print_banner();
 	read_command_line(a);
 	apply_termios(a->saved);

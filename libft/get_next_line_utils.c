@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 00:03:45 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/26 14:49:28 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/27 10:37:01 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,31 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	int		c1;
 
 	i = 0;
-	if (s1 == NULL || s2 == NULL)
+	if (!s1 && !s2)
 		return (NULL);
-	c1 = ft_strlen(s1) + ft_strlen(s2);
+	if (s1 && s2)
+		c1 = ft_strlen(s1) + ft_strlen(s2);
+	else if (!s1)
+		c1 = ft_strlen(s2);
+	else
+		c1 = ft_strlen(s1);
 	str = ft_calloc(c1 + 1, 1);
+	c1 = 0;
 	if (!(str))
 		return (NULL);
-	while (s1[i] != '\0')
+	if (s1)
 	{
-		str[i] = s1[i];
-		i++;
+		while (s1[i] != '\0')
+		{
+			str[i] = s1[i];
+			i++;
+		}
 	}
-	c1 = 0;
-	while (s2[c1] != '\0')
-		str[i++] = s2[c1++];
+	if (s2)
+	{
+		while (s2[c1] != '\0')
+			str[i++] = s2[c1++];
+	}
 	str[i] = '\0';
 	free(s1);
 	return (str);

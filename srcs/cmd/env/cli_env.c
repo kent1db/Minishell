@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 14:45:11 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/26 15:32:39 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/27 09:55:08 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	ft_env(t_all *a)
 // A DECOMMENTER QUAND ON AURA LES ARGUMENTS DANS LA STRUCT A
 int	ft_export(t_all *a)
 {
-	int	i;
-	t_env *new_elem;
+	int		i;
+	t_env	*new_elem;
 
 	i = -1;
 	// if (!args)

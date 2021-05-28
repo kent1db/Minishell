@@ -18,9 +18,8 @@ FILES			= 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii
 					$(addprefix ft_printf/, ${FILES_PRINTF})
 
 
-OBJS_PATH		=	objs
-OBJS 			=	$(FILES:%.c=$(OBJS_PATH)/%.o)
-# OBJS_FINAL		= 	$(addprefix ${OBJS_PATH}/, $(notdir $(OBJS)))
+BIN_PATH		=	bin
+BIN 			=	$(FILES:%.c=$(BIN_PATH)/%.o)
 
 FLAGS			= 	-Wall -Wextra -Werror
 RM				=	rm -rf
@@ -30,19 +29,20 @@ CC				=	clang
 
 all: 				${NAME}
 
-$(OBJS): 			$(OBJS_PATH)/%.o: %.c libft.h
+$(BIN): 			$(BIN_PATH)/%.o: %.c libft.h
 					@mkdir -p $(@D)
-					@$(CC) $(FLAGS) -I ${INC_PATH} -o $@ -c $<
-					@printf "\e[?25l\e[LIBFT : \e[92m$(notdir $<)\e[0m\r"
+					@$(CC) $(FLAGS) -o $@ -c $<
+					@printf "\e[?25l\e[JLIBFT : \e[92m$(notdir $<)\e[0m\r"
 
-$(NAME):			init ${OBJS}
-					@${AR} ${NAME} ${OBJS}
+$(NAME):			init ${BIN}
+					@${AR} ${NAME} ${BIN}
 					@printf '\033[?25l\033[JLIBFT CREATED \033[92m✔ \033[0m\033[?25h\n'
 
 init:
-					@${shell mkdir -p ${OBJS_PATH}}
+					@${shell mkdir -p ${BIN_PATH}}
 clean:
-					@${RM} ${OBJS_PATH}
+					@${RM} ${BIN_PATH}
+					@printf '\033[?25l\033[JLIBFT DELETED \033[92m✔ \033[0m\033[?25h\n'
 
 fclean:				clean
 					@${RM} ${NAME}

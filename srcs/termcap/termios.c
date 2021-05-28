@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 10:47:01 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/26 11:10:38 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/27 16:13:38 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,30 @@
 
 void	delete_special_characters(void)
 {
-	struct termios termios;
+	struct termios	termios;
 
 	tcgetattr(STDIN_FILENO, &termios);
-	termios.c_lflag &= ~ ECHOCTL;
-	// DELETE EOF
-	// termios.c_cc[VEOF] = 0;
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &termios);
+	// termios.c_lflag &= (~ECHOCTL | ICANON | ~ECHO);
+	// termios.c_lflag &= ~ICANON;
+	// termios.c_lflag &= ECHOCTL;
+	// termios.c_lflag &= ECHO;
+	apply_termios(termios);
 }
 
 void	delete_or_add_eof(int is_add)
 {
-	struct termios termios;
+	struct termios	termios;
 
 	tcgetattr(STDIN_FILENO, &termios);
 	termios.c_cc[VEOF] = is_add;
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &termios);
+	apply_termios(termios);
 }
 
-struct termios save_termios(void)
+struct termios	get_termios(void)
 {
-	struct termios saved;
+	struct termios	saved;
 
-	tcgetattr(STDIN_FILENO, &saved);	
+	tcgetattr(STDIN_FILENO, &saved);
 	return (saved);
 }
 
