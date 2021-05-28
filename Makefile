@@ -6,7 +6,7 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/05/27 15:05:10 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/05/28 11:30:09 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FILES_PARSING	= parse_arg.c parse_env.c
 FILES_GENERAL	= garbage_collector.c error.c main.c display.c
 FILES_LAUNCH	= pointer_array_fct_cmd.c launch_cmd.c launch_execve.c
 FILES_ENV		= cli_env.c lst_env.c
-FILES_TERMCAP	= termios.c historic.c init_terms.c
+FILES_TERMCAP	= termios.c termcap.c init_terms.c
 
 FILES			= $(addprefix display/, ${FILES_DISPLAY}) \
 				  ${addprefix parsing/, ${FILES_PARSING}} \

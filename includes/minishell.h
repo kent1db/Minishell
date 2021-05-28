@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/27 14:16:38 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/28 13:23:32 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,19 @@ void			display_line(t_all *a);
 /*
 ** ---------- TERMCAP ----------
 */
-void			delete_special_characters(void);
+void			init_termios(void);
 void			delete_or_add_eof(int is_add);
 struct termios	get_termios(void);
 void			apply_termios(struct termios termios);
-void			init_historic(t_all *a);
 void			ft_pick_signal(t_all *a);
 void			init_terms(t_all *a);
+void			ft_init_termcap(t_all *a);
+void			ft_backspace(t_all *a, int *cursor, t_list **line);
+void			ft_left_arrow(t_all *a, int *cursor);
+void			ft_right_arrow(t_all *a, int *cursor, t_list *line);
+char			*transform_to_str(t_list *lst, t_list **gc);
+void			ft_lst_remove_index(t_list **str, int remove_index);
+void			ft_print_list(t_list *lst);
 /*
 **	---------- CMD ----------
 ** 		---------- ENV ----------

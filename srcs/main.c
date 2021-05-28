@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/27 16:01:36 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/28 13:27:46 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,49 +39,51 @@ t_all	*init_all(char **envp)
 	set_all(a);
 	return (a);
 }
+
 void	read_command_line(t_all *a)
 {
-	char buf[256];
-	char c;
+	char	buf[4];
+	int		cursor;
+	t_list	*line;
 
-	// while (buf[0] != '\n')
-	// {
-		while (1)
+	line = NULL;
+	cursor = 0;
+	display_line(a);
+	while (read(0, buf, 3))
+	{
+		if (buf[0] == 127)
+			ft_backspace(a, &cursor, &line);
+		else if (buf[0] == 4)
+			ft_printf(1, "ctrl+d");
+		else if (buf[1] == '[')
 		{
-			read(0, buf, 1);
-			ft_printf(1, "%c", buf[0]);
-			// c = getchar();
-			// if (buf[0] == 279167)
-				// ft_printf(1, "ohh dude");
-			// ft_printf(1, "%d", buf[0]);
+			if (buf[2] == 'A')
+				ft_printf(1, "up");
+			else if (buf[2] == 'B')
+				ft_printf(1, "down");
+			else if (buf[2] == 'C')
+				ft_right_arrow(a, &cursor, line);
+			else if (buf[2] == 'D')
+				ft_left_arrow(a, &cursor);
 		}
-		// read(0, &buf, 1);
-		// printf("%c", buf[0]);
-		// 		read(0, &buf, 1);
-		// printf("%c", buf[0]);	
-		// 		read(0, &buf, 1);
-		// printf("%c", buf[0]);	
-		// 		read(0, &buf, 1);
-		// printf("%c", buf[0]);	
-		// 		read(0, &buf, 1);
-		// printf("%c", buf[0]);	
-		// 		read(0, &buf, 1);
-		// printf("%c", buf[0]);	
-	// }
+		else if (buf[0] == '\n')
+		{
+			ft_printf(1, "\n");
+			ft_printf(1, GRN "➜ " CYN "minishell " RESET);
+			ft_print_list(line);
+			ft_printf(1, YEL "✗ " RESET);
+			cursor = 0;
+			line = NULL;
+		}
+		else
+		{
+			ft_lstadd_back(&line, ft_lstnew(ft_strdup_gc(&a->gc, buf)));
+			ft_printf(1, "%s", buf);
+			cursor++;
+		}
+		ft_bzero(buf, 3);
+	}
 }
-// void	read_command_line(t_all *a)
-// {
-// 	char	*line;
-
-// 	line = NULL;
-// 	display_line(a);
-// 	while (get_next_line(0, &line))
-// 	{
-// 		// ft_lexing_command_line(line, a);
-// 		display_line(a);
-// 		free(line);
-// 	}
-// }
 
 int	main(int ac, char **av, char **envp)
 {

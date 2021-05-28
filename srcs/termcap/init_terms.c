@@ -6,12 +6,11 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 14:07:44 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/27 14:16:56 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/28 11:49:06 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	ctrl_c(int signal)
 {
@@ -25,11 +24,30 @@ void	ctrl_c(int signal)
 	display_line(a);
 }
 
+void	ft_init_termcap(t_all *a)
+{
+	int ret;
+	char *term_type;
+	term_type = getenv("TERM");
+	ret = tgetent(NULL, term_type);
+	if (ret == -1 || ret == 0)
+		return (ft_error_msg("Init termcap error", a->gc));
+}
+
+void	init_termios(void)
+{
+	struct termios	termios;
+
+	tcgetattr(STDIN_FILENO, &termios);
+	termios.c_lflag &= ~(ICANON | ECHO);
+	apply_termios(termios);
+}
+
 void	init_terms(t_all *a)
 {
 	a->saved = get_termios();
-	delete_special_characters();
+	init_termios();
+	ft_init_termcap(a);
 	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR) //|| signal(SIGINT, fct_signal) == SIG_ERR)
 		return (ft_error_msg("signal have a error", a->gc));
-	init_historic(a);
 }
