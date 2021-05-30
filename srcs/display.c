@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:44:06 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/27 11:50:39 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/30 17:31:24 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,10 @@ void	display_line(t_all *a)
 			color = RED;
 	}
 	ft_printf(1, "%s➜ " CYN "minishell " YEL "✗ " RESET, color);
+}
+
+int	ft_putchar_int(int c)
+{
+	write(1, &c, 1);
+	return (1);
 }

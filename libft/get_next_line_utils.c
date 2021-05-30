@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 00:03:45 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/27 10:37:01 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/28 19:56:58 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 			str[i] = s1[i];
 			i++;
 		}
+		free(s1);
 	}
 	if (s2)
 	{
@@ -86,6 +87,5 @@ char	*ft_strjoin_free(char *s1, char *s2)
 			str[i++] = s2[c1++];
 	}
 	str[i] = '\0';
-	free(s1);
 	return (str);
 }

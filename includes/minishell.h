@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/28 13:23:32 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/30 18:17:21 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,30 @@ t_all			*get_all(void);
 void			read_command_line(t_all *a);
 t_all			*init_all(char **envp);
 void			print_banner(void);
+int				ft_switch_keyboard(t_all *a, char buf[4],
+					int *cursor, char **line);
+void			ft_launch_cmd_and_reset(t_all *a, int *cursor, char **line);
+void			ft_print_line_and_stock(t_all *a, char **line, char *buf, int *cursor);
+int				ft_putchar_int(int c);
 void			display_line(t_all *a);
 /*
 ** ---------- TERMCAP ----------
 */
 void			init_termios(void);
-void			delete_or_add_eof(int is_add);
 struct termios	get_termios(void);
 void			apply_termios(struct termios termios);
-void			ft_pick_signal(t_all *a);
 void			init_terms(t_all *a);
 void			ft_init_termcap(t_all *a);
-void			ft_backspace(t_all *a, int *cursor, t_list **line);
-void			ft_left_arrow(t_all *a, int *cursor);
-void			ft_right_arrow(t_all *a, int *cursor, t_list *line);
-char			*transform_to_str(t_list *lst, t_list **gc);
-void			ft_lst_remove_index(t_list **str, int remove_index);
-void			ft_print_list(t_list *lst);
+void			ft_backspace(t_all *a, int *cursor, char **line);
+void			ft_delete_line_to_cursor(t_all *a, int *cursor, char **line);
+char			*delete_char(int index_char, char *str, t_list *gc);
+void			ft_delete_line(t_all *a, int *cursor, char **line);
+void			ft_arrow_key(t_all *a, char c, int *cursor, char **line);
+void			ft_left_arrow(int *cursor);
+void			ft_right_arrow(int *cursor, char *line);
+void			ft_up_arrow(t_all *a, int *cursor, char **line);
+void			ft_down_arrow(t_all *a, int *cursor, char **line);
+char			*ft_add_string_in_index(t_list *gc, char *str, char *add, int index);
 /*
 **	---------- CMD ----------
 ** 		---------- ENV ----------

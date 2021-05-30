@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 14:45:11 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/27 09:55:08 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/30 13:13:09 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	ft_export(t_all *a)
 	t_env	*new_elem;
 
 	i = -1;
+	(void)new_elem;
+	(void)a;
 	// if (!args)
 	// 	return ;
 	// while (args[++i])
@@ -58,6 +60,7 @@ int	ft_unset(t_all *a)
 	int	i;
 
 	i = -1;
+	(void)a;
 	// if (!args)
 	// 	return ;
 	// while (args[++i])

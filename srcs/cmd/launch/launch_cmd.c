@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/26 14:53:37 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/30 13:13:18 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	launch_if_is_our_cmd(char *cmd, t_all *a, char **cmd_done,
 							int	(**ft_cmd)(t_all *a))
 {
 	int		i;
-	t_env	*new_status;
 
 	i = -1;
 	while (cmd_done[++i])

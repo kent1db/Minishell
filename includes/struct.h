@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/27 10:52:36 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/29 12:10:20 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ typedef struct s_all
 	t_tree			*tree;
 	struct termios	saved;
 	int				status_cmd;
-	int				do_gnl;
-	pid_t			pid;
+	t_list			*historic;
 }				t_all;
 
 #endif
