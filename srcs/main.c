@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/30 14:43:07 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/31 13:44:09 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ t_all	*init_all(char **envp)
 	ft_lstadd_front(&a->gc, ft_lstnew(a));
 	a->status_cmd = 0;
 	a->env = parse_env(envp, &a->gc);
+	a->termcap = malloc_gc(&a->gc, (sizeof(t_termcap)));
+	a->termcap->historic = NULL;
+	a->termcap->historic_current = NULL;
+	a->termcap->ptr_historic = NULL;
 	set_all(a);
 	return (a);
 }
@@ -54,7 +58,7 @@ int	main(int ac, char **av, char **envp)
 	init_terms(a);
 	// print_banner();
 	read_command_line(a);
-	apply_termios(a->saved);
+	apply_termios(a->termcap->saved);
 	ft_lstclear(&a->gc, free);
 	return (0);
 }

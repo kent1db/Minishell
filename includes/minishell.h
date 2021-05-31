@@ -6,12 +6,16 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/30 18:17:21 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/31 15:17:46 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# define CTRL_U 21
+# define DEL	127
+# define BACKSPACE 127
+# define CTRL_D		4
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
@@ -49,15 +53,15 @@ struct termios	get_termios(void);
 void			apply_termios(struct termios termios);
 void			init_terms(t_all *a);
 void			ft_init_termcap(t_all *a);
-void			ft_backspace(t_all *a, int *cursor, char **line);
-void			ft_delete_line_to_cursor(t_all *a, int *cursor, char **line);
-char			*delete_char(int index_char, char *str, t_list *gc);
-void			ft_delete_line(t_all *a, int *cursor, char **line);
+void			ft_backspace(t_list **gc, int *cursor, char **line);
+void			ft_delete_line(t_list **gc, int *cursor, char **line);
+char			*delete_char(int index_char, char *str, t_list **gc);
+void			ft_delete_line_to_cursor(t_list **gc, int *cursor, char **line);
 void			ft_arrow_key(t_all *a, char c, int *cursor, char **line);
 void			ft_left_arrow(int *cursor);
 void			ft_right_arrow(int *cursor, char *line);
-void			ft_up_arrow(t_all *a, int *cursor, char **line);
-void			ft_down_arrow(t_all *a, int *cursor, char **line);
+void			ft_up_arrow(t_termcap *term, int *cursor, char **line, t_list **gc);
+void			ft_down_arrow(t_termcap *term, int *cursor, char **line, t_list **gc);
 char			*ft_add_string_in_index(t_list *gc, char *str, char *add, int index);
 /*
 **	---------- CMD ----------

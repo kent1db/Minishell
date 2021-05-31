@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 14:07:44 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/28 11:49:06 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/05/31 12:12:21 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ctrl_c(int signal)
 	display_line(a);
 }
 
-void	ft_init_termcap(t_all *a)
+void	init_termcap(t_all *a)
 {
 	int ret;
 	char *term_type;
@@ -45,9 +45,9 @@ void	init_termios(void)
 
 void	init_terms(t_all *a)
 {
-	a->saved = get_termios();
+	a->termcap->saved = get_termios();
 	init_termios();
-	ft_init_termcap(a);
-	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR) //|| signal(SIGINT, fct_signal) == SIG_ERR)
+	init_termcap(a);
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR) //|| signal(SIGINT, ctrl_c) == SIG_ERR)
 		return (ft_error_msg("signal have a error", a->gc));
 }
