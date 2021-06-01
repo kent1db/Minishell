@@ -40,8 +40,9 @@ typedef	struct		s_tree
 {	
 	struct s_btree	*left;
 	struct s_btree	*right;
-	t_type_enum		type;
-	t_type_union	exec;
+	int				type;
+	t_type_enum		e_type;
+	t_type_union	*exec;
 }					t_tree;
 
 typedef struct s_all

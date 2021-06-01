@@ -76,6 +76,7 @@ void	ft_lexing_command_line(char *line, t_all *a);
 /* UTILS_PARSING */
 void	ft_skip_whitespace(char *line, int *i);
 void	ft_is_quote(char c, int *quote);
-int	ft_delimiter(char c, char *del);
+int	    ft_delimiter(char c, char *del);
+void	ft_priority(char *line, int start, int end,  t_tree *node);
 
 #endif

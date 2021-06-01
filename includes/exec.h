@@ -15,9 +15,9 @@
 
 typedef enum		e_type_enum
 {
-	type_command,
-	type_operator,
-	type_file
+	other,
+	redir,
+	op_pipe
 }					t_type_enum;
 
 typedef struct		s_command
@@ -39,9 +39,9 @@ typedef struct		s_file
 
 typedef union		u_type_union
 {
-	t_command		cmd;
-	t_operator		op;
-	t_file			file;
+	t_command		*cmd;
+	t_operator		*op;
+	t_file			*file;
 }					t_type_union;
 
 #endif

@@ -42,3 +42,33 @@ int	ft_delimiter(char c, char *del)
 		return (1);
 	return (0);
 }
+
+void	ft_priority(char *line, int start, int end,  t_tree *node)
+{
+	node->type = -1;
+	while (line[start] && start < end)
+	{
+		if (line[start] == '|')
+			node->type = op_pipe;
+		else if ((line[start] == '>'  || line[start] == '<') &&\
+		node->type <= redir)
+			node->type = redir;
+		else if (node->type < other)
+			node->type = other;
+		start++;
+	}
+}
+
+int	ft_op_pos(char *line, int start, int end, t_tree *node)
+{
+	while (line[end] && end > start)
+	{
+		if (line[end] == '|' && node->type == op_pipe)
+			return (end);
+		if ((line[end] == '>' || line[end] == '<') &&\
+		node->type == redir)
+			return (end);
+		end--;
+	}
+	return (-1);
+}

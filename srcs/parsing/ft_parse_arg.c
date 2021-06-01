@@ -116,21 +116,90 @@ void	ft_malloc_command(char *line, int *i, t_all *a, int *bool)
 	printf("1 size = %d cmd = %s\n", size, cmd);
 }
 
+// void	ft_lexing_command_line(char *line, t_all *a)
+// {
+// 	int	i;
+// 	int	count;
+// 	int	bool;
+
+// 	i = 0;
+// 	bool = 1;
+// 	count = 0;
+// 	while (line[i])
+// 	{
+// 		if (bool)
+// 			ft_malloc_command(line, &i, a, &bool);
+// 		if (line[i] && (line[i] == ';' || line[i] == '|'))
+// 			bool = 1;
+// 		if (line[i])
+// 			i++;
+// 	}
+// }
+
+void	ft_parsing(char *line, int *tab, t_tree *node, t_all *a)
+{
+	int	start;
+	int	end;
+
+	start = tab[0];
+	end = tab[1];
+	if (start == '<' || start == '>')
+	{
+		node->exec->file->file = ft_malloc_file();
+		ft_lstadd_front(&a->gc, ft_lstnew(node->exec->file->file));
+	}
+	else if (node->type == op_pipe)
+		node->exec = NULL;
+	else if (node->type = redir)
+		ft_malloc_redir();
+	else if (node->type == other)
+		ft_malloc_command();
+}
+
+t_tree	*ft_binary_tree(char *line, int start, int end, t_all *a)
+{
+	t_tree	*node;
+	int		op_pos;
+	int		tab[2];
+
+	node = malloc(sizeof(t_tree));
+	ft_lstadd_front(&a->gc, ft_lstnew(node));
+	ft_priority(line, start, end, node);
+	op_pos = ft_op_pos(line, start, end, node);
+	tab[0] = start;
+	tab[1] = end;
+	ft_parsing(line, tab, node, a);
+	if (op_pos)
+	{
+		node->left = ft_binary_tree(line, start, op_pos, a);
+		node->right = ft_binary_tree(line, op_pos, end, a);
+	}
+	else
+	{
+		node->left = NULL;
+		node->right = NULL;
+	}
+	return (node);
+}
+
 void	ft_lexing_command_line(char *line, t_all *a)
 {
 	int	i;
 	int	count;
-	int	bool;
+	int start;
+
 
 	i = 0;
-	bool = 1;
 	count = 0;
 	while (line[i])
 	{
-		if (bool)
-			ft_malloc_command(line, &i, a, &bool);
-		if (line[i] && (line[i] == ';' || line[i] == '|'))
-			bool = 1;
+		start = i;
+		a->tree->type = -1;
+		while (line[i] && line[i] != ';')
+			i++;
+		a->tree = ft_binary_tree(line, a, start, i);
+		/* exec command(a); */
+		/* delete tree */
 		if (line[i])
 			i++;
 	}
