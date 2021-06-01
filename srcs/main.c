@@ -37,7 +37,8 @@ t_all	*init_all(char **envp)
 	a->env = parse_env(envp, &a->gc);
 	a->termcap = malloc_gc(&a->gc, (sizeof(t_termcap)));
 	a->termcap->historic = NULL;
-	a->termcap->historic_current = NULL;
+	a->termcap->historic_current = ft_lstnew("");
+	ft_lstadd_front(&a->gc, ft_lstnew(a->termcap->historic_current));
 	a->termcap->ptr_historic = NULL;
 	set_all(a);
 	return (a);

@@ -6,7 +6,7 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/05/30 18:03:42 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/06/01 18:22:09 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME			= minishell
 FILES_PARSING	= parse_arg.c parse_env.c
 FILES_GENERAL	= garbage_collector.c error.c main.c display.c 
 FILES_LAUNCH	= pointer_array_fct_cmd.c launch_cmd.c launch_execve.c
-FILES_ENV		= cli_env.c lst_env.c
-FILES_TERMCAP	= termios.c delete.c init_terms.c arrow_key.c read_cmd_line.c
+FILES_ENV		= env_export_unset.c utility_lst_env.c
+FILES_TERMCAP	= arrow_key.c delete.c init_terms.c print_buf_and_stock.c read_cmd_line.c termios.c utility.c
 
 FILES			= $(addprefix display/, ${FILES_DISPLAY}) \
 				  ${addprefix parsing/, ${FILES_PARSING}} \

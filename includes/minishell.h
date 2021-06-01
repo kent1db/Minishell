@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/31 15:17:46 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/01 18:25:48 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINISHELL_H
 # define CTRL_U 21
 # define DEL	127
-# define BACKSPACE 127
+# define BACKSPACE 8
 # define CTRL_D		4
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -48,21 +48,50 @@ void			display_line(t_all *a);
 /*
 ** ---------- TERMCAP ----------
 */
-void			init_termios(void);
-struct termios	get_termios(void);
-void			apply_termios(struct termios termios);
-void			init_terms(t_all *a);
-void			ft_init_termcap(t_all *a);
-void			ft_backspace(t_list **gc, int *cursor, char **line);
-void			ft_delete_line(t_list **gc, int *cursor, char **line);
-char			*delete_char(int index_char, char *str, t_list **gc);
-void			ft_delete_line_to_cursor(t_list **gc, int *cursor, char **line);
+/*
+**	ARROW_KEY
+*/
 void			ft_arrow_key(t_all *a, char c, int *cursor, char **line);
 void			ft_left_arrow(int *cursor);
 void			ft_right_arrow(int *cursor, char *line);
 void			ft_up_arrow(t_termcap *term, int *cursor, char **line, t_list **gc);
 void			ft_down_arrow(t_termcap *term, int *cursor, char **line, t_list **gc);
+/*
+**	DELETE
+*/
+char			*delete_char(int index_char, char *str, t_list **gc);
+void			ft_delete_line_to_cursor(t_list **gc, int *cursor, char **line);
+void			ft_delete_line(t_list **gc, int *cursor, char **line);
+void			ft_backspace(t_list **gc, int *cursor, char **line);
+/*
+**	INIT
+*/
+void			init_termios(void);
+void			init_terms(t_all *a);
+void			ft_init_termcap(t_all *a);
+/*
+**	PRINT
+*/
+int				ft_print_buf(char *str, int *cursor);
+void			ft_print_buf_and_stock(t_all *a, char **line, char *buf, int *cursor);
+/*
+**	READ_CMD_LINE
+*/
+void			read_command_line(t_all *a);
+int				ft_switch_keyboard(t_all *a, char buf[4], int *cursor, char **line);
+void			ft_launch_cmd_and_reset(t_all *a, int *cursor, char **line);
+/*
+**	TERMIOS
+*/
+struct termios	get_termios(void);
+void			apply_termios(struct termios termios);
+/*
+**	UTILITY
+*/
+t_list			*previous_current(t_list *lst, t_list *current, t_list *historic_current);
+void			ft_change_line(t_list **gc, int *cursor, char **line, char *new_line);
 char			*ft_add_string_in_index(t_list *gc, char *str, char *add, int index);
+
 /*
 **	---------- CMD ----------
 ** 		---------- ENV ----------

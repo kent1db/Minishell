@@ -41,7 +41,7 @@ typedef struct s_termcap
 {
 	struct termios	saved;
 	t_list			*historic;
-	char			*historic_current;
+	t_list			*historic_current;
 	t_list			*ptr_historic;	
 }				t_termcap;
 
