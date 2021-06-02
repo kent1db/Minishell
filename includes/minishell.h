@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/26 10:01:06 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/02 14:10:04 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,7 @@ void	ft_skip_whitespace(char *line, int *i);
 void	ft_is_quote(char c, int *quote);
 int	    ft_delimiter(char c, char *del);
 void	ft_priority(char *line, int start, int end,  t_tree *node);
+int     ft_op_pos(char *line, int start, int end, t_tree *node);
+void	ft_print_tree(t_tree *node, int count);
 
 #endif

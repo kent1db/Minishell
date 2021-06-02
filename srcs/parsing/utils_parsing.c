@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:59:21 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/26 10:04:42 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/02 10:07:47 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_priority(char *line, int start, int end,  t_tree *node)
 		if (line[start] == '|')
 			node->type = op_pipe;
 		else if ((line[start] == '>'  || line[start] == '<') &&\
-		node->type <= redir)
+		node->type < redir)
 			node->type = redir;
 		else if (node->type < other)
 			node->type = other;
