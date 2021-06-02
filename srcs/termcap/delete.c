@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 14:08:59 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/01 00:01:11 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/02 11:09:55 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,31 @@ char	*delete_char(int index_char, char *str, t_list **gc)
 
 void	ft_delete_line_to_cursor(t_list **gc, int *cursor, char **line)
 {
+	if (!line || !(*line))
+		return ;
 	while (*cursor > 0)
+		ft_backspace(gc, cursor, line);
+}
+
+void	ft_delete_line_from_cursor_into_line(t_list **gc, int *cursor, char **line)
+{
+	int cursor_remember;
+
+	if (!line || !(*line))
+		return ;
+	cursor_remember = *cursor;
+	while ((size_t)(*cursor) < ft_strlen(*line))
+		ft_right_arrow(cursor, ft_strlen(*line));
+	while (*cursor > cursor_remember)
 		ft_backspace(gc, cursor, line);
 }
 
 void	ft_delete_line(t_list **gc, int *cursor, char **line)
 {
 	if (!line || !(*line))
-		return ;		
+		return ;
 	while ((size_t)(*cursor) < ft_strlen(*line))
-		ft_right_arrow(cursor, *line);
+		ft_right_arrow(cursor, ft_strlen(*line));
 	while (*cursor > 0)
 		ft_backspace(gc, cursor, line);
 }

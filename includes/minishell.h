@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/01 18:25:48 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/02 15:40:45 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # include <term.h>
 # include <termios.h>
 # include <signal.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 # include "color.h"
 # include "struct.h"
@@ -53,7 +56,7 @@ void			display_line(t_all *a);
 */
 void			ft_arrow_key(t_all *a, char c, int *cursor, char **line);
 void			ft_left_arrow(int *cursor);
-void			ft_right_arrow(int *cursor, char *line);
+void			ft_right_arrow(int *cursor, int size_line);
 void			ft_up_arrow(t_termcap *term, int *cursor, char **line, t_list **gc);
 void			ft_down_arrow(t_termcap *term, int *cursor, char **line, t_list **gc);
 /*
@@ -61,6 +64,7 @@ void			ft_down_arrow(t_termcap *term, int *cursor, char **line, t_list **gc);
 */
 char			*delete_char(int index_char, char *str, t_list **gc);
 void			ft_delete_line_to_cursor(t_list **gc, int *cursor, char **line);
+void			ft_delete_line_from_cursor_into_line(t_list **gc, int *cursor, char **line);
 void			ft_delete_line(t_list **gc, int *cursor, char **line);
 void			ft_backspace(t_list **gc, int *cursor, char **line);
 /*
@@ -90,7 +94,8 @@ void			apply_termios(struct termios termios);
 */
 t_list			*previous_current(t_list *lst, t_list *current, t_list *historic_current);
 void			ft_change_line(t_list **gc, int *cursor, char **line, char *new_line);
-char			*ft_add_string_in_index(t_list *gc, char *str, char *add, int index);
+char			*ft_add_string_in_index(t_list **gc, char **str_split, char *add);
+char			**split_str_into_index(t_list **gc, char *str, int index);
 
 /*
 **	---------- CMD ----------
@@ -120,6 +125,10 @@ void			*init_array_instruction_function(t_list **gc);
 char			**pick_argument_and_add_name_prg(t_all *a, char *name_prg);
 void			ft_point_gc_on_split(t_list **gc, char **split);
 void			ft_fill_exit_status(t_all *a);
+/*
+**		---------- ROOT ----------
+*/
+int				ft_exit(t_all *a);
 /*	
 ** ---------- PARSING ----------
 */

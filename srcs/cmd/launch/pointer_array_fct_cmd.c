@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 13:12:49 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/26 14:54:32 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/02 15:43:05 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	*init_array_instruction_function(t_list **gc)
 	ft_cmd[3] = &ft_export;
 	ft_cmd[4] = &ft_unset;
 	ft_cmd[5] = &ft_env;
-	ft_cmd[6] = NULL;
+	ft_cmd[6] = &ft_exit;
 	return (ft_cmd);
 }
 

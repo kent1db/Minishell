@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 18:08:36 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/01 18:26:07 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/02 14:57:34 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,59 @@ int	ft_print_buf(char *str, int *cursor)
 	i = -1;
 	size_print = 0;
 	while (str[++i])
-		size_print += ft_printf(1, "%c", str[i]);
+		if (ft_isprint(str[i]))
+			size_print += ft_printf(1, "%c", str[i]);
 	if (size_print == 0)
 		return (0);
-	*cursor += size_print;
+	(*cursor) += size_print;
 	return (1);
+}
+
+void	add_string_into_line(t_list **gc, char **line, char *buf, int *cursor)
+{
+	char	**str_split;
+	int		cursor_remember;
+	int		size_print;
+	int		i;
+
+	i = -1;
+	while (buf[++i])
+		if (!ft_isprint(buf[i]))
+			return ;
+	str_split = split_str_into_index(gc, *line, *cursor);
+	ft_delete_line_from_cursor_into_line(gc, cursor, line);
+	*line = ft_strjoin(str_split[0], ft_strdup_gc(gc, buf));
+	*line = ft_strjoin_free(*line, str_split[1]);
+	ft_lstadd_front(gc, ft_lstnew(*line));
+	cursor_remember = *cursor + 1;
+	size_print = ft_printf(1, "%s", buf);
+	size_print = ft_printf(1, "%s", str_split[1]);
+	*cursor += size_print + 1;
+	while (*cursor > cursor_remember)
+		ft_left_arrow(cursor);
+	*cursor = ft_strlen(str_split[0]) + ft_strlen(buf);
 }
 
 void	ft_print_buf_and_stock(t_all *a, char **line, char *buf, int *cursor)
 {
-	int	size_print;
+	char	**str_split;
+	int		cursor_remember;
 
+	if (ft_strlen(*line) != (size_t)(*cursor))
+	{
+		add_string_into_line(&a->gc, line, buf, cursor);
+		return ;
+	}
 	if (ft_print_buf(buf, cursor))
 	{	
 		if (!line || !(*line))
 			*line = ft_strdup_gc(&a->gc, buf);
-		else if (ft_strlen(*line) == (size_t)(*cursor))
-			*line = ft_strjoin(*line, buf);
 		else
-			*line = ft_add_string_in_index(a->gc, *line, buf, *cursor);
+		{
+			*line = ft_strjoin(*line, buf);
+			ft_lstadd_front(&a->gc, ft_lstnew(*line));			
+		}
 		a->termcap->historic_current = ft_lstnew(*line);
-		ft_lstadd_front(&a->gc, a->termcap->historic_current);
+		ft_lstadd_front(&a->gc, ft_lstnew(a->termcap->historic_current));
 	}
 }

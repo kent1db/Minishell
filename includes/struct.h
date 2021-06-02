@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/31 13:44:02 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/02 15:36:56 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_all
 	t_tree			*tree;
 	int				status_cmd;
 	t_termcap		*termcap;
+	int				read;
 }				t_all;
 
 
