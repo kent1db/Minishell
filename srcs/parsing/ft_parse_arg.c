@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:19 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/02 16:05:16 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 14:32:24 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,26 +89,34 @@ void	ft_malloc_argument(char *line, int *i, t_all *a, t_tree *node)
 	// 	ft_malloc_option(line, i, a);
 	start = *i;
 	size = ft_count_malloc(line, i, ft_delimiter, ";><|");
-	if (size)
+	if (size > 0)
 		node->exec->cmd->args = ft_malloc_size(line, size, a, start);
+	else
+		node->exec->cmd->args = NULL;
 }
 
-void	ft_malloc_command(char *line, int *tab, t_tree *node, t_all *a)
+int	ft_malloc_command(char *line, int *tab, t_tree *node, t_all *a)
 {
 	int		size;
 	int		start;
 
 	size = 0;
+	if (line[tab[0]] == '|')
+		tab[0]++;
 	ft_skip_whitespace(line, &tab[0]);
 	start = tab[0];
 	size = ft_count_malloc(line, &start, ft_delimiter, " ;><|\t");
-	if (size)
+	if (size > 0)
 	{
 		node->exec = malloc_gc(&a->gc, sizeof(t_type_union));
 		node->exec->cmd = malloc_gc(&a->gc, sizeof(t_command));
 		node->exec->cmd->cmd = ft_malloc_size(line, size, a, tab[0]);
 		ft_malloc_argument(line, &start, a, node);
+		return (1);
 	}
+	else
+		node->exec = NULL;
+	return (0);
 }
 
 void	ft_malloc_redir(t_tree *node, t_all *a, int *tab, char *line)
@@ -170,8 +178,8 @@ void	ft_parsing(char *line, int *tab, t_tree *node, t_all *a)
 	}
 	else if (node->type == other)
 	{
-		ft_malloc_command(line, tab, node, a);
-		dprintf(1, "cmd = %s\targs = %s\n", node->exec->cmd->cmd, node->exec->cmd->args);
+		if (ft_malloc_command(line, tab, node, a))
+			dprintf(1, "cmd = %s\targs = %s\n", node->exec->cmd->cmd, node->exec->cmd->args);
 	}
 	dprintf(1, "\n");
 }
@@ -181,13 +189,13 @@ t_tree	*ft_binary_tree(char *line, int start, int end, t_all *a)
 	t_tree	*node;
 	int		op_pos;
 	int		tab[3];
-	// static int i;
+	static int i;
 
 	node = malloc_gc(&a->gc, sizeof(t_tree));
-	// node->count = 0;
-	// if (i > 0)
-	// 	node->count = 1;
-	ft_priority(line, start + 1 /*node->count*/, end, node);
+	node->count = 0;
+	if (i > 0)
+		node->count = 1;
+	ft_priority(line, start + node->count, end, node);
 	op_pos = ft_op_pos(line, start, end - 1, node);
 	dprintf(1, "type = %d\nop_pos = %d\n", node->type, op_pos);
 	tab[0] = start;
@@ -196,7 +204,7 @@ t_tree	*ft_binary_tree(char *line, int start, int end, t_all *a)
 	ft_parsing(line, tab, node, a);
 	if (op_pos > 0)
 	{
-		// i++;
+		i++;
 		node->left = ft_binary_tree(line, start, op_pos, a);
 		node->right = ft_binary_tree(line, op_pos, end, a);
 	}
@@ -223,23 +231,25 @@ void	ft_lexing_command_line(char *line, t_all *a)
 		while (line[i] && line[i] != ';')
 			i++;
 		a->tree = ft_binary_tree(line, start, i, a);
+		dprintf(1, "------New Tree------\n\n");
 		/* exec command(a); */
 		/* delete tree */
 		if (line[i])
 			i++;
 	}
-	// ft_print_tree(a->tree, 0);
+	dprintf(1, "\n\n\n ft_print_tree \n\n\n");
+	ft_print_tree(a->tree, 0);
 }
 
 void	ft_print_tree(t_tree *node, int count)
 {
-	// if (node->type == op_pipe)
-	// 	ft_printf(1, "node %d : pipe\n", count);
-	// else if (node->type == redir)
-	// 	ft_printf(1, "node %d : redir : %s\n", count, node->exec->op->op);
-	// else if (node->exec->file)
-	// 	ft_printf(1, "node %d : file : %s\n", count, node->exec->file->file);
-	// dprintf(1, "%d_type = %d\n other = %d\n", count, node->type, other);
+	if (node->type == op_pipe)
+		ft_printf(1, "node %d : pipe\n", count);
+	else if (node->type == redir)
+		ft_printf(1, "node %d : redir : %s\n", count, node->exec->op->op);
+	else if (node->exec->file)
+		ft_printf(1, "node %d : file : %s\n", count, node->exec->file->file);
+	dprintf(1, "%d_type = %d\n other = %d\n", count, node->type, other);
 	if (node->type == other)
 		ft_printf(1, "node %d : cmd = %s\t arg = %s\n", count, node->exec->cmd->cmd, node->exec->cmd->args);
 	if (node->left != NULL)
