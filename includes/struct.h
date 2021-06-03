@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/03 11:16:19 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 12:34:30 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_tree
 	struct s_btree	*left;
 	struct s_btree	*right;
 	t_type_enum		type;
-	t_type_union	exec;
+	t_type_union	*exec;
 }					t_tree;
 
 typedef struct s_termcap
@@ -54,6 +54,7 @@ typedef struct s_all
 	t_termcap		*termcap;
 	int				read;
 	int				ctrl_c;
+	char			*name_prg;
 }				t_all;
 
 

@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 13:12:49 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/02 15:43:05 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 12:12:46 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ char	**list_cmd_done(t_list **gc)
 
 void	*init_array_instruction_function(t_list **gc)
 {
-	int		(**ft_cmd)(t_all *a);
+	int		(**ft_cmd)(t_all *a, t_command *cmd);
 	int		nb_cmd;
 
 	nb_cmd = 7;
 	ft_cmd = malloc_gc(gc, sizeof(ft_cmd) * nb_cmd);
-	ft_cmd[0] = NULL;
+	ft_cmd[0] = &ft_echo;
 	ft_cmd[1] = NULL;
 	ft_cmd[2] = NULL;
 	ft_cmd[3] = &ft_export;

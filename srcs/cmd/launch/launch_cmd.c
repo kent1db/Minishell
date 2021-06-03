@@ -6,24 +6,24 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/30 13:13:18 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 12:30:01 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	launch_if_is_our_cmd(char *cmd, t_all *a, char **cmd_done,
-							int	(**ft_cmd)(t_all *a))
+int	launch_if_is_our_cmd(t_command *cmd, t_all *a, char **cmd_done,
+							int	(**ft_cmd)(t_all *a, t_command *cmd))
 {
 	int		i;
 
 	i = -1;
 	while (cmd_done[++i])
 	{
-		if (!ft_strcmp(cmd, cmd_done[i]))
+		if (!ft_strcmp(cmd->cmd, cmd_done[i]))
 		{
 			if (ft_cmd[i] != NULL)
-				a->status_cmd = ft_cmd[i](a);
+				a->status_cmd = ft_cmd[i](a, cmd);
 			else
 				ft_printf(1, "not done yet\n");
 			return (1);
@@ -48,10 +48,10 @@ void	ft_exit_status_cmd(t_all *a)
 	a->status_cmd = 0;
 }
 
-void	ft_launch_cmd(char *cmd, t_all *a, char *name_prg)
+void	ft_launch_cmd(t_command *cmd, t_all *a, char *name_prg)
 {
 	char	**cmd_done;
-	int		(**ft_cmd)(t_all *a);
+	int		(**ft_cmd)(t_all *a, t_command *cmd);
 
 	if (!cmd)
 		return ;

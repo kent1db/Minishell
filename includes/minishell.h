@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/03 10:31:42 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 12:46:30 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void			ft_error_msg(char *msg_error, t_list *gc);
 t_all			*set_all(t_all *tmp);
 t_all			*get_all(void);
 void			read_command_line(t_all *a);
-t_all			*init_all(char **envp);
+t_all			*init_all(char **envp, char *name_prg);
 void			print_banner(void);
 int				ft_switch_keyboard(t_all *a, char buf[4],
 					int *cursor, char **line);
@@ -49,6 +49,7 @@ void			ft_launch_cmd_and_reset(t_all *a, int *cursor, char **line);
 void			ft_print_line_and_stock(t_all *a, char **line, char *buf, int *cursor);
 int				ft_putchar_int(int c);
 void			display_line(t_all *a);
+void			ft_cmd_not_found(t_all *a, char *cmd);
 /*
 ** ---------- TERMCAP ----------
 */
@@ -107,21 +108,22 @@ t_env			*ft_lstlast_env(t_env *lst);
 void			ft_lstadd_back_env(t_env **alst, t_env *new);
 void			ft_lst_remove_key(t_env **env, char *key);
 t_env			*ft_keyshr(t_env *env, char *key);
-int				ft_env(t_all *a);
-int				ft_export(t_all *a);
-int				ft_unset(t_all *a);
+int				ft_env(t_all *a, t_command *cmd);
+int				ft_export(t_all *a, t_command *cmd);
+int				ft_unset(t_all *a, t_command *cmd);
 int				ft_lstsize_env_status(t_env *env, t_status status);
 char			**convert_env_to_strs(t_list **gc, t_env *env);
 /*
 ** 		---------- LAUNCH ----------
 */
-int				launch_if_is_our_cmd(char *cmd, t_all *a, char **cmd_done,
-					int	(**ft_cmd)(t_all *a));
-void			ft_launch_cmd(char *cmd, t_all *all, char *name_prg);
+int				launch_if_is_our_cmd(t_command *cmd, t_all *a, char **cmd_done,
+					int	(**ft_cmd)(t_all *a, t_command *cmd));
+void			ft_launch_cmd(t_command *cmd, t_all *all, char *name_prg);
+void			ft_launch_execve_path_cmd(char **arg, t_all *a, t_command *cmd);
 void			ft_exit_status_cmd(t_all *a);
 int				ft_launch_execve_with_path(char *path_cmd, t_all *a,
 					char **arg);
-void			ft_launch_execve(char *cmd, t_all *a, char *name_prg);
+void			ft_launch_execve(t_command *cmd, t_all *a, char *name_prg);
 void			ft_point_on_split(t_list **gc, char **split);
 char			**list_cmd_done(t_list **gc);
 void			*init_array_instruction_function(t_list **gc);
@@ -131,7 +133,8 @@ void			ft_fill_exit_status(t_all *a);
 /*
 **		---------- ROOT ----------
 */
-int				ft_exit(t_all *a);
+int				ft_exit(t_all *a, t_command *cmd);
+int				ft_echo(t_all *a, t_command *cmd);
 /*	
 ** ---------- PARSING ----------
 */

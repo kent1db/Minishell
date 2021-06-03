@@ -6,14 +6,15 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 14:45:11 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/03 10:57:29 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 12:11:38 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_env(t_all *a)
+int	ft_env(t_all *a, t_command *cmd)
 {
+	(void)cmd;
 	t_env *begin_env;
 
 	begin_env = a->env;
@@ -28,7 +29,7 @@ int	ft_env(t_all *a)
 }
 
 // A DECOMMENTER QUAND ON AURA LES ARGUMENTS DANS LA STRUCT A
-int	ft_export(t_all *a)
+int	ft_export(t_all *a, t_command *cmd)
 {
 	int		i;
 	t_env	*new_elem;
@@ -36,6 +37,7 @@ int	ft_export(t_all *a)
 	i = -1;
 	(void)new_elem;
 	(void)a;
+	(void)cmd;
 	// if (!args)
 	// 	return ;
 	// while (args[++i])
@@ -59,12 +61,13 @@ int	ft_export(t_all *a)
 }
 
 // A DECOMMENTER QUAND ON AURA LES ARGUMENTS DANS LA STRUCT A
-int	ft_unset(t_all *a)
+int	ft_unset(t_all *a, t_command *cmd)
 {
 	int	i;
 
 	i = -1;
 	(void)a;
+	(void)cmd;
 	// if (!args)
 	// 	return ;
 	// while (args[++i])

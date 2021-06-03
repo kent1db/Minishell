@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/02 15:45:41 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 12:54:41 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_all	*get_all(void)
 	return (set_all(NULL));
 }
 
-t_all	*init_all(char **envp)
+t_all	*init_all(char **envp, char *name_prg)
 {
 	t_all	*a;
 
@@ -41,6 +41,8 @@ t_all	*init_all(char **envp)
 	ft_lstadd_front(&a->gc, ft_lstnew(a->termcap->historic_current));
 	a->termcap->ptr_historic = NULL;
 	a->read = 1;
+	a->ctrl_c = 0;
+	a->name_prg = name_prg;
 	set_all(a);
 	return (a);
 }
@@ -52,7 +54,7 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	errno = 0;
-	a = init_all(envp);
+	a = init_all(envp, av[0]);
 	init_terms(a);
 	print_banner();
 	read_command_line(a);

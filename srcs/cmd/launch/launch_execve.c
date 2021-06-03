@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/03 11:15:28 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 12:29:27 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,6 @@ void	ft_point_gc_on_split(t_list **gc, char **split)
 	while (split[++i])
 		ft_lstadd_front(gc, ft_lstnew(split[i]));
 	ft_lstadd_front(gc, ft_lstnew(split));
-}
-
-void	ft_print_strs(char **path_cmd)
-{
-	int	i;
-
-	i = 0;
-	ft_printf(1, "\n");
-	if (!path_cmd)
-		ft_printf(1, "IS NULL");
-	while (path_cmd[i])
-	{
-		ft_printf(1, "path_cmd[%d]: %s\n", i, path_cmd[i]);
-		i++;
-	}
 }
 
 int	ft_launch_execve_with_path(char *path_cmd, t_all *a, char **arg)
@@ -57,16 +42,7 @@ int	ft_launch_execve_with_path(char *path_cmd, t_all *a, char **arg)
 	return (0);
 }
 
-void	ft_cmd_not_found(t_all *a, char *name_prg, char *cmd)
-{
-	a->status_cmd = 127;
-	ft_printf(1, "%s: %s: %s\n", ft_strchr(name_prg, '/') + 1, cmd, strerror(2));
-}
-
-
-
-void	ft_launch_execve_path_cmd(char **arg, t_all *a
-		, char *name_prg, char *cmd)
+void	ft_launch_execve_path_cmd(char **arg, t_all *a, t_command *cmd)
 {
 	char	**path_cmd;
 	int		i;
@@ -77,7 +53,7 @@ void	ft_launch_execve_path_cmd(char **arg, t_all *a
 	{
 		if ((path_cmd[i])[ft_strlen(path_cmd[i]) - 1] != '/')
 			path_cmd[i] = ft_strjoin_free(path_cmd[i], "/");
-		path_cmd[i] = ft_strjoin_free(path_cmd[i], cmd);
+		path_cmd[i] = ft_strjoin_free(path_cmd[i], cmd->cmd);
 		if (ft_launch_execve_with_path(path_cmd[i], a, arg))
 		{
 			ft_point_gc_on_split(&a->gc, path_cmd);
@@ -85,19 +61,19 @@ void	ft_launch_execve_path_cmd(char **arg, t_all *a
 		}
 	}
 	ft_point_gc_on_split(&a->gc, path_cmd);
-	ft_cmd_not_found(a, name_prg, cmd);
+	ft_cmd_not_found(a, cmd->cmd);
 }
 
-void	ft_launch_execve(char *cmd, t_all *a, char *name_prg)
+void	ft_launch_execve(t_command *cmd, t_all *a, char *name_prg)
 {
 	char	**arg;
 
 	arg = pick_argument_and_add_name_prg(a, name_prg);
-	if (ft_strchr(cmd, '/'))
+	if (ft_strchr(cmd->cmd, '/'))
 	{
-		if (!ft_launch_execve_with_path(cmd, a, arg))
-			ft_cmd_not_found(a, name_prg, cmd);
+		if (!ft_launch_execve_with_path(cmd->cmd, a, arg))
+			ft_cmd_not_found(a, cmd->cmd);
 		return ;
 	}
-	ft_launch_execve_path_cmd(arg, a, name_prg, cmd);
+	ft_launch_execve_path_cmd(arg, a, cmd);
 }
