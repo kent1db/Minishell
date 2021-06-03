@@ -6,13 +6,14 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/02 15:40:45 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/02 16:11:02 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # define CTRL_U 21
+# define CTRL_L 12
 # define DEL	127
 # define BACKSPACE 8
 # define CTRL_D		4

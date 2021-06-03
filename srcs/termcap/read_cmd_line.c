@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 14:42:57 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/02 15:48:11 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/02 16:11:33 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	ft_switch_keyboard(t_all *a, char buf[4], int *cursor, char **line)
 		ft_backspace(&a->gc, cursor, line);
 	else if (buf[0] == CTRL_U)
 		ft_delete_line_to_cursor(&a->gc, cursor, line);
+	else if (buf[0] == CTRL_L)
+		ft_launch_cmd("clear", a, "./minishell");
 	else if (buf[1] == '[')
 		ft_arrow_key(a, buf[2], cursor, line);
 	else if (buf[0] == '\n')
