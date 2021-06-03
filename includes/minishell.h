@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/02 16:11:02 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 10:31:42 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ t_env			*ft_keyshr(t_env *env, char *key);
 int				ft_env(t_all *a);
 int				ft_export(t_all *a);
 int				ft_unset(t_all *a);
+int				ft_lstsize_env_status(t_env *env, t_status status);
+char			**convert_env_to_strs(t_list **gc, t_env *env);
 /*
 ** 		---------- LAUNCH ----------
 */

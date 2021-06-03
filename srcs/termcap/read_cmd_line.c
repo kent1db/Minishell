@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 14:42:57 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/02 16:11:33 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 11:16:36 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,12 @@ int	ft_switch_keyboard(t_all *a, char buf[4], int *cursor, char **line)
 	else if (buf[0] == CTRL_U)
 		ft_delete_line_to_cursor(&a->gc, cursor, line);
 	else if (buf[0] == CTRL_L)
+	{
 		ft_launch_cmd("clear", a, "./minishell");
+		display_line(a);
+		if (*line)
+			ft_printf(1, "%s", *line);
+	}
 	else if (buf[1] == '[')
 		ft_arrow_key(a, buf[2], cursor, line);
 	else if (buf[0] == '\n')
@@ -55,7 +60,9 @@ void	ft_launch_cmd_and_reset(t_all *a, int *cursor, char **line)
 {
 	t_list  *new_historic;
 
-	ft_printf(1, "\n");
+	if (*line)
+		apply_termios(a->termcap->saved);
+	ft_printf(1, "\n");	
 	if (*line && *line[0] != '\0')
 	{
 		new_historic = ft_lstnew(*line);
@@ -63,11 +70,14 @@ void	ft_launch_cmd_and_reset(t_all *a, int *cursor, char **line)
 		ft_lstadd_back(&a->termcap->historic, new_historic);			
 	}
 	ft_launch_cmd(*line, a, "./minishell");	
-	if (a->read)
+	if (a->read && !a->ctrl_c)
 		display_line(a);
-	// ft_printf(1, GRN "➜ " CYN "minichiale %s " YEL "✗ " RESET, *line);
+	// // ft_printf(1, GRN "➜ " CYN "minichiale %s " YEL "✗ " RESET, *line);
 	*cursor = 0;
+	if (*line)
+		init_terms(a);
 	*line = NULL;
+	a->ctrl_c = 0;
 	a->termcap->historic_current->content = "";
 	a->termcap->ptr_historic = NULL;
 }

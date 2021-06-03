@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/26 15:03:09 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 11:15:28 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,21 @@ void	ft_point_gc_on_split(t_list **gc, char **split)
 	ft_lstadd_front(gc, ft_lstnew(split));
 }
 
+void	ft_print_strs(char **path_cmd)
+{
+	int	i;
+
+	i = 0;
+	ft_printf(1, "\n");
+	if (!path_cmd)
+		ft_printf(1, "IS NULL");
+	while (path_cmd[i])
+	{
+		ft_printf(1, "path_cmd[%d]: %s\n", i, path_cmd[i]);
+		i++;
+	}
+}
+
 int	ft_launch_execve_with_path(char *path_cmd, t_all *a, char **arg)
 {
 	struct stat	buf;
@@ -30,7 +45,10 @@ int	ft_launch_execve_with_path(char *path_cmd, t_all *a, char **arg)
 	if (lstat(path_cmd, &buf) == 0)
 	{
 		if (fork() == 0)
-			execve(path_cmd, arg, NULL);
+		{
+			execve(path_cmd, arg, convert_env_to_strs(&a->gc, a->env));
+			exit(0);
+		}
 		wait(&status);
 		if (WIFEXITED(status))
 			a->status_cmd = WEXITSTATUS(status);
@@ -44,6 +62,8 @@ void	ft_cmd_not_found(t_all *a, char *name_prg, char *cmd)
 	a->status_cmd = 127;
 	ft_printf(1, "%s: %s: %s\n", ft_strchr(name_prg, '/') + 1, cmd, strerror(2));
 }
+
+
 
 void	ft_launch_execve_path_cmd(char **arg, t_all *a
 		, char *name_prg, char *cmd)

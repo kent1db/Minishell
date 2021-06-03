@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 13:46:04 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/02 11:11:27 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 11:17:37 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_arrow_key(t_all *a, char c, int *cursor, char **line)
 {
-	int	size_line;
-
 	if (c == 'A')
 		ft_up_arrow(a->termcap, cursor, line, &a->gc);
 	else if (c == 'B')
@@ -56,7 +54,7 @@ void	ft_left_arrow(int *cursor)
 
 void	ft_right_arrow(int *cursor, int size_line)
 {
-	if (size_line <= (size_t)(*cursor))
+	if (size_line <= (*cursor))
 		return ;
 	tputs(tgetstr("nd", NULL), 1, ft_putchar_int);
 	(*cursor)++;

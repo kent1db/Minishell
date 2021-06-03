@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 18:08:36 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/02 14:57:34 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 11:17:54 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ void	add_string_into_line(t_list **gc, char **line, char *buf, int *cursor)
 
 void	ft_print_buf_and_stock(t_all *a, char **line, char *buf, int *cursor)
 {
-	char	**str_split;
-	int		cursor_remember;
-
 	if (ft_strlen(*line) != (size_t)(*cursor))
 	{
 		add_string_into_line(&a->gc, line, buf, cursor);
