@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/04 13:20:55 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 11:33:26 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void			ft_launch_execve(t_command *cmd, t_all *a);
 void			ft_point_on_split(t_list **gc, char **split);
 char			**list_cmd_done(t_list **gc);
 void			*init_array_instruction_function(t_list **gc);
-char			**fill_argument_execve(t_all *a, char *args, char *opt);
+char			**fill_argument_execve(t_all *a, char *args);
 void			ft_point_gc_on_split(t_list **gc, char **split);
 void			ft_fill_exit_status(t_all *a);
 /*

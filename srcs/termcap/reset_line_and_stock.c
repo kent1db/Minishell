@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 12:39:20 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/04 13:16:28 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 11:32:38 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,16 @@ void	stock_cmd(t_command *cmd, char **line_split)
 	{
 		cmd->cmd = NULL;
 		cmd->args = NULL;
-		cmd->opt = NULL;
 		return ;
 	}
-	else if (ft_strslen(line_split) >= 3)
+	else if (ft_strslen(line_split) == 2)
 	{
 		cmd->cmd = line_split[0];
-		cmd->opt = line_split[1];
+		cmd->args = NULL;
+	}
+	else
+	{
+		cmd->cmd = line_split[0];
 		i = 1;
 		cmd->args = NULL;
 		while (line_split[++i])
@@ -57,18 +60,6 @@ void	stock_cmd(t_command *cmd, char **line_split)
 			cmd->args = ft_strjoin_free(cmd->args, line_split[i]);
 			cmd->args = ft_strjoin_free(cmd->args, " ");
 		}
-	}
-	else if (ft_strslen(line_split) == 2)
-	{
-		cmd->cmd = line_split[0];
-		cmd->opt = NULL;
-		cmd->args = line_split[1];
-	}
-	else
-	{	
-		cmd->cmd = line_split[0];
-		cmd->opt = NULL;
-		cmd->args = NULL;
 	}
 }
 
@@ -81,8 +72,6 @@ void	ft_print_cmd(t_command *cmd)
 	}
 	if (cmd->cmd)
 		ft_printf(1, "cmd: %s\n", cmd->cmd);
-	if (cmd->cmd)
-		ft_printf(1, "opt: %s\n", cmd->opt);
 	if (cmd->args)
 		ft_printf(1, "args: %s\n", cmd->args);
 }

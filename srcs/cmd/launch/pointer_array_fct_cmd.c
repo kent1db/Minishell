@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 13:12:49 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/04 13:49:40 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 11:31:22 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	*init_array_instruction_function(t_list **gc)
 	return (ft_cmd);
 }
 
-char	**fill_argument_execve(t_all *a, char *args, char *opt)
+char	**fill_argument_execve(t_all *a, char *args)
 {
 	char	**arg;
 	char	**arg_cmd_split;
@@ -64,8 +64,6 @@ char	**fill_argument_execve(t_all *a, char *args, char *opt)
 		ft_strs_add_to_gc(arg, &a->gc);
 		return (arg);
 	}
-	if (opt)
-		arg = ft_strsjoin_free(arg, opt);
 	arg_cmd_split = ft_split(args, ' ');
 	ft_strs_add_to_gc(arg, &a->gc);
 	while (++i < ft_strslen(arg_cmd_split))

@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:44:55 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/04 12:55:03 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 11:30:46 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef enum e_type_enum
 typedef struct s_command
 {
 	char			*cmd;
-	char			*opt;
 	char			*args;
 }					t_command;
 

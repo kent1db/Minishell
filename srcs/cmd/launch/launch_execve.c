@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/04 13:21:05 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 11:31:12 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_launch_execve(t_command *cmd, t_all *a)
 {
 	char	**arg;
 
-	arg = fill_argument_execve(a, cmd->args, cmd->opt);
+	arg = fill_argument_execve(a, cmd->args);
 	if (ft_strchr(cmd->cmd, '/'))
 	{
 		if (!ft_launch_execve_with_path(cmd->cmd, a, arg))

@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 14:42:57 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/04 13:06:07 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 11:32:46 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	ft_ctrl_l(t_all *a, char *line)
 
 	cmd = malloc_gc(&a->gc, sizeof(t_command));
 	cmd->cmd = ft_strdup_gc(&a->gc, "clear");
-	cmd->opt = NULL;
 	cmd->args = NULL;
 	ft_launch_cmd(cmd, a);
 	display_line(a);
