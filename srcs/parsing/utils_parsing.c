@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:59:21 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/02 10:07:47 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 13:11:45 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,31 @@ int	ft_delimiter(char c, char *del)
 	return (0);
 }
 
-void	ft_priority(char *line, int start, int end,  t_tree *node)
+char	*ft_substr_sw(char *s, int w, size_t len)
 {
-	node->type = -1;
-	while (line[start] && start < end)
-	{
-		if (line[start] == '|')
-			node->type = op_pipe;
-		else if ((line[start] == '>'  || line[start] == '<') &&\
-		node->type < redir)
-			node->type = redir;
-		else if (node->type < other)
-			node->type = other;
-		start++;
-	}
-}
+	char	*buf;
+	size_t	size;
+	size_t	i;
 
-int	ft_op_pos(char *line, int start, int end, t_tree *node)
-{
-	while (line[end] && end > start)
+	i = 0;
+	size = 0;
+	if (s == NULL)
+		return (NULL);
+	if (w >= ft_strlen(s))
+		return (ft_calloc(1, sizeof(char)));
+	while (size < len && s[w + size])
+		size++;
+	buf = malloc(sizeof(char) * (size + 1));
+	if (!buf)
+		return (NULL);
+	size = 0;
+	while (s[w] && i < len)
 	{
-		if (line[end] == '|' && node->type == op_pipe)
-			return (end);
-		if ((line[end] == '>' || line[end] == '<') &&\
-		node->type == redir)
-			return (end);
-		end--;
+		ft_is_quote(s[w], (int *)&size);
+		buf[i++] = s[w++];
+		if (s[w] && s[w - 1] && s[w - 1] == ' ' && s[w] == ' ' && !size)
+			ft_skip_whitespace(s, &w);
 	}
-	return (-1);
+	buf[i] = '\0';
+	return (buf);
 }

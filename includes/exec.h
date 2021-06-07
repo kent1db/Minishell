@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:44:55 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/20 13:54:23 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 12:30:33 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 typedef enum		e_type_enum
 {
 	other,
+	file,
+	command,
 	redir,
 	op_pipe
 }					t_type_enum;
