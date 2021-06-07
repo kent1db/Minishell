@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 18:08:36 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/03 13:13:49 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/04 12:56:59 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,14 @@ void	add_string_into_line(t_list **gc, char **line, char *buf, int *cursor)
 
 void	ft_print_buf_and_stock(t_all *a, char **line, char *buf, int *cursor)
 {
+	if (a->input->ctrl_c)
+	{
+		*cursor = 0;
+		a->input->ctrl_c = 0;
+		ft_print_buf(buf, cursor);
+		*line = ft_strdup_gc(&a->gc, buf);
+		return ;
+	}
 	if (ft_strlen(*line) != (size_t)(*cursor))
 	{
 		add_string_into_line(&a->gc, line, buf, cursor);
@@ -71,7 +79,7 @@ void	ft_print_buf_and_stock(t_all *a, char **line, char *buf, int *cursor)
 			*line = ft_strjoin(*line, buf);
 			ft_lstadd_front(&a->gc, ft_lstnew(*line));			
 		}
-		a->termcap->historic_current = ft_lstnew(*line);
-		ft_lstadd_front(&a->gc, ft_lstnew(a->termcap->historic_current));
+		a->input->historic_current = ft_lstnew(*line);
+		ft_lstadd_front(&a->gc, ft_lstnew(a->input->historic_current));
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/03 12:34:30 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/04 13:00:32 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,24 @@ typedef struct s_tree
 	t_type_union	*exec;
 }					t_tree;
 
-typedef struct s_termcap
+typedef struct s_input
 {
+	int				read;
+	int				ctrl_c;
 	struct termios	saved;
 	t_list			*historic;
 	t_list			*historic_current;
 	t_list			*ptr_historic;	
-}				t_termcap;
+}				t_input;
 
 typedef struct s_all
 {
 	t_env			*env;
 	t_list			*gc;
 	t_tree			*tree;
+	t_input			*input;
 	int				status_cmd;
-	t_termcap		*termcap;
-	int				read;
-	int				ctrl_c;
+	int				in_cmd;
 	char			*name_prg;
 }				t_all;
 

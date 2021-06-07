@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 13:12:49 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/03 12:12:46 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/04 13:49:40 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,29 @@ void	*init_array_instruction_function(t_list **gc)
 	return (ft_cmd);
 }
 
-char	**pick_argument_and_add_name_prg(t_all *a, char *name_prg)
+char	**fill_argument_execve(t_all *a, char *args, char *opt)
 {
 	char	**arg;
-
-	arg = malloc_gc(&a->gc, sizeof(char *) * 2);
-	arg[0] = ft_strdup_gc(&a->gc, name_prg);
+	char	**arg_cmd_split;
+	int		i;
+	
+	i = -1;
+	arg = malloc(sizeof(char *) * 2);
+	if (!arg)
+		ft_error_msg("Malloc error", a->gc);
+	arg[0] = ft_strdup(a->name_prg);
 	arg[1] = NULL;
+	if (!args)
+	{
+		ft_strs_add_to_gc(arg, &a->gc);
+		return (arg);
+	}
+	if (opt)
+		arg = ft_strsjoin_free(arg, opt);
+	arg_cmd_split = ft_split(args, ' ');
+	ft_strs_add_to_gc(arg, &a->gc);
+	while (++i < ft_strslen(arg_cmd_split))
+		arg = ft_strsjoin_free(arg, arg_cmd_split[i]);
+	ft_strs_add_to_gc(arg, &a->gc);
 	return (arg);
 }

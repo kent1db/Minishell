@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/03 12:46:30 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/04 13:20:55 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void			ft_cmd_not_found(t_all *a, char *cmd);
 void			ft_arrow_key(t_all *a, char c, int *cursor, char **line);
 void			ft_left_arrow(int *cursor);
 void			ft_right_arrow(int *cursor, int size_line);
-void			ft_up_arrow(t_termcap *term, int *cursor, char **line, t_list **gc);
-void			ft_down_arrow(t_termcap *term, int *cursor, char **line, t_list **gc);
+void			ft_up_arrow(t_input *term, int *cursor, char **line, t_list **gc);
+void			ft_down_arrow(t_input *term, int *cursor, char **line, t_list **gc);
 /*
 **	DELETE
 */
@@ -74,7 +74,7 @@ void			ft_backspace(t_list **gc, int *cursor, char **line);
 */
 void			init_termios(void);
 void			init_terms(t_all *a);
-void			ft_init_termcap(t_all *a);
+void			ft_init_input(t_all *a);
 /*
 **	PRINT
 */
@@ -118,16 +118,16 @@ char			**convert_env_to_strs(t_list **gc, t_env *env);
 */
 int				launch_if_is_our_cmd(t_command *cmd, t_all *a, char **cmd_done,
 					int	(**ft_cmd)(t_all *a, t_command *cmd));
-void			ft_launch_cmd(t_command *cmd, t_all *all, char *name_prg);
+void			ft_launch_cmd(t_command *cmd, t_all *all);
 void			ft_launch_execve_path_cmd(char **arg, t_all *a, t_command *cmd);
 void			ft_exit_status_cmd(t_all *a);
 int				ft_launch_execve_with_path(char *path_cmd, t_all *a,
 					char **arg);
-void			ft_launch_execve(t_command *cmd, t_all *a, char *name_prg);
+void			ft_launch_execve(t_command *cmd, t_all *a);
 void			ft_point_on_split(t_list **gc, char **split);
 char			**list_cmd_done(t_list **gc);
 void			*init_array_instruction_function(t_list **gc);
-char			**pick_argument_and_add_name_prg(t_all *a, char *name_prg);
+char			**fill_argument_execve(t_all *a, char *args, char *opt);
 void			ft_point_gc_on_split(t_list **gc, char **split);
 void			ft_fill_exit_status(t_all *a);
 /*

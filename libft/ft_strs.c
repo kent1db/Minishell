@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 14:36:00 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/26 14:49:14 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/04 13:14:41 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,26 @@ char	**ft_strsdup(char **s1)
 	}
 	strs[i] = NULL;
 	return (strs);
+}
+
+void	ft_print_strs(char **strs)
+{
+	int	i;
+
+	i = -1;
+	while (strs[++i])
+		ft_printf(1, "%s\n", strs[i]);
+}
+
+void	ft_strs_add_to_gc(char **strs, t_list **gc)
+{
+	int		i;
+
+	i = -1;
+	if (!strs)
+		return ;
+	ft_lstadd_front(gc, ft_lstnew(strs));
+
+	while (strs[++i])
+		ft_lstadd_front(gc, ft_lstnew(strs[i]));
 }

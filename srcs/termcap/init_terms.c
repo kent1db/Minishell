@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 14:07:44 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/03 11:16:56 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/04 13:01:12 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ void	ctrl_c(int signal)
 	(void)signal;
 	a = get_all();
 	a->status_cmd = 1;
-	a->ctrl_c = 1;
+	a->input->ctrl_c = 1;
 	ft_exit_status_cmd(a);
 	ft_printf(1, "\n");
-	display_line(a);
+	if (!a->in_cmd)
+		display_line(a);
 }
 
-void	init_termcap(t_all *a)
+void	init_input(t_all *a)
 {
 	int ret;
 	char *term_type;
@@ -46,9 +47,9 @@ void	init_termios(void)
 
 void	init_terms(t_all *a)
 {
-	a->termcap->saved = get_termios();
+	a->input->saved = get_termios();
 	init_termios();
-	init_termcap(a);
+	init_input(a);
 	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR || signal(SIGINT, ctrl_c) == SIG_ERR)
 		return (ft_error_msg("signal have a error", a->gc));
 }

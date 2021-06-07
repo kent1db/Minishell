@@ -6,7 +6,7 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/06/03 12:17:06 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/06/04 13:16:54 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ FILES_GENERAL	= garbage_collector.c error.c main.c display.c
 FILES_LAUNCH	= pointer_array_fct_cmd.c launch_cmd.c launch_execve.c
 FILES_CMD		= exit.c echo.c
 FILES_ENV		= env_export_unset.c utility_lst_env.c convert_env_to_strs.c
-FILES_TERMCAP	= arrow_key.c delete.c init_terms.c print_buf_and_stock.c read_cmd_line.c termios.c utility.c
+FILES_TERMCAP	= arrow_key.c delete.c init_terms.c print_buf_and_stock.c \
+				  read_cmd_line.c termios.c utility.c reset_line_and_stock.c
 
 FILES			= $(addprefix display/, ${FILES_DISPLAY}) \
 				  ${addprefix parsing/, ${FILES_PARSING}} \

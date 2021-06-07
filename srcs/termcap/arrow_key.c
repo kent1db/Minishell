@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 13:46:04 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/03 11:17:37 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/04 12:56:21 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 void	ft_arrow_key(t_all *a, char c, int *cursor, char **line)
 {
 	if (c == 'A')
-		ft_up_arrow(a->termcap, cursor, line, &a->gc);
+		ft_up_arrow(a->input, cursor, line, &a->gc);
 	else if (c == 'B')
-		ft_down_arrow(a->termcap, cursor, line, &a->gc);
+		ft_down_arrow(a->input, cursor, line, &a->gc);
 	else if (c == 'C')
 		ft_right_arrow(cursor, ft_strlen(*line));
 	else if (c == 'D')
 		ft_left_arrow(cursor);
 }
 
-void	ft_up_arrow(t_termcap *term, int *cursor, char **line, t_list **gc)
+void	ft_up_arrow(t_input *term, int *cursor, char **line, t_list **gc)
 {
 	term->ptr_historic = previous_current(term->historic, term->ptr_historic, term->historic_current);
 	if (term->ptr_historic)
 		ft_change_line(gc, cursor, line, term->ptr_historic->content);
 }
 
-void	ft_down_arrow(t_termcap *term, int *cursor, char **line, t_list **gc)
+void	ft_down_arrow(t_input *term, int *cursor, char **line, t_list **gc)
 {
 	if (term->ptr_historic)
 	{

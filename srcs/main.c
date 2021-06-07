@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/03 12:54:41 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/04 13:30:24 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,14 @@ t_all	*init_all(char **envp, char *name_prg)
 	ft_lstadd_front(&a->gc, ft_lstnew(a));
 	a->status_cmd = 0;
 	a->env = parse_env(envp, &a->gc);
-	a->termcap = malloc_gc(&a->gc, (sizeof(t_termcap)));
-	a->termcap->historic = NULL;
-	a->termcap->historic_current = ft_lstnew("");
-	ft_lstadd_front(&a->gc, ft_lstnew(a->termcap->historic_current));
-	a->termcap->ptr_historic = NULL;
-	a->read = 1;
-	a->ctrl_c = 0;
+	a->input = malloc_gc(&a->gc, (sizeof(t_input)));
+	a->input->historic = NULL;
+	a->input->historic_current = ft_lstnew("");
+	ft_lstadd_front(&a->gc, ft_lstnew(a->input->historic_current));
+	a->input->ptr_historic = NULL;
+	a->input->read = 1;
+	a->input->ctrl_c = 0;
+	a->in_cmd = 0;
 	a->name_prg = name_prg;
 	set_all(a);
 	return (a);
@@ -59,7 +60,7 @@ int	main(int ac, char **av, char **envp)
 	print_banner();
 	read_command_line(a);
 	ft_printf(1, "exit\n");
-	apply_termios(a->termcap->saved);
+	apply_termios(a->input->saved);
 	ft_lstclear(&a->gc, free);
 	return (0);
 }

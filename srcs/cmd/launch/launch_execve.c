@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/03 12:29:27 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/04 13:21:05 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ void	ft_launch_execve_path_cmd(char **arg, t_all *a, t_command *cmd)
 	ft_cmd_not_found(a, cmd->cmd);
 }
 
-void	ft_launch_execve(t_command *cmd, t_all *a, char *name_prg)
+void	ft_launch_execve(t_command *cmd, t_all *a)
 {
 	char	**arg;
 
-	arg = pick_argument_and_add_name_prg(a, name_prg);
+	arg = fill_argument_execve(a, cmd->args, cmd->opt);
 	if (ft_strchr(cmd->cmd, '/'))
 	{
 		if (!ft_launch_execve_with_path(cmd->cmd, a, arg))
