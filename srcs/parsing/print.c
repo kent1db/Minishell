@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 13:14:32 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/07 13:14:53 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 11:23:26 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,18 @@ void	ft_print_tree(t_tree *node, int count)
 		ft_print_tree(node->left, count + 1);
 	if (node->right != NULL)
 		ft_print_tree(node->right, count + 1);
+}
+
+void	ft_print_start_to_end(char *line, int start, int end)
+{
+	int	i;
+
+	i = 0;
+	dprintf(1, "start = %d\tend = %d\n", start, end);
+	while (line[start] && start != end)
+	{
+		write(1, &line[start], 1);
+		start++;
+	}
+	write(1, "\n", 1);
 }

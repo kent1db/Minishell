@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 13:16:13 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/07 16:35:29 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 11:30:30 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_file_name(char *line, int *tab, t_tree *node, t_all *a)
 
 	end = tab[1];
 	start = tab[0];
+	if (end == 0)
+		return (NULL);
 	while (line[start] && (line[start] == '>' || line[start] == '<' ||\
 	line[start] == '|' || line[start] == ' '))
 		start++;

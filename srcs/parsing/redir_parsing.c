@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 13:16:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/07 16:51:01 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 10:04:08 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,4 @@ void	ft_malloc_redir(t_tree *node, t_all *a, int *tab, char *line)
 	node->exec = malloc_gc(&a->gc, sizeof(t_type_union));
 	node->exec->op = malloc_gc(&a->gc, sizeof(t_operator));
 	node->exec->op->op = ft_malloc_nb_redir(line, tab, a);
-	// if (line[op_pos] == '<')
-	// {
-	// 	node->exec->op->op = malloc_gc(&a->gc, (sizeof(char) * 2));
-	// 	ft_strcpy(node->exec->op->op, "<");
-	// }
-	// else
-	// {
-	// 	node->exec->op->op = malloc_gc(&a->gc, (sizeof(char) * 2));
-	// 	ft_strcpy(node->exec->op->op, ">");
-	// }
-	// dprintf(1, "redirection = %s\n", node->exec->op->op);
 }

@@ -6,26 +6,13 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 12:59:58 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/07 16:31:59 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 11:51:26 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_print_start_to_end(char *line, int start, int end)
-{
-	int	i;
-
-	i = 0;
-	while (line[start] && start != end)
-	{
-		write(1, &line[start], 1);
-		start++;
-	}
-	write(1, "\n", 1);
-}
-
-int		ft_last_op(char *line, int end)
+int		ft_last_op(char *line, int end, t_tree *node)
 {
 	int count;
 
@@ -44,12 +31,18 @@ int		ft_last_op(char *line, int end)
 	return (end + count);
 }
 
-void	ft_priority(char *line, int start, int end,  t_tree *node)
+void	ft_priority(char *line, int start, int end, t_tree *node)
 {
 	int	quote;
 
 	quote = 0;
-	node->type = -1;
+	if (node->type != file)
+	{
+		dprintf(1, "ici\n");
+		node->type = -1;
+	}
+	dprintf(1, "1\n");
+	ft_print_start_to_end(line, start, end);
 	while (line[start] && start < end)
 	{
 		ft_is_quote(line[start], &quote);
@@ -66,13 +59,13 @@ void	ft_priority(char *line, int start, int end,  t_tree *node)
 
 int	ft_op_pos(char *line, int start, int end, t_tree *node)
 {
-	while (line[end] && end > start)
+	while (line[end] && end >= start)
 	{
 		if (line[end] == '|' && node->type == op_pipe)
-			return (ft_last_op(line, end));
+			return (ft_last_op(line, end, node));
 		if ((line[end] == '>' || line[end] == '<') &&\
 		node->type == redir)
-			return (ft_last_op(line, end));
+			return (ft_last_op(line, end, node));
 		end--;
 	}
 	return (-1);
