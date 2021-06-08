@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 12:39:20 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/07 11:32:38 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 16:17:00 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,32 +35,15 @@ void	reset_variable_new_line(t_all *a, int *cursor, char **line)
 	a->input->ptr_historic = NULL;
 }
 
-void	stock_cmd(t_command *cmd, char **line_split)
+void	stock_cmd(t_command *cmd, char *line)
 {
-	int i;
+	int	i;
 
-	if (!line_split)
-	{
-		cmd->cmd = NULL;
-		cmd->args = NULL;
-		return ;
-	}
-	else if (ft_strslen(line_split) == 2)
-	{
-		cmd->cmd = line_split[0];
-		cmd->args = NULL;
-	}
-	else
-	{
-		cmd->cmd = line_split[0];
-		i = 1;
-		cmd->args = NULL;
-		while (line_split[++i])
-		{
-			cmd->args = ft_strjoin_free(cmd->args, line_split[i]);
-			cmd->args = ft_strjoin_free(cmd->args, " ");
-		}
-	}
+	i = 0;
+	while (line[i] && line[i] != ' ')
+		i++;
+	cmd->cmd = ft_substr(line, 0, i);
+	cmd->args = ft_substr(line, i + 1, ft_strlen(line) - i + 1);
 }
 
 void	ft_print_cmd(t_command *cmd)
@@ -79,20 +62,19 @@ void	ft_print_cmd(t_command *cmd)
 void	ft_launch_cmd_and_reset(t_all *a, int *cursor, char **line)
 {
 	t_command	*cmd;
-	char		**line_split;
 
 	ft_printf(1, "\n");
-	if (line && *line && (*line)[0] != '\0')
+	if (*line && (*line)[0] != '\0')
 	{
+		stock_to_historic(a, *line);
 		apply_termios(a->input->saved);
 		cmd = malloc_gc(&a->gc, sizeof(t_command));
-		line_split = ft_split(*line, ' '); // JUST FOR TEST WHITOUT PARSING
-		ft_strs_add_to_gc(line_split, &a->gc); // JUST FOR TEST WHITOUT PARSING
-		stock_to_historic(a, *line);
-		stock_cmd(cmd, line_split); // JUST FOR TEST WHITOUT PARSING
+		stock_cmd(cmd, *line); // JUST FOR TEST WHITOUT PARSING
+		cmd->cmd = delete_quote(cmd->cmd);
+		ft_lstadd_front(&a->gc, ft_lstnew(cmd->cmd));
 		ft_launch_cmd(cmd, a);
 	}
 	if (a->input->read)// && !a->input->ctrl_c)
-	display_line(a);
+		display_line(a);
 	reset_variable_new_line(a, cursor, line);
 }

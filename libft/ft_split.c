@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:18:32 by alafranc          #+#    #+#             */
-/*   Updated: 2021/04/08 15:39:05 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 11:40:37 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	**ft_split(char const *s, char c)
 	char	**strs;
 	int		i;
 
-	i = 0;
+	i = 0;	
 	strs = malloc(sizeof(char *) * (malloc_all(s, c) + 1));
 	if (!s || !strs)
 		return (NULL);
