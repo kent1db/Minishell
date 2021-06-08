@@ -6,43 +6,59 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 12:59:58 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/08 11:51:26 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 16:32:02 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_last_op(char *line, int end, t_tree *node)
+int		ft_is_file(char *line, int start)
+{
+	if (start > 0)
+	{
+		while (start > 0 && line[start] == ' ')
+			start--;
+		if (line[start] && (line[start] == '>' || line[start] == '<'))
+			return (1);
+	}
+	return (0);
+}
+
+int		*ft_tab_op(char *line, int end, t_tree *node, t_all *a)
 {
 	int count;
+	int	*op_pos;
 
 	count = 0;
+	op_pos = malloc_gc(&a->gc, sizeof(int) * 2);
 	if (line[end] && (line[end] == '<' ||\
 	line[end] == '>' || line[end] == '|'))
 	{
+		op_pos[1] = end;
 		while (line[end] && line[end] != ' ' && (line[end] == '<' ||\
 		line[end] == '>' || line[end] == '|' || ft_isdigit(line[end])))
 		{
 			end--;
 			count = 1;
 		}
-		return (end + count);
+		op_pos[0] = end + count;
 	}
-	return (end + count);
+	else
+	{
+		op_pos[0] = -1;
+		op_pos[1] = -1;
+	}
+	return (op_pos);
 }
 
 void	ft_priority(char *line, int start, int end, t_tree *node)
 {
 	int	quote;
+	int	beg;
 
 	quote = 0;
-	if (node->type != file)
-	{
-		dprintf(1, "ici\n");
-		node->type = -1;
-	}
-	dprintf(1, "1\n");
-	ft_print_start_to_end(line, start, end);
+	node->type = -1;
+	beg = start;
 	while (line[start] && start < end)
 	{
 		ft_is_quote(line[start], &quote);
@@ -55,18 +71,20 @@ void	ft_priority(char *line, int start, int end, t_tree *node)
 			node->type = other;
 		start++;
 	}
+	if (ft_is_file(line, beg) && node->type == other)
+		node->type = file;
 }
 
-int	ft_op_pos(char *line, int start, int end, t_tree *node)
+int		*ft_op_pos(char *line, int end, t_tree *node, t_all *a)
 {
-	while (line[end] && end >= start)
+	while (line[end] && end >= node->start)
 	{
 		if (line[end] == '|' && node->type == op_pipe)
-			return (ft_last_op(line, end, node));
+			return (ft_tab_op(line, end, node, a));
 		if ((line[end] == '>' || line[end] == '<') &&\
 		node->type == redir)
-			return (ft_last_op(line, end, node));
+			return (ft_tab_op(line, end, node, a));
 		end--;
 	}
-	return (-1);
+	return (ft_tab_op(line, end, node, a));
 }

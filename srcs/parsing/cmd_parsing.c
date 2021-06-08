@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 13:12:59 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/07 13:14:04 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 16:17:53 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_count_malloc(char *line, int *i, int (*f)(char c, char *str), char *del)
 {
 	int	size;
 	int	quote;
+	int	a;
 
 	size = 0;
 	quote = 0;
@@ -36,6 +37,16 @@ int	ft_count_malloc(char *line, int *i, int (*f)(char c, char *str), char *del)
 	}
 	if (f(line[*i], del) && line[*i - 1] && line[*i - 1] == ' ')
 		size--;
+	else if (line[*i] == '>')
+	{
+		(*i)--;
+		size--;
+		while (line[*i] && ft_isdigit(line[*i]))
+		{
+			(*i)--;
+			size--;
+		}
+	}
 	return (size);
 }
 

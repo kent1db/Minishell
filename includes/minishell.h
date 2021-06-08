@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/07 16:49:56 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 15:42:46 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_print_tree(t_tree *node, int count);
 
 /* PRIORITY_OP */
 void	ft_priority(char *line, int start, int end,  t_tree *node);
-int     ft_op_pos(char *line, int start, int end, t_tree *node);
+int     *ft_op_pos(char *line, int end, t_tree *node, t_all *a);
 void	ft_print_start_to_end(char *line, int start, int end);
 
 /* REDIR_PARSING */

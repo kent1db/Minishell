@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/08 11:34:24 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 16:01:52 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ typedef	struct		s_tree
 	t_type_union	*exec;
 	int				count;
 	int				loop;
-	int				fd;
+	int				start;
+	int				end;
 }					t_tree;
 
 typedef struct s_all
