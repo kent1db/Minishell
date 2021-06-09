@@ -6,22 +6,25 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/05/26 08:32:25 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/09 11:49:00 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <readline/history.h>
+#include <readline/readline.h>
 
 void	read_command_line(t_all *a)
 {
 	char	*line;
 
 	line = NULL;
-	ft_printf(1, RED "➜ " BLU "minishell " YEL "✗ " RESET);
-	while (get_next_line(0, &line))
+	// ft_printf(1, RED "➜ " BLU "minishell " YEL "✗ " RESET);
+	while ((line = readline(RED "➜ " BLU "minishell " YEL "✗ " RESET)))
 	{
+		add_history(line);
 		ft_lexing_command_line(line, a);
-		ft_printf(1, RED "➜ " BLU "minishell " YEL "✗ " RESET);
+		// ft_printf(1, RED "➜ " BLU "minishell " YEL "✗ " RESET);
 		free(line);
 	}
 }

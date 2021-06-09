@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 13:16:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/08 15:26:09 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/09 11:36:28 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,7 @@ char	*ft_malloc_nb_redir(char *line, int *tab, t_all *a)
 	char	*str;
 
 	count = 0;
-	// start = tab[2];
-	// while (line[start] && (line[start] == '>' || line[start] == '<' ||
-	// ft_isdigit(line[start])))
-	// {
-	// 	count++;
-	// 	start++;
-	// }
 	str = malloc_gc(&a->gc, sizeof(char) * (tab[3] - tab[2] + 2));
-	// start = tab[2];
-	// count = ;
 	start = tab[2];
 	while (line[start] && start <= tab[3])
 		str[count++] = line[start++];

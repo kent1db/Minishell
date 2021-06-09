@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/08 16:01:52 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/09 14:36:20 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef	struct		s_tree
 	int				loop;
 	int				start;
 	int				end;
+	char			*line;
 }					t_tree;
 
 typedef struct s_all

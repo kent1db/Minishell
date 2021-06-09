@@ -6,26 +6,53 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:19 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/08 16:32:56 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/09 16:06:24 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		ft_start(char *line, int start, t_tree *node)
+int		ft_check_cmd_after(int **tab, t_tree *node, t_all *a)
 {
-	// int	beg;
+	int	s;
+	int beg;
+	int end;
 
-	// beg = start;
-	if (node->loop > 0 && line[start] && (line[start] == '>' ||\
-	line[start] == '<'))
-		node->type = file;
-		// dprintf(1, "oui\n");
-		// while (line[start] && (line[start] == '>' || line[start] == '<' ||\
-		// line[start] == '|'))
-		// 	start++;
+	s = node->start;
+	while (node->line[s] && ft_delimiter(node->line[s], " ><123456789"))
+		s++;
+	while (node->line[s] && !ft_delimiter(node->line[s], " ><|;"))
+		s++;
+	while (node->line[s] && node->line[s] == ' ')
+		s++;
+	beg = s;
+	while (node->line[s] && !ft_delimiter(node->line[s], "><|;"))
+		s++;
+	end = s;
+	if (end - beg > 0)
+	{
+		(*tab)[0] = beg;
+		(*tab)[1] = end;
+		return (1);
+	}
+	return (0);
+}
+
+void	ft_put_in_tab(int **tab, int *op_pos, t_tree *node, t_all *a)
+{
+	(*tab) = malloc_gc(&a->gc, sizeof(int) * 4);
+	if (node->type == -1)
+	{
+		if (ft_check_cmd_after(tab, node, a))
+			node->type = 0;
+	}
 	else
-		node->type = -1;
+	{
+		(*tab)[0] = node->start;
+		(*tab)[1] = node->end;
+	}
+	(*tab)[3] = op_pos[1];
+	(*tab)[2] = op_pos[0];
 }
 
 void	ft_parsing(char *line, int *tab, t_tree *node, t_all *a)
@@ -51,20 +78,16 @@ t_tree	*ft_binary_tree(char *line, int start, int end, t_all *a)
 {
 	t_tree	*node;
 	int		*op_pos;
-	int		tab[4];
+	int		*tab;
 
 	node = malloc_gc(&a->gc, sizeof(t_tree));
-	// ft_start(line, start, node);
 	ft_priority(line, start, end, node);
-	// op_pos = ft_op_pos(line, start, end - 1, node);
 	node->start = start;
 	node->end = end;
+	node->line = line;
 	op_pos = ft_op_pos(line, end - 1, node, a);
+	ft_put_in_tab(&tab, op_pos, node, a);
 	// dprintf(1, "type = %d\nop_pos[0] = %d\top_pos[1] = %d\n\n", node->type, op_pos[0], op_pos[1]);
-	tab[0] = start;
-	tab[1] = end;
-	tab[2] = op_pos[0];
-	tab[3] = op_pos[1];
 	ft_parsing(line, tab, node, a);
 	// usleep(800000);
 	if (node->type == op_pipe || node->type == redir)
@@ -84,12 +107,10 @@ t_tree	*ft_binary_tree(char *line, int start, int end, t_all *a)
 void	ft_lexing_command_line(char *line, t_all *a)
 {
 	int	i;
-	int	count;
 	int start;
 	int	quote;
 
 	i = 0;
-	count = 0;
 	quote = 0;
 	while (line[i])
 	{

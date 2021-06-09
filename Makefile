@@ -6,7 +6,7 @@
 #    By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/06/07 13:19:32 by qurobert         ###   ########lyon.fr    #
+#    Updated: 2021/06/09 11:51:33 by qurobert         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ LIBFT			= $(addprefix ${LIBFT_PATH}, ${NAME_LIBFT})
 
 CC				= clang
 RM				= rm -rf
-FLAGS			= #-Wall -Wextra -Werror
+FLAGS			= -Wunused-command-line-argument #-Wall -Wextra -Werror 
 
 all: 			${NAME}
 
@@ -54,7 +54,7 @@ $(OBJS_PATH)/%.o: %.c  $(INC)
 				@printf "\e[?25l\e[JMINISHELL : \e[92m$(notdir $<)\e[0m\r"
 
 ${NAME}: 		init ${OBJS}
-				@${CC} ${FLAGS} ${OBJS_FINAL} -o ${NAME} ${NAME_LIBFT} -I ${INC_PATH}
+				@${CC} ${FLAGS} -lreadline ${OBJS_FINAL} -o ${NAME} ${NAME_LIBFT} -I ${INC_PATH}
 				@printf '\033[?25l\033[JMINISHELL CREATED \033[92m✔ \033[0m\033[?25h\n'
 
 clean:
