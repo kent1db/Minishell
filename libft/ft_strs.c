@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 14:36:00 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/07 14:31:04 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/09 13:28:20 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	ft_strs_add_to_gc(char **strs, t_list **gc)
 	if (!strs)
 		return ;
 	ft_lstadd_front(gc, ft_lstnew(strs));
-
 	while (strs[++i])
 		ft_lstadd_front(gc, ft_lstnew(strs[i]));
 }

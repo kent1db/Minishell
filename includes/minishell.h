@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/08 12:38:39 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/09 15:13:26 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 */
 void			*malloc_gc(t_list **gc, size_t size);
 char			*ft_strdup_gc(t_list **gc, char *src);
+void			ft_lst_add_to_gc(t_list **gc, t_list *lst);
 void			ft_error_msg(char *msg_error, t_list *gc);
 t_all			*set_all(t_all *tmp);
 t_all			*get_all(void);
@@ -131,12 +132,25 @@ char			**fill_argument_execve(t_all *a, char *args);
 void			ft_point_gc_on_split(t_list **gc, char **split);
 void			ft_fill_exit_status(t_all *a);
 /*
+** 		---------- ECHO ----------
+*/
+char			*transform_arg_with_env(char *arg, t_all *a);
+void			delete_option_and_empty_quote(t_list **arg_split, t_all *a, int *option);
+void			main_echo(t_list **arg_split,  t_all *a);
+int				ft_reverse_boolean(int boolean);
+int				is_option(char *args, t_all *a);
+t_env			*find_env(t_all *a, char *arg,  int *i);
+int				ft_echo(t_all *a, char *args);
+
+
+/*
 **		---------- ROOT ----------
 */
 int				ft_exit(t_all *a, char *args);
-int				ft_echo(t_all *a, char *args);
 char			*delete_quote(char *args);
 void			ft_move_quote_to_cmd(t_list **gc, t_command *cmd);
+int				ft_alexis(t_all *a, char *args);
+int				ft_quentin(t_all *a, char *args);
 /*
 **			QUOTES
 */

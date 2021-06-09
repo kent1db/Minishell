@@ -6,11 +6,21 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 13:13:12 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/21 13:13:14 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/09 13:07:15 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_lst_add_to_gc(t_list **gc, t_list *lst)
+{
+	while (lst)
+	{
+		ft_lstadd_front(gc, ft_lstnew(lst));
+		ft_lstadd_front(gc, ft_lstnew(lst->content));
+		lst = lst->next;
+	}
+}
 
 void	*malloc_gc(t_list **gc, size_t size)
 {
