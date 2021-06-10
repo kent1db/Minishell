@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/09 15:13:26 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/10 13:57:17 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void			ft_print_line_and_stock(t_all *a, char **line, char *buf, int *cursor);
 int				ft_putchar_int(int c);
 void			display_line(t_all *a);
 void			ft_cmd_not_found(t_all *a, char *cmd);
+char			*delete_backslash(char *str);
 /*
 ** ---------- TERMCAP ----------
 */
@@ -157,6 +158,9 @@ int				ft_quentin(t_all *a, char *args);
 char			*delete_empty_quote(char *str);
 char			*delete_quote(char *args);
 t_list			*ft_split_quote(char *str, char del);
+int				is_quote_or_d_quote(char *str, int index);
+int				is_char_whitout_backslash(char *str, int index, char c);
+int				ft_ccmp(char c, char *str);
 /*	
 ** ---------- PARSING ----------
 */

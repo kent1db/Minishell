@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 11:56:26 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/09 15:55:52 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/10 14:58:49 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ char	*transform_arg_with_env(char *arg, t_all *a)
 	new_str = NULL;
 	while (arg[i])
 	{
-		if ((arg[i] == '\'' || arg[i] == '\"') && quote == 0)
+		if ((is_quote_or_d_quote(arg, i)) && quote == 0)
 			quote = arg[i];
 		else if (arg[i] == quote)
 			quote = 0;
-		if (arg[i] == '~')
+		if (is_char_whitout_backslash(arg, i, '~'))
 		{
 			i++;
 			str_env = ft_keyshr(a->env, "HOME");
@@ -39,7 +39,7 @@ char	*transform_arg_with_env(char *arg, t_all *a)
 				ft_lstadd_front(&a->gc, ft_lstnew(new_str));
 			}
 		}
-		else if (arg[i] == '$' && quote != '\'' && arg[i + 1] && arg[i + 1] != ' ')
+		else if (is_char_whitout_backslash(arg, i, '$') && quote != '\'' && arg[i + 1] && !ft_ccmp(arg[i + 1], "= $\'\""))
 		{
 			i++;
 			str_env = find_env(a, arg, &i);
@@ -62,24 +62,41 @@ char	*transform_arg_with_env(char *arg, t_all *a)
 	return (new_str);
 }
 
-void	delete_option_and_empty_quote(t_list **arg_split, t_all *a, int *option)
+void	transform_string_with_quote_arg_slash_env(t_list **arg_split, t_all *a, int *option)
 {
 	t_list *current;
 
 	current = *arg_split;
 	while (current)
 	{
-		current->content = delete_empty_quote(current->content);
-		ft_lstadd_front(&a->gc, ft_lstnew(current->content));
 		current->content = transform_arg_with_env(current->content, a);
+		current->content = delete_empty_quote(current->content);
 		ft_lstadd_front(&a->gc, ft_lstnew(current->content));
 		if (is_option(current->content, a))
 		{
 			*option = 1;
 			ft_lst_remove_if(arg_split, current);
 		}
+		else
+		{
+			current->content = delete_quote(current->content);
+			ft_lstadd_front(&a->gc, ft_lstnew(current->content));
+			current->content = delete_backslash(current->content);
+			ft_lstadd_front(&a->gc, ft_lstnew(current->content));
+		}
 		current = current->next;
 	}
+}
+
+int		is_a_next(t_list *lst)
+{
+	while (lst)
+	{
+		if (lst->content)
+			return (1);
+		lst = lst->next;
+	}
+	return (0);
 }
 
 void	main_echo(t_list **arg_split,  t_all *a)
@@ -89,12 +106,14 @@ void	main_echo(t_list **arg_split,  t_all *a)
 	current = *arg_split;
 	while (current)
 	{	
-		ft_lstadd_front(&a->gc, ft_lstnew(current->content));
 		if (current->content)
+		{
 			ft_printf(1, "%s", current->content);
+			if (is_a_next(current))
+				ft_printf(1, " ");
+		}
 		current = current->next;
-		if (current)
-			ft_printf(1, " ");
+		
 	}
 }
 
@@ -108,7 +127,7 @@ int	ft_echo(t_all *a, char *args)
 	arg_split = ft_split_quote(args, ' ');
 	option = 0;
 	ft_lst_add_to_gc(&a->gc, arg_split);
-	delete_option_and_empty_quote(&arg_split, a, &option);
+	transform_string_with_quote_arg_slash_env(&arg_split, a, &option);
 	main_echo(&arg_split, a);
 	if (!option)
 		ft_printf(1, "\n");

@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 15:46:45 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/08 13:12:07 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/10 13:42:08 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ t_list	*ft_split_quote(char *str, char del)
 	i = 0;
 	while (str[i])
 	{
-		while (str[i] == del && str[i])
+		while (is_char_whitout_backslash(str, i, ' ') && str[i])
 			i++;
 		r = i;	
-		while (str[i] != del && str[i])
+		while (!is_char_whitout_backslash(str, i, ' ') && str[i])
 		{
-			if (str[i] == '\'' || str[i] == '\"')
+			if (is_char_whitout_backslash(str, i, '\''))
 				jump_to_next_quote(&i, str, str[i]);
 			else
 				i++;

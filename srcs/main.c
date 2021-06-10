@@ -44,6 +44,7 @@ t_all	*init_all(char **envp, char *name_prg)
 	a->input->ctrl_c = 0;
 	a->in_cmd = 0;
 	a->name_prg = name_prg;
+	ft_exit_status_cmd(a);
 	set_all(a);
 	return (a);
 }

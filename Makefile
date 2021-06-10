@@ -6,7 +6,7 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/06/09 14:23:47 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/06/10 14:53:03 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME			= minishell
 FILES_PARSING	= parse_arg.c parse_env.c
 FILES_GENERAL	= garbage_collector.c error.c main.c display.c 
 FILES_LAUNCH	= pointer_array_fct_cmd.c launch_cmd.c launch_execve.c
-FILES_CMD		= exit.c quote.c ft_split_quote.c easter_egg.c
+FILES_CMD		= exit.c  easter_egg.c
+FILES_QUOTES	= quote.c ft_split_quote.c is_backslash.c backslash.c
 FILES_ECHO		= echo.c utility_echo.c
 FILES_ENV		= env_export_unset.c utility_lst_env.c convert_env_to_strs.c
 FILES_TERMCAP	= arrow_key.c delete.c init_terms.c print_buf_and_stock.c \
@@ -25,6 +26,7 @@ FILES			= $(addprefix display/, ${FILES_DISPLAY}) \
 				  ${addprefix parsing/, ${FILES_PARSING}} \
 				  ${addprefix cmd/, ${FILES_CMD} ${addprefix env/, ${FILES_ENV}} ${addprefix launch/, ${FILES_LAUNCH}} ${addprefix echo/, ${FILES_ECHO}}} \
 				  ${addprefix termcap/, ${FILES_TERMCAP}} \
+				  ${addprefix special_char/, ${FILES_QUOTES}} \
 				  ${FILES_GENERAL}
 
 INC_FILES		= minishell.h color.h struct.h
@@ -43,7 +45,7 @@ LIBFT			= $(addprefix ${LIBFT_PATH}, ${NAME_LIBFT})
 
 CC				= clang
 RM				= rm -rf
-FLAGS			=  #-fsanitize=address #-Wall -Wextra -Werror
+FLAGS			=  -fsanitize=address #-Wall -Wextra -Werror
 
 all: 			${NAME}
 
