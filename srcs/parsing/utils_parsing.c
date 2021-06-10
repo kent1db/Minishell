@@ -6,11 +6,18 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:59:21 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/07 13:11:45 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/10 12:00:27 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		ft_is_bs_before(char *line, int i)
+{
+	if (line[i] && (line[i - 1] && line[i - 1] == '\\'))
+		return (1);
+	return (0);	
+}
 
 void	ft_skip_whitespace(char *line, int *i)
 {

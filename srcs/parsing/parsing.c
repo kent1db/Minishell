@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:19 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/09 16:06:24 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/10 14:58:48 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void	ft_parsing(char *line, int *tab, t_tree *node, t_all *a)
 		ft_malloc_redir(node, a, tab, line);
 	else if (node->type == other)
 		ft_malloc_command(line, tab, node, a);
-			// dprintf(1, "cmd = %s\targs = %s\n", node->exec->cmd->cmd, node->exec->cmd->args);
-	// dprintf(1, "\n");
 }
 
 t_tree	*ft_binary_tree(char *line, int start, int end, t_all *a)
@@ -87,9 +85,7 @@ t_tree	*ft_binary_tree(char *line, int start, int end, t_all *a)
 	node->line = line;
 	op_pos = ft_op_pos(line, end - 1, node, a);
 	ft_put_in_tab(&tab, op_pos, node, a);
-	// dprintf(1, "type = %d\nop_pos[0] = %d\top_pos[1] = %d\n\n", node->type, op_pos[0], op_pos[1]);
 	ft_parsing(line, tab, node, a);
-	// usleep(800000);
 	if (node->type == op_pipe || node->type == redir)
 	{
 		a->tree->loop++;
@@ -114,13 +110,13 @@ void	ft_lexing_command_line(char *line, t_all *a)
 	quote = 0;
 	while (line[i])
 	{
-		ft_printf(1, "\n\n BINARY TREE \n\n");
 		start = i;
 		a->tree->type = -1;
 		while (line[i])
 		{
 			ft_is_quote(line[i], &quote);
-			if (line[i] == ';' && !quote)
+			if (line[i] == ';' && !quote &&\
+			!ft_is_bs_before(line, i))
 				break ;
 			i++;
 		}
@@ -128,6 +124,7 @@ void	ft_lexing_command_line(char *line, t_all *a)
 		a->tree = ft_binary_tree(line, start, i, a);
 		/* exec command(a); */
 		/* delete tree */
+		ft_printf(1, GRN "\nBINARY TREE"" - " RED "MINICHIALE\n\n" RESET);
 		ft_print_tree(a->tree, 0);
 		if (line[i])
 			i++;
