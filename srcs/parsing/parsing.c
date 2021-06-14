@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:19 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/10 14:58:48 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/14 15:53:38 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,10 @@ void	ft_lexing_command_line(char *line, t_all *a)
 		a->tree->loop = 0;
 		a->tree = ft_binary_tree(line, start, i, a);
 		/* exec command(a); */
+		ft_exec_command(a);
 		/* delete tree */
-		ft_printf(1, GRN "\nBINARY TREE"" - " RED "MINICHIALE\n\n" RESET);
-		ft_print_tree(a->tree, 0);
+		// ft_printf(1, GRN "\nBINARY TREE"" - " RED "MINICHIALE\n\n" RESET);
+		// ft_print_tree(a->tree, 0);
 		if (line[i])
 			i++;
 	}

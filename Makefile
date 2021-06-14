@@ -6,7 +6,7 @@
 #    By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/06/09 11:51:33 by qurobert         ###   ########lyon.fr    #
+#    Updated: 2021/06/14 13:03:34 by qurobert         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME			= minishell
 FILES_DISPLAY	= print_banner.c
 FILES_PARSING	= utils_parsing.c cmd_parsing.c env_parsing.c file_parsing.c parsing.c print.c priority_op.c redir_parsing.c
 FILES_GENERAL	= ft_garbage_collector.c ft_error.c main.c
-FILES_CMD		= ft_launch_cmd.c ft_lst_env.c ft_cli_env.c ft_utility_env.c ft_fill_array_our_cmd.c
+FILES_CMD		= ft_launch_cmd.c ft_lst_env.c ft_cli_env.c ft_utility_env.c ft_fill_array_our_cmd.c cd.c
 
 FILES			= $(addprefix display/, ${FILES_DISPLAY}) \
 				  ${addprefix parsing/, ${FILES_PARSING}} \

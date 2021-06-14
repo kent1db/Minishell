@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/10 11:53:32 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/14 13:05:26 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_env	*ft_keyshr(t_env *env, char *key);
 */
 char	**list_cmd_done(t_list **gc);
 void	*init_array_instruction_function(t_list **gc);
+int		ft_exec_command(t_all *a);
 /*
 **	FT_LAUNCH_CMD
 */
