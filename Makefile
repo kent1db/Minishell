@@ -6,13 +6,14 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/06/15 10:38:15 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/06/15 11:53:20 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 
 FILES_GENERAL	= garbage_collector.c error.c main.c display.c 
+FILES_EXEC		= exec_line.c ft_file.c ft_pipe.c ft_redir.c
 FILES_LAUNCH	= pointer_array_fct_cmd.c launch_cmd.c launch_execve.c
 FILES_CMD		= exit.c echo.c
 FILES_ENV		= env_export_unset.c utility_lst_env.c convert_env_to_strs.c
@@ -21,6 +22,7 @@ FILES_TERMCAP	= arrow_key.c delete.c init_terms.c print_buf_and_stock.c \
 FILES_PARSING	= utils_parsing.c cmd_parsing.c env_parsing.c file_parsing.c parsing.c print.c priority_op.c redir_parsing.c
 
 FILES			= $(addprefix display/, ${FILES_DISPLAY}) \
+				  ${addprefix exec/, ${FILES_EXEC}} \
 				  ${addprefix parsing/, ${FILES_PARSING}} \
 				  ${addprefix cmd/, ${FILES_CMD} ${addprefix env/, ${FILES_ENV}} ${addprefix launch/, ${FILES_LAUNCH}}} \
 				  ${addprefix termcap/, ${FILES_TERMCAP}} \
@@ -42,7 +44,7 @@ LIBFT			= $(addprefix ${LIBFT_PATH}, ${NAME_LIBFT})
 
 CC				= clang
 RM				= rm -rf
-FLAGS			= -Wall -Wextra -fsanitize=address -Werror
+FLAGS			= -fsanitize=address #-Wall -Wextra  -Werror
 
 all: 			${NAME}
 

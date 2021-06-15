@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:59:21 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/15 10:59:41 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 11:18:22 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_is_bs_before(char *line, int i)
 {
-	if (line[i] && (line[i - 1] && line[i - 1] == '\\'))
+	if (line[i] && (i != 0 && line[i - 1] && line[i - 1] == '\\'))
 		return (1);
 	return (0);	
 }

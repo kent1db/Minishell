@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 12:59:58 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/15 11:01:40 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 11:27:54 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		*ft_array_op(char *line, int end, t_tree *node, t_all *a)
 	pos = 0;
 	plus = 0;
 	op_pos = malloc_gc(&a->gc, sizeof(int) * 2);
-	if (line[end] && (line[end] == '<' ||\
+	if (end > -1 && line[end] && (line[end] == '<' ||\
 	line[end] == '>' || line[end] == '|') && !ft_is_bs_before(line, end))
 	{
 		op_pos[1] = end;
@@ -94,7 +94,7 @@ void	ft_priority(char *line, int start, int end, t_tree *node)
 
 int		*ft_op_pos(char *line, int end, t_tree *node, t_all *a)
 {
-	while (line[end] && end >= node->start)
+	while (end != -1 && line[end] && end >= node->start)
 	{
 		if (line[end] == '|' && node->type == op_pipe &&\
 		!ft_is_bs_before(line, end))

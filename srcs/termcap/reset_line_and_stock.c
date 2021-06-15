@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 12:39:20 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/07 11:32:38 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 11:11:29 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,20 @@ void	ft_print_cmd(t_command *cmd)
 
 void	ft_launch_cmd_and_reset(t_all *a, int *cursor, char **line)
 {
-	t_command	*cmd;
-	char		**line_split;
+	// t_command	*cmd;
+	// char		**line_split;
 
 	ft_printf(1, "\n");
 	if (line && *line && (*line)[0] != '\0')
 	{
 		apply_termios(a->input->saved);
-		cmd = malloc_gc(&a->gc, sizeof(t_command));
-		line_split = ft_split(*line, ' '); // JUST FOR TEST WHITOUT PARSING
-		ft_strs_add_to_gc(line_split, &a->gc); // JUST FOR TEST WHITOUT PARSING
+		// cmd = malloc_gc(&a->gc, sizeof(t_command));
+		// line_split = ft_split(*line, ' '); // JUST FOR TEST WHITOUT PARSING
+		// ft_strs_add_to_gc(line_split, &a->gc); // JUST FOR TEST WHITOUT PARSING
 		stock_to_historic(a, *line);
-		stock_cmd(cmd, line_split); // JUST FOR TEST WHITOUT PARSING
-		ft_launch_cmd(cmd, a);
+		// stock_cmd(cmd, line_split); // JUST FOR TEST WHITOUT PARSING
+		ft_lexing_command_line(*line, a);
+		// ft_launch_cmd(cmd, a);
 	}
 	if (a->input->read)// && !a->input->ctrl_c)
 	display_line(a);
