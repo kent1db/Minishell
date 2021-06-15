@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 12:39:20 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 11:11:29 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 12:42:48 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,45 +35,17 @@ void	reset_variable_new_line(t_all *a, int *cursor, char **line)
 	a->input->ptr_historic = NULL;
 }
 
-void	stock_cmd(t_command *cmd, char **line_split)
+void	stock_cmd(t_command *cmd, char *line, t_list **gc)
 {
-	int i;
+	int	i;
 
-	if (!line_split)
-	{
-		cmd->cmd = NULL;
-		cmd->args = NULL;
-		return ;
-	}
-	else if (ft_strslen(line_split) == 2)
-	{
-		cmd->cmd = line_split[0];
-		cmd->args = NULL;
-	}
-	else
-	{
-		cmd->cmd = line_split[0];
-		i = 1;
-		cmd->args = NULL;
-		while (line_split[++i])
-		{
-			cmd->args = ft_strjoin_free(cmd->args, line_split[i]);
-			cmd->args = ft_strjoin_free(cmd->args, " ");
-		}
-	}
-}
-
-void	ft_print_cmd(t_command *cmd)
-{
-	if (!cmd)
-	{
-		ft_printf(1, "cmd NULL\n");
-		return ;
-	}
-	if (cmd->cmd)
-		ft_printf(1, "cmd: %s\n", cmd->cmd);
-	if (cmd->args)
-		ft_printf(1, "args: %s\n", cmd->args);
+	i = 0;
+	while (line[i] && line[i] != ' ')
+		i++;
+	cmd->cmd = ft_substr(line, 0, i);
+	cmd->args = ft_substr(line, i + 1, ft_strlen(line) - i + 1);
+	ft_lstadd_front(gc, ft_lstnew(cmd->cmd));
+	ft_lstadd_front(gc, ft_lstnew(cmd->args));
 }
 
 void	ft_launch_cmd_and_reset(t_all *a, int *cursor, char **line)
@@ -82,8 +54,9 @@ void	ft_launch_cmd_and_reset(t_all *a, int *cursor, char **line)
 	// char		**line_split;
 
 	ft_printf(1, "\n");
-	if (line && *line && (*line)[0] != '\0')
+	if (*line && (*line)[0] != '\0')
 	{
+		stock_to_historic(a, *line);
 		apply_termios(a->input->saved);
 		// cmd = malloc_gc(&a->gc, sizeof(t_command));
 		// line_split = ft_split(*line, ' '); // JUST FOR TEST WHITOUT PARSING
@@ -94,6 +67,6 @@ void	ft_launch_cmd_and_reset(t_all *a, int *cursor, char **line)
 		// ft_launch_cmd(cmd, a);
 	}
 	if (a->input->read)// && !a->input->ctrl_c)
-	display_line(a);
+		display_line(a);
 	reset_variable_new_line(a, cursor, line);
 }

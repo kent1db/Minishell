@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 14:36:00 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/04 13:14:41 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/09 13:28:20 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,28 @@ char	**ft_strsjoin_free(char **s1, char *s2)
 	return (strs);
 }
 
+char	**ft_strsjoin(char **s1, char *s2)
+{
+	char	**strs;
+	int		i;
+
+	i = 0;
+	strs = malloc(sizeof(char *) * (ft_strslen(s1) + 2));
+	if (!(strs))
+		return (NULL);
+	if (s1)
+	{	
+		while (s1[i])
+		{
+			strs[i] = ft_strdup(s1[i]);
+			i++;
+		}
+	}
+	strs[i++] = ft_strdup(s2);
+	strs[i] = NULL;
+	return (strs);
+}
+
 char	**ft_strsdup(char **s1)
 {
 	char	**strs;
@@ -69,15 +91,6 @@ char	**ft_strsdup(char **s1)
 	return (strs);
 }
 
-void	ft_print_strs(char **strs)
-{
-	int	i;
-
-	i = -1;
-	while (strs[++i])
-		ft_printf(1, "%s\n", strs[i]);
-}
-
 void	ft_strs_add_to_gc(char **strs, t_list **gc)
 {
 	int		i;
@@ -86,7 +99,6 @@ void	ft_strs_add_to_gc(char **strs, t_list **gc)
 	if (!strs)
 		return ;
 	ft_lstadd_front(gc, ft_lstnew(strs));
-
 	while (strs[++i])
 		ft_lstadd_front(gc, ft_lstnew(strs[i]));
 }

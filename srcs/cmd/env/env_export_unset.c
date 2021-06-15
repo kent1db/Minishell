@@ -6,22 +6,22 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 14:45:11 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/03 12:11:38 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/09 10:25:52 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_env(t_all *a, t_command *cmd)
+int	ft_env(t_all *a, char *args)
 {
-	(void)cmd;
+	(void)args;
 	t_env *begin_env;
 
 	begin_env = a->env;
 	while (a->env)
 	{
-		if (a->env->status == status_env)
-			ft_printf(1, "%s=%s\n", a->env->key, a->env->content);
+		// if (a->env->status == status_env)
+		ft_printf(1, "%s=%s\n", a->env->key, a->env->content);
 		a->env = a->env->next;
 	}
 	a->env = begin_env;
@@ -29,7 +29,7 @@ int	ft_env(t_all *a, t_command *cmd)
 }
 
 // A DECOMMENTER QUAND ON AURA LES ARGUMENTS DANS LA STRUCT A
-int	ft_export(t_all *a, t_command *cmd)
+int	ft_export(t_all *a, char *args)
 {
 	int		i;
 	t_env	*new_elem;
@@ -37,7 +37,7 @@ int	ft_export(t_all *a, t_command *cmd)
 	i = -1;
 	(void)new_elem;
 	(void)a;
-	(void)cmd;
+	(void)args;
 	// if (!args)
 	// 	return ;
 	// while (args[++i])
@@ -61,13 +61,13 @@ int	ft_export(t_all *a, t_command *cmd)
 }
 
 // A DECOMMENTER QUAND ON AURA LES ARGUMENTS DANS LA STRUCT A
-int	ft_unset(t_all *a, t_command *cmd)
+int	ft_unset(t_all *a, char *args)
 {
 	int	i;
 
 	i = -1;
 	(void)a;
-	(void)cmd;
+	(void)args;
 	// if (!args)
 	// 	return ;
 	// while (args[++i])

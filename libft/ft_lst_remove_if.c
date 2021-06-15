@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_lst_remove_if.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/17 19:50:43 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/07 12:54:58 by alafranc         ###   ########lyon.fr   */
+/*   Created: 2021/06/08 13:43:59 by alafranc          #+#    #+#             */
+/*   Updated: 2021/06/08 14:16:32 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_cmd_not_found(t_all *a, char *cmd)
+void	ft_lst_remove_if(t_list **lst, t_list *remove)
 {
-	a->status_cmd = 127;
-	ft_printf(1, "minichiale: %s: %s\n", cmd, "command not found");
-}
+	t_list	*begin;
 
-void	ft_error_msg(char *msg_error, t_list *gc)
-{
-	ft_printf(1, "Error:\n%s\n", msg_error);
-	exit(EXIT_FAILURE);
-	ft_lstclear(&gc, free);
+	begin = *lst;
+	if (remove == *lst)
+	{
+		*lst = (*lst)->next;
+		return ;
+	}
+	while (*lst && (*lst)->next)
+	{
+		if ((*lst)->next == remove)
+		{
+			(*lst)->next = (*lst)->next->next;
+			*lst = begin;
+			return ;
+		}
+		*lst = (*lst)->next;
+	}
+	*lst = begin;
 }

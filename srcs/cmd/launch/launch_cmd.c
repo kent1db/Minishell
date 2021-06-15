@@ -6,14 +6,14 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/04 13:06:50 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/09 10:27:23 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	launch_if_is_our_cmd(t_command *cmd, t_all *a, char **cmd_done,
-							int	(**ft_cmd)(t_all *a, t_command *cmd))
+							int	(**ft_cmd)(t_all *a, char *args))
 {
 	int		i;
 
@@ -23,7 +23,7 @@ int	launch_if_is_our_cmd(t_command *cmd, t_all *a, char **cmd_done,
 		if (!ft_strcmp(cmd->cmd, cmd_done[i]))
 		{
 			if (ft_cmd[i] != NULL)
-				a->status_cmd = ft_cmd[i](a, cmd);
+				a->status_cmd = ft_cmd[i](a, cmd->args);
 			else
 				ft_printf(1, "not done yet\n");
 			return (1);
@@ -51,7 +51,7 @@ void	ft_exit_status_cmd(t_all *a)
 void	ft_launch_cmd(t_command *cmd, t_all *a)
 {
 	char	**cmd_done;
-	int		(**ft_cmd)(t_all *a, t_command *cmd);
+	int		(**ft_cmd)(t_all *a, char *args);
 
 	if (!cmd || !cmd->cmd)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 12:37:20 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 12:49:52 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 /*	---------- SRCS ---------- */
 void			*malloc_gc(t_list **gc, size_t size);
 char			*ft_strdup_gc(t_list **gc, char *src);
+void			ft_lst_add_to_gc(t_list **gc, t_list *lst);
 void			ft_error_msg(char *msg_error, t_list *gc);
 t_all			*set_all(t_all *tmp);
 t_all			*get_all(void);
@@ -90,14 +91,14 @@ t_env			*ft_lstlast_env(t_env *lst);
 void			ft_lstadd_back_env(t_env **alst, t_env *new);
 void			ft_lst_remove_key(t_env **env, char *key);
 t_env			*ft_keyshr(t_env *env, char *key);
-int				ft_env(t_all *a, t_command *cmd);
-int				ft_export(t_all *a, t_command *cmd);
-int				ft_unset(t_all *a, t_command *cmd);
+int				ft_env(t_all *a, char *args);
+int				ft_export(t_all *a, char *args);
+int				ft_unset(t_all *a, char *args);
 int				ft_lstsize_env_status(t_env *env, t_status status);
 char			**convert_env_to_strs(t_list **gc, t_env *env);
 /*		---------- LAUNCH ---------- */
 int				launch_if_is_our_cmd(t_command *cmd, t_all *a, char **cmd_done,
-					int	(**ft_cmd)(t_all *a, t_command *cmd));
+					int	(**ft_cmd)(t_all *a, char *args));
 void			ft_launch_cmd(t_command *cmd, t_all *all);
 void			ft_launch_execve_path_cmd(char **arg, t_all *a, t_command *cmd);
 void			ft_exit_status_cmd(t_all *a);
@@ -110,10 +111,40 @@ void			*init_array_instruction_function(t_list **gc);
 char			**fill_argument_execve(t_all *a, char *args);
 void			ft_point_gc_on_split(t_list **gc, char **split);
 void			ft_fill_exit_status(t_all *a);
-/*		---------- ROOT ---------- */
-int				ft_exit(t_all *a, t_command *cmd);
-int				ft_echo(t_all *a, t_command *cmd);
-/*	---------- PARSING ---------- */
+/*
+** 		---------- ECHO ----------
+*/
+char			*transform_arg_with_env(char *arg, t_all *a);
+void			delete_option_and_empty_quote(t_list **arg_split, t_all *a, int *option);
+void			main_echo(t_list **arg_split);
+int				ft_reverse_boolean(int boolean);
+int				is_option(char *args, t_all *a);
+t_env			*find_env(t_all *a, char *arg,  int *i);
+int				ft_echo(t_all *a, char *args);
+char			*delete_backslash(char *str);
+
+/*
+**		---------- ROOT ----------
+*/
+int				ft_exit(t_all *a, char *args);
+char			*delete_quote(char *args);
+void			ft_move_quote_to_cmd(t_list **gc, t_command *cmd);
+int				ft_alexis(t_all *a, char *args);
+int				ft_quentin(t_all *a, char *args);
+int				ft_cd(t_all *a, char *arg);
+int				ft_pwd(t_all *a, char *args);
+/*
+**			QUOTES
+*/
+char			*delete_empty_quote(char *str);
+char			*delete_quote(char *args);
+t_list			*ft_split_quote(char *str, char del);
+int				is_quote_or_d_quote(char *str, int index);
+int				is_char_whitout_backslash(char *str, int index, char c);
+int				ft_ccmp(char c, char *str);
+/*	
+** ---------- PARSING ----------
+*/
 void			ft_lexing_command_line(char *line, t_all *a);
 t_env			*parse_env(char **env, t_list **gc);
 t_env			*pick_key_and_content(char *envp, t_list **gc, t_status status);

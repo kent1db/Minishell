@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 10:27:21 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/15 11:01:24 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 12:53:48 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ char	*ft_content_shr(t_env *env, char *key)
 void	ft_init_old_pwd(t_all *a)
 {
 	t_env	*env;
-	int		len;
 	char	*old_pwd;
 	char	*pwd;
 
@@ -40,7 +39,6 @@ void	ft_init_old_pwd(t_all *a)
 			env->content = old_pwd;
 	}
 }
-
 
 int	ft_get_path(char *arg, char **path, t_all *a)
 {
@@ -62,13 +60,14 @@ int	ft_get_path(char *arg, char **path, t_all *a)
 	return (1);
 }
 
-int		ft_cd(char *arg, t_all *a)
+int		ft_cd(t_all *a, char *arg)
 {
 	char	*path;
 	char	*buf;
 	int		ret;
 	t_env	*env;
 
+	ret = 0;
 	if (!ft_get_path(arg, &path, a))
 		path = NULL;
 	// ft_printf(1, "path = %s\n", path);
@@ -93,7 +92,7 @@ int		ft_cd(char *arg, t_all *a)
 	}
 	if (ret == -1 && ft_strcmp(path, "-"))
 	{
-		ft_printf(1, "bash: cd: %s: %s\n", path, strerror(errno));
+		ft_printf(1, "minichiale: cd: %s: %s\n", path, strerror(errno));
 		return (ret);
 	}
 	buf = malloc_gc(&a->gc, 200);
@@ -101,14 +100,14 @@ int		ft_cd(char *arg, t_all *a)
 	env = ft_keyshr(a->env, "PWD");
 	env->content = buf;
 	ft_printf(1, "ret = %d\n", ret);
-	free(buf);
 	return (ret);
 }
 
-int		ft_pwd(t_all *a)
+int		ft_pwd(t_all *a, char *args)
 {
 	char	*buf;
 
+	(void)args;
 	buf = malloc_gc(&a->gc, sizeof(char) * 200);
 	buf = getcwd(buf, 200);
 	ft_printf(1, "%s\n", buf);
