@@ -6,11 +6,13 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/15 10:30:40 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 10:57:45 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <readline/history.h>
+#include <readline/readline.h>
 
 t_all	*set_all(t_all *tmp)
 {

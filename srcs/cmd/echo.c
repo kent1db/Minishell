@@ -6,15 +6,15 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 11:56:26 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/07 11:34:26 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 11:00:12 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_reverse_boolean(int boolean)
+int	ft_reverse_booleanean(int booleanean)
 {
-	if (boolean)
+	if (booleanean)
 		return (0);
 	return (1);
 }
@@ -45,9 +45,9 @@ int	ft_echo(t_all *a, t_command *cmd)
 	while (cmd->args[++i])
 	{
 		if (cmd->args[i] == '\"')
-			ft_reverse_boolean(quote);
+			ft_reverse_booleanean(quote);
 		else if (cmd->args[i] == '\'')
-			ft_reverse_boolean(quote);
+			ft_reverse_booleanean(quote);
 		else
 		{
 			

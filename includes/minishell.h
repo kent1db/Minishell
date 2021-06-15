@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 10:30:04 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 10:59:21 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,30 @@ t_env			*pick_key_and_content(char *envp, t_list **gc, t_status status);
 void			ft_lexing_command_line(char *line, t_all *a);
 /* UTILS_PARSING */
 void	ft_skip_whitespace(char *line, int *i);
+int		ft_is_bs_before(char *line, int i);
 void	ft_is_quote(char c, int *quote);
-int	ft_delimiter(char c, char *del);
+int	    ft_delimiter(char c, char *del);
+char	*ft_substr_sw(char *s, int w, size_t len);
+
+
+/* CMD_PARSING */
+int		ft_malloc_command(char *line, int *array, t_tree *node, t_all *a);
+/*	ENV_PARSING */
+t_env	*parse_env(char **env, t_list **gc);
+t_env	*pick_key_and_content(char *envp, t_list **gc, t_status status);
+
+/* FILE_PARSING */
+void	ft_malloc_file(char *line, int *array, t_tree *node, t_all *a);
+
+/* PRINT */
+void	ft_print_tree(t_tree *node, int count);
+
+/* PRIORITY_OP */
+void	ft_priority(char *line, int start, int end,  t_tree *node);
+int     *ft_op_pos(char *line, int end, t_tree *node, t_all *a);
+void	ft_print_start_to_end(char *line, int start, int end);
+
+/* REDIR_PARSING */
+void	ft_malloc_redir(t_tree *node, t_all *a, int *array, char *line);
 
 #endif

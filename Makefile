@@ -6,7 +6,7 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/06/15 10:32:20 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/06/15 10:38:15 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FILES_CMD		= exit.c echo.c
 FILES_ENV		= env_export_unset.c utility_lst_env.c convert_env_to_strs.c
 FILES_TERMCAP	= arrow_key.c delete.c init_terms.c print_buf_and_stock.c \
 				  read_cmd_line.c termios.c utility.c reset_line_and_stock.c
-FILES_PARSING	= parse_env.c utils_parsing.c
+FILES_PARSING	= utils_parsing.c cmd_parsing.c env_parsing.c file_parsing.c parsing.c print.c priority_op.c redir_parsing.c
 
 FILES			= $(addprefix display/, ${FILES_DISPLAY}) \
 				  ${addprefix parsing/, ${FILES_PARSING}} \

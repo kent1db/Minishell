@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/04 13:00:32 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 10:57:31 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,16 @@ typedef struct s_env
 
 typedef struct s_tree
 {	
-	struct s_btree	*left;
-	struct s_btree	*right;
-	t_type_enum		type;
+	struct s_tree	*left;
+	struct s_tree	*right;
+	int				type;
+	t_type_enum		e_type;
 	t_type_union	*exec;
+	int				count;
+	int				loop;
+	int				start;
+	int				end;
+	char			*line;
 }					t_tree;
 
 typedef struct s_input
