@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 19:50:43 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/07 12:54:58 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 15:45:12 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@ void	ft_cmd_not_found(t_all *a, char *cmd)
 {
 	a->status_cmd = 127;
 	ft_printf(1, "minichiale: %s: %s\n", cmd, "command not found");
+}
+
+void	ft_no_such_file(t_all *a, char *cmd)
+{
+	a->status_cmd = 1;
+	ft_printf(1, "minichiale: %s: %s\n", cmd, strerror(2));
+}
+
+void	ft_error_is_a_directory(t_all *a, char *cmd)
+{
+	a->status_cmd = 126;
+	ft_printf(1, "minichiale: %s: %s\n", cmd, "is a directory");
 }
 
 void	ft_error_msg(char *msg_error, t_list *gc)

@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 10:27:21 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/15 12:53:48 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 15:36:28 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,11 @@ void	ft_init_old_pwd(t_all *a)
 	}
 }
 
-int	ft_get_path(char *arg, char **path, t_all *a)
+void	ft_get_path(char *arg, char **path, t_all *a)
 {
 	int	i;
 
 	i = 0;
-	if (arg == NULL)
-		return (0);
 	while (arg && arg[i] && arg[i] != ' ')
 		i++;
 	*path = malloc_gc(&a->gc, sizeof(char) * i + 1);
@@ -57,10 +55,9 @@ int	ft_get_path(char *arg, char **path, t_all *a)
 		i++;
 	}
 	(*path)[i] = '\0';
-	return (1);
 }
 
-int		ft_cd(t_all *a, char *arg)
+int		ft_cd(t_all *a, char **arg)
 {
 	char	*path;
 	char	*buf;
@@ -68,9 +65,11 @@ int		ft_cd(t_all *a, char *arg)
 	t_env	*env;
 
 	ret = 0;
-	if (!ft_get_path(arg, &path, a))
+	path = 0;
+	if (!arg)
 		path = NULL;
-	// ft_printf(1, "path = %s\n", path);
+	else
+		ft_get_path(arg[0], &path, a);
 	if (path && !ft_strncmp("-", path, 2))
 	{
 		if (ft_content_shr(a->env, "OLDPWD") == NULL)
@@ -92,18 +91,17 @@ int		ft_cd(t_all *a, char *arg)
 	}
 	if (ret == -1 && ft_strcmp(path, "-"))
 	{
-		ft_printf(1, "minichiale: cd: %s: %s\n", path, strerror(errno));
-		return (ret);
+		ft_no_such_file(a, "cd");
+		return (1);
 	}
 	buf = malloc_gc(&a->gc, 200);
 	buf = getcwd(buf, sizeof(char) * 200);
 	env = ft_keyshr(a->env, "PWD");
 	env->content = buf;
-	ft_printf(1, "ret = %d\n", ret);
 	return (ret);
 }
 
-int		ft_pwd(t_all *a, char *args)
+int		ft_pwd(t_all *a, char **args)
 {
 	char	*buf;
 

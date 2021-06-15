@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   easter_egg.c                                       :+:      :+:    :+:   */
+/*   ft_strsjoin_before.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/03 11:56:26 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 13:43:56 by alafranc         ###   ########lyon.fr   */
+/*   Created: 2021/06/15 14:00:26 by alafranc          #+#    #+#             */
+/*   Updated: 2021/06/15 14:42:15 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int ft_alexis(t_all *a, char **args)
+char	**ft_strsjoin_begin(char **strs, char *str)
 {
-	(void)a;
-	(void)args;
-	ft_printf(1, "repete sans minichialer\n");
-	return (0);
-}
+	int		i;
+	int		j;
+	char	**new_strs;
 
-int ft_quentin(t_all *a, char **args)
-{
-	(void)a;
-	(void)args;
-	ft_printf(1, "repete sans minichialer\n");
-	return (0);
+	i = -1;
+	j = 0;
+	new_strs = malloc(sizeof(char *) * (ft_strslen(strs) + 2));
+	if (!new_strs)
+		return (NULL);
+	new_strs[0] = ft_strdup(str);
+	if (strs)
+		while (strs[++i])
+			new_strs[++j] = ft_strdup(strs[i]);
+	new_strs[++j] = NULL;
+	return (new_strs);
 }

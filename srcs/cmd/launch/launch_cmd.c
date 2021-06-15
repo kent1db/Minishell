@@ -6,26 +6,26 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/09 10:27:23 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 16:31:03 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	launch_if_is_our_cmd(t_command *cmd, t_all *a, char **cmd_done,
-							int	(**ft_cmd)(t_all *a, char *args))
+							int	(**ft_cmd)(t_all *a, char **args))
 {
 	int		i;
+	char	**args;
 
 	i = -1;
+	args = parse_argument(a, cmd->args);
 	while (cmd_done[++i])
 	{
 		if (!ft_strcmp(cmd->cmd, cmd_done[i]))
 		{
 			if (ft_cmd[i] != NULL)
-				a->status_cmd = ft_cmd[i](a, cmd->args);
-			else
-				ft_printf(1, "not done yet\n");
+				a->status_cmd = ft_cmd[i](a, args);
 			return (1);
 		}
 	}
@@ -51,11 +51,12 @@ void	ft_exit_status_cmd(t_all *a)
 void	ft_launch_cmd(t_command *cmd, t_all *a)
 {
 	char	**cmd_done;
-	int		(**ft_cmd)(t_all *a, char *args);
+	int		(**ft_cmd)(t_all *a, char **args);
 
 	if (!cmd || !cmd->cmd)
 		return ;
 	a->in_cmd = 1;
+	cmd->cmd = parse_argument(a, cmd->cmd)[0];
 	cmd_done = list_cmd_done(&a->gc);
 	ft_cmd = init_array_instruction_function(&a->gc);
 	if (!launch_if_is_our_cmd(cmd, a, cmd_done, ft_cmd))

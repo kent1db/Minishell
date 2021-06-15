@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:23:42 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/08 14:16:00 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 14:14:22 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,6 @@ void				*malloc_gc(t_list **gc, size_t size);
 int					ft_iswithespace(char c);
 char				**ft_strsdup(char **s1);
 void				ft_strs_add_to_gc(char **strs, t_list **gc);
-void				ft_print_strs(char **strs);
 void				ft_lst_remove_if(t_list **lst, t_list *remove);
+char				**ft_strsjoin_begin(char **strs, char *str);
 #endif

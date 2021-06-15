@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_quote.c                                         :+:      :+:    :+:   */
+/*   is_backslash.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 12:01:25 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/10 13:34:51 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 16:33:05 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int is_char_whitout_backslash(char *str, int index, char c)
+int ft_is_backslash_before(char *str, int index, char c)
 {
 	if (index == 0 && str[index] == c)
 		return (1);

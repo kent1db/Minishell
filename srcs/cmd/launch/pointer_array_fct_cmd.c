@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 13:12:49 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 12:48:36 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 16:02:36 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**list_cmd_done(t_list **gc)
 
 void	*init_array_instruction_function(t_list **gc)
 {
-	int		(**ft_cmd)(t_all *a, char *args);
+	int		(**ft_cmd)(t_all *a, char **args);
 	int		nb_cmd;
 
 	nb_cmd = 9;
@@ -50,28 +50,4 @@ void	*init_array_instruction_function(t_list **gc)
 	ft_cmd[8] = &ft_quentin;
 	ft_cmd[9] = NULL;
 	return (ft_cmd);
-}
-
-char	**fill_argument_execve(t_all *a, char *args)
-{
-	char	**arg;
-	char	**arg_cmd_split;
-	int		i;
-	
-	i = -1;
-	arg = malloc_gc(&a->gc, sizeof(char *) * 2);
-	if (!arg)
-		ft_error_msg("Malloc error", a->gc);
-	arg[0] = a->name_prg;
-	arg[1] = NULL;
-	if (!args || (args && args[0] == '\0'))
-		return (arg);
-	arg_cmd_split = ft_split(args, ' ');
-	ft_strs_add_to_gc(arg_cmd_split, &a->gc);
-	while (++i < ft_strslen(arg_cmd_split))
-	{
-		arg = ft_strsjoin(arg, arg_cmd_split[i]);
-		ft_strs_add_to_gc(arg, &a->gc);
-	}
-	return (arg);
 }

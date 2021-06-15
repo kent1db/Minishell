@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 12:49:52 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 16:33:24 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void			ft_print_line_and_stock(t_all *a, char **line, char *buf, int *cursor);
 int				ft_putchar_int(int c);
 void			display_line(t_all *a);
 void			ft_cmd_not_found(t_all *a, char *cmd);
+void			ft_no_such_file(t_all *a, char *cmd);
+void			ft_error_is_a_directory(t_all *a, char *cmd);
 /* ---------- TERMCAP ---------- */
 /*	ARROW_KEY */
 void			ft_arrow_key(t_all *a, char c, int *cursor, char **line);
@@ -91,16 +93,16 @@ t_env			*ft_lstlast_env(t_env *lst);
 void			ft_lstadd_back_env(t_env **alst, t_env *new);
 void			ft_lst_remove_key(t_env **env, char *key);
 t_env			*ft_keyshr(t_env *env, char *key);
-int				ft_env(t_all *a, char *args);
-int				ft_export(t_all *a, char *args);
-int				ft_unset(t_all *a, char *args);
+int				ft_env(t_all *a, char **args);
+int				ft_export(t_all *a, char **args);
+int				ft_unset(t_all *a, char **args);
 int				ft_lstsize_env_status(t_env *env, t_status status);
 char			**convert_env_to_strs(t_list **gc, t_env *env);
 /*		---------- LAUNCH ---------- */
 int				launch_if_is_our_cmd(t_command *cmd, t_all *a, char **cmd_done,
-					int	(**ft_cmd)(t_all *a, char *args));
+					int	(**ft_cmd)(t_all *a, char **args));
 void			ft_launch_cmd(t_command *cmd, t_all *all);
-void			ft_launch_execve_path_cmd(char **arg, t_all *a, t_command *cmd);
+void			ft_launch_execve_main(char **arg, t_all *a, t_command *cmd);
 void			ft_exit_status_cmd(t_all *a);
 int				ft_launch_execve_with_path(char *path_cmd, t_all *a,
 					char **arg);
@@ -114,33 +116,42 @@ void			ft_fill_exit_status(t_all *a);
 /*
 ** 		---------- ECHO ----------
 */
-char			*transform_arg_with_env(char *arg, t_all *a);
+int				ft_echo(t_all *a, char **args);
 void			delete_option_and_empty_quote(t_list **arg_split, t_all *a, int *option);
-void			main_echo(t_list **arg_split);
+void			main_echo(char **arg_split);
 int				ft_reverse_boolean(int boolean);
-int				is_option(char *args, t_all *a);
-t_env			*find_env(t_all *a, char *arg,  int *i);
-int				ft_echo(t_all *a, char *args);
-char			*delete_backslash(char *str);
+int				is_option(char *args);
+char			*delete_backslash(t_list **gc, char *str);
 
 /*
 **		---------- ROOT ----------
 */
-int				ft_exit(t_all *a, char *args);
-char			*delete_quote(char *args);
-void			ft_move_quote_to_cmd(t_list **gc, t_command *cmd);
-int				ft_alexis(t_all *a, char *args);
-int				ft_quentin(t_all *a, char *args);
-int				ft_cd(t_all *a, char *arg);
-int				ft_pwd(t_all *a, char *args);
-/*
-**			QUOTES
+int				ft_exit(t_all *a, char **args);
+int				ft_alexis(t_all *a, char **args);
+int				ft_quentin(t_all *a, char **args);
+int				ft_cd(t_all *a, char **args);
+int				ft_pwd(t_all *a, char **args);
+/*	
+** ---------- ARGUMENT ----------
+** ARG_PARSING
 */
-char			*delete_empty_quote(char *str);
-char			*delete_quote(char *args);
-t_list			*ft_split_quote(char *str, char del);
+char			**parse_argument(t_all *a, char *args);
+t_env  			*find_env(t_all *a, char *arg, int *i);
+char			*transform_arg_with_env(char *arg, t_all *a);
+/* BACKSLASH */
+int				count_delete_backslash(char *str);
+char			*delete_backslash(t_list **gc, char *str);
+int				count_add_backslash_quote(char *str);
+char			*add_backslash_quote(t_list **gc, char *str);
+/* FT_SPLIT_QUOTE */
+void			jump_to_next_quote(int *i, char *str, char quote);
+char			**ft_split_quote(char *str, char del);
+/* QUOTES */
+char			*delete_empty_quote(t_list **gc, char *str);
+char			*delete_quote(t_list **gc, char *args);
+/* IS_BACKSLASH */
 int				is_quote_or_d_quote(char *str, int index);
-int				is_char_whitout_backslash(char *str, int index, char c);
+int				ft_is_backslash_before(char *str, int index, char c);
 int				ft_ccmp(char c, char *str);
 /*	
 ** ---------- PARSING ----------

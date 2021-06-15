@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/09 16:00:03 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 15:44:48 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_launch_execve_with_path(char *path_cmd, t_all *a, char **arg)
 	return (0);
 }
 
-void	ft_launch_execve_path_cmd(char **arg, t_all *a, t_command *cmd)
+void	ft_launch_execve_main(char **arg, t_all *a, t_command *cmd)
 {
 	char	**path_cmd;
 	int		i;
@@ -64,18 +64,31 @@ void	ft_launch_execve_path_cmd(char **arg, t_all *a, t_command *cmd)
 	ft_cmd_not_found(a, cmd->cmd);
 }
 
+int	ft_is_a_directory(char *cmd_path)
+{
+	struct stat buf;
+	int			ret;
+	
+	ret = lstat(cmd_path, &buf);
+	if (!ret && S_ISDIR(buf.st_mode))
+		return (1);
+	return (0);
+}
+
 void	ft_launch_execve(t_command *cmd, t_all *a)
 {
 	char	**arg;
 
-	cmd->args = delete_quote(cmd->args);
-	ft_lstadd_front(&a->gc, ft_lstnew(cmd->args));
-	arg = fill_argument_execve(a, cmd->args);
+	arg = parse_argument(a, cmd->args);
+	arg = ft_strsjoin_begin(arg, a->name_prg);
+	ft_strs_add_to_gc(arg, &a->gc);
 	if (ft_strchr(cmd->cmd, '/'))
 	{
-		if (!ft_launch_execve_with_path(cmd->cmd, a, arg))
+		if (ft_is_a_directory(cmd->cmd))
+			ft_error_is_a_directory(a, cmd->cmd);
+		else if (!ft_launch_execve_with_path(cmd->cmd, a, arg))
 			ft_cmd_not_found(a, cmd->cmd);
 		return ;
 	}
-	ft_launch_execve_path_cmd(arg, a, cmd);
+	ft_launch_execve_main(arg, a, cmd);
 }

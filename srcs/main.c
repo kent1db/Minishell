@@ -58,12 +58,13 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	errno = 0;
-	a = init_all(envp, av[0]);
-	init_terms(a);
-	print_banner();
-	read_command_line(a);
-	ft_printf(1, "exit\n");
-	apply_termios(a->input->saved);
-	ft_lstclear(&a->gc, free);
+	rl_replace_line("", a);
+	// a = init_all(envp, av[0]);
+	// init_terms(a);
+	// print_banner();
+	// read_command_line(a);
+	// ft_printf(1, "exit\n");
+	// apply_termios(a->input->saved);
+	// ft_lstclear(&a->gc, free);
 	return (0);
 }

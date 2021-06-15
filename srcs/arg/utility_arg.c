@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   easter_egg.c                                       :+:      :+:    :+:   */
+/*   utility_arg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/03 11:56:26 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 13:43:56 by alafranc         ###   ########lyon.fr   */
+/*   Created: 2021/06/15 13:33:42 by alafranc          #+#    #+#             */
+/*   Updated: 2021/06/15 13:34:10 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_alexis(t_all *a, char **args)
+int	ft_ccmp(char c, char *str)
 {
-	(void)a;
-	(void)args;
-	ft_printf(1, "repete sans minichialer\n");
-	return (0);
-}
+	int	i;
 
-int ft_quentin(t_all *a, char **args)
-{
-	(void)a;
-	(void)args;
-	ft_printf(1, "repete sans minichialer\n");
+	if (!str)
+		return (-1);
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == c)
+			return (1);
+	}
 	return (0);
 }
