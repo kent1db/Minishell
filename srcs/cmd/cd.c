@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 10:27:21 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/14 16:09:26 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 10:22:18 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,14 @@ int		ft_cmd_cd(char *arg, t_all *a)
 	return (ret);
 }
 
-void		ft_cmd_pwd(t_all *a)
+int		ft_cmd_pwd(t_all *a)
 {
 	char	*buf;
 
 	buf = malloc_gc(&a->gc, sizeof(char) * 200);
 	buf = getcwd(buf, 200);
 	ft_printf(1, "%s\n", buf);
+	return (0);
 }
 
 int		ft_exec_command(t_all *a)
