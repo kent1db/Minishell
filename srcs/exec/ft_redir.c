@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 11:48:38 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 11:51:58 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 15:01:48 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_redir(t_operator *op, t_all *a)
+void	ft_redir(t_file *file, t_all *a)
 {
-	(void)op;
+	(void)file;
 	(void)a;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/15 10:57:31 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/16 15:09:15 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ typedef struct s_all
 	t_tree			*tree;
 	t_input			*input;
 	int				status_cmd;
+	int				fd;
+	int				*fd_b;
+	int				*fd_p;
 	int				in_cmd;
 	char			*name_prg;
 }				t_all;

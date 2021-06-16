@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/06/15 12:50:11 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/06/16 11:46:00 by qurobert         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ LIBFT			= $(addprefix ${LIBFT_PATH}, ${NAME_LIBFT})
 
 CC				= clang
 RM				= rm -rf
-FLAGS			= -fsanitize=address -Wall -Wextra  -Werror
+FLAGS			= -fsanitize=address -g3 -Wall -Wextra  -Werror
 
 all: 			${NAME}
 
