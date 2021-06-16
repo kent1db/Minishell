@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 16:33:24 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/16 11:40:13 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,18 @@ char			**split_str_into_index(t_list **gc, char *str, int index);
 **	---------- CMD ----------
 ** 		---------- ENV ----------
 */
+/* UTILITY_ENV */
 t_env			*ft_lstnew_env(char *key, char *content, t_status status);
 t_env			*ft_lstlast_env(t_env *lst);
 void			ft_lstadd_back_env(t_env **alst, t_env *new);
 void			ft_lst_remove_key(t_env **env, char *key);
 t_env			*ft_keyshr(t_env *env, char *key);
+/* ENV_EXPORT_UNSET */
 int				ft_env(t_all *a, char **args);
 int				ft_export(t_all *a, char **args);
 int				ft_unset(t_all *a, char **args);
+int				ft_print_alphabetic_env(t_all *a, t_env *env);
+/* CONVERT */
 int				ft_lstsize_env_status(t_env *env, t_status status);
 char			**convert_env_to_strs(t_list **gc, t_env *env);
 /*		---------- LAUNCH ---------- */
