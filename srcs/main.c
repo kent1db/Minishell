@@ -45,7 +45,17 @@ t_all	*init_all(char **envp, char *name_prg)
 	a->input->read = 1;
 	a->input->ctrl_c = 0;
 	a->in_cmd = 0;
+	a->redir = malloc_gc(&a->gc, sizeof(t_redir));
+	a->redir->fd_backup = -1;
+	a->redir->chevron = 0;
+	a->redir->fd = -1;
+	a->pipe = malloc_gc(&a->gc, sizeof(t_pipe));
+	a->pipe->fd = malloc_gc(&a->gc, sizeof(int) * 2);
+	a->pipe->fd_backup = malloc_gc(&a->gc, sizeof(int) * 3);
 	a->name_prg = name_prg;
+	a->pipe->fd[0] = -1;
+	a->pipe->fd[1] = -1;
+	a->redir->count = -12;
 	ft_exit_status_cmd(a);
 	set_all(a);
 	return (a);

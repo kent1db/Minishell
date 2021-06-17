@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/16 15:10:21 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/17 12:44:03 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ void	ft_launch_cmd(t_command *cmd, t_all *a)
 	ft_cmd = init_array_instruction_function(&a->gc);
 	if (!launch_if_is_our_cmd(cmd, a, cmd_done, ft_cmd))
 		ft_launch_execve(cmd, a);
-	else if (a->fd > 0)
-	{
-		close(a->fd_p[0]);
-		close(a->fd_p[1]);
-	}
 	a->in_cmd = 0;
+	if (a->redir->fd != -1)
+		reset_redir(a);
 }

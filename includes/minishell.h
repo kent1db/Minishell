@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 15:01:58 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/17 12:43:45 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,11 +177,12 @@ void	ft_malloc_redir(t_tree *node, t_all *a, int *array, char *line);
 
 /*	---------- EXEC ---------- */
 /* FILE */
-void	ft_file(t_file *file, t_all *a);
+void	ft_file(t_tree *node, t_all *a);
+void	reset_redir(t_all *a);
 /* PIPE */
 void	ft_pipe(t_all *a);
 /* REDIR */
-void	ft_redir(t_file *file, t_all *a);
+void	ft_redir(t_operator *op, t_all *a);
 /* EXEC_LINE */
 void	exec_line(t_tree *node, t_all *a);
 #endif

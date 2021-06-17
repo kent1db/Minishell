@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/16 15:09:15 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/17 12:32:25 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,30 @@ typedef struct s_input
 	t_list			*ptr_historic;	
 }				t_input;
 
+typedef struct	s_redir
+{
+	int				fd_backup;
+	int				chevron;
+	int				fd;
+	int				count;
+}				t_redir;
+
+typedef struct	s_pipe
+{
+	int				boolean;
+	int				*fd_backup;
+	int				*fd;
+}				t_pipe;
+
 typedef struct s_all
 {
 	t_env			*env;
 	t_list			*gc;
 	t_tree			*tree;
 	t_input			*input;
+	t_pipe			*pipe;
+	t_redir			*redir;
 	int				status_cmd;
-	int				fd;
-	int				*fd_b;
-	int				*fd_p;
 	int				in_cmd;
 	char			*name_prg;
 }				t_all;

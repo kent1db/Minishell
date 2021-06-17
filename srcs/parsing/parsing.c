@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:19 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/16 15:22:56 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/17 12:47:44 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void	ft_lexing_command_line(char *line, t_all *a)
 	{
 		start = i;
 		a->tree = malloc_gc(&a->gc, sizeof(t_tree));
-		a->fd = 0;
 		a->tree->type = -1;
 		while (line[i])
 		{
@@ -126,8 +125,7 @@ void	ft_lexing_command_line(char *line, t_all *a)
 		a->tree->loop = 0;
 		a->tree = ft_binary_tree(line, start, i, a);
 		exec_line(a->tree, a);
-		if (a->fd > 0)
-			dup2(a->fd_b[0], 0);
+		// ft_print_tree(a->tree, 0);
 		/* delete tree */
 		if (line[i])
 			i++;
