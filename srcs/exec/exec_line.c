@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 11:31:08 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/17 12:20:52 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/17 13:37:30 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	exec_line(t_tree *node, t_all *a)
 		ft_file(node, a);
 	if (node->left != NULL)
 		exec_line(node->left, a);
+	if (a->pipe->boolean)
+		a->pipe->boolean = 2;
 	if (node->right != NULL)
 		exec_line(node->right, a);
 }

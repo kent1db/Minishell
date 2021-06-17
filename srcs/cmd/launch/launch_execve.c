@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_execve.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/17 13:11:29 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/17 17:05:18 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,31 @@ int	ft_launch_execve_with_path(char *path_cmd, t_all *a, char **arg)
 	{
 		if (fork() == 0)
 		{
-			// if (a->fd == 1)
-			// {
-			// 	close(a->fd_p[0]);
-			// 	dup2(a->fd_p[1], 1);
-			// 	close(a->fd_p[1]);
-			// }
-			// else if (a->fd == 2)
-			// {
-			// 	close(a->fd_p[1]);
-			// 	dup2(a->fd_p[0], 0);
-			// 	dup2(a->fd_b[1], 1);
-			// 	close(a->fd_p[0]);
-			// }
+			if (a->pipe->boolean == 1)
+			{
+				// close(a->pipe->fd[0]);
+				dup2(a->pipe->fd[1], 1);
+				// close(a->pipe->fd[1]);
+			}
+			else if (a->pipe->boolean == 2)
+			{
+				// close(a->pipe->fd[1]);
+				dup2(a->pipe->fd[0], 0);
+				// close(a->pipe->fd[0]);
+			}
 			execve(path_cmd, arg, convert_env_to_strs(&a->gc, a->env));
 			exit(0);
 		}
-		wait(&status);
+		
+		// if (a->pipe->boolean == 1)
+			// wait(&status);
+			// dup2(a->pipe->fd_backup[0], 0);
+		if (a->pipe->boolean == 2)
+		{
+			close(a->pipe->fd[0]);
+			close(a->pipe->fd[1]);
+			wait(&status);
+		}
 		if (WIFEXITED(status))
 			a->status_cmd = WEXITSTATUS(status);
 		return (1);
@@ -81,7 +89,7 @@ int	ft_is_a_directory(char *cmd_path)
 {
 	struct stat buf;
 	int			ret;
-	
+
 	ret = lstat(cmd_path, &buf);
 	if (!ret && S_ISDIR(buf.st_mode))
 		return (1);
