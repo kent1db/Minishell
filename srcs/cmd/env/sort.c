@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 11:34:28 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/16 17:01:50 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/17 12:22:41 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_switch_link_begin(t_env **begin)
 
 void	ft_switch_link(t_env **previous, t_env **current, t_env **next)
 {
-
 	t_env *tmp;
 
 	tmp = (*previous);
