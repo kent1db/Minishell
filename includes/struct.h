@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/15 10:57:31 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/17 12:32:25 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,29 @@ typedef struct s_input
 	t_list			*ptr_historic;	
 }				t_input;
 
+typedef struct	s_redir
+{
+	int				fd_backup;
+	int				chevron;
+	int				fd;
+	int				count;
+}				t_redir;
+
+typedef struct	s_pipe
+{
+	int				boolean;
+	int				*fd_backup;
+	int				*fd;
+}				t_pipe;
+
 typedef struct s_all
 {
 	t_env			*env;
 	t_list			*gc;
 	t_tree			*tree;
 	t_input			*input;
+	t_pipe			*pipe;
+	t_redir			*redir;
 	int				status_cmd;
 	int				in_cmd;
 	char			*name_prg;

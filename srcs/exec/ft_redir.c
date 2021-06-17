@@ -3,17 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/15 11:48:38 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 11:51:58 by alafranc         ###   ########lyon.fr   */
+/*   Created: 2021/06/17 10:44:32 by qurobert          #+#    #+#             */
+/*   Updated: 2021/06/17 12:59:13 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+
 void	ft_redir(t_operator *op, t_all *a)
 {
-	(void)op;
-	(void)a;
-}
+	a->redir->fd = ft_atoi(op->op);
+	if (ft_strlen(ft_strchr(op->op, '>')) == 2)
+		a->redir->chevron = 1;
+	else
+		a->redir->chevron = 0;
+	if (!a->redir->fd)
+		a->redir->fd = 1;
+	a->redir->count++;
+}	

@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/16 11:09:38 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/17 13:13:19 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,6 @@ void	ft_launch_cmd(t_command *cmd, t_all *a)
 		ft_launch_execve(cmd, a);
 	a->in_cmd = 0;
 	ft_exit_status_cmd(a);
+	if (a->redir->fd != -1)
+		reset_redir(a);
 }

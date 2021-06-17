@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/16 11:40:13 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/17 13:13:06 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_env			*ft_keyshr(t_env *env, char *key);
 int				ft_env(t_all *a, char **args);
 int				ft_export(t_all *a, char **args);
 int				ft_unset(t_all *a, char **args);
-int				ft_print_alphabetic_env(t_all *a, t_env *env);
+int				ft_print_alphabetic_env(t_env *env);
 /* CONVERT */
 int				ft_lstsize_env_status(t_env *env, t_status status);
 char			**convert_env_to_strs(t_list **gc, t_env *env);
@@ -192,9 +192,10 @@ void	ft_malloc_redir(t_tree *node, t_all *a, int *array, char *line);
 
 /*	---------- EXEC ---------- */
 /* FILE */
-void	ft_file(t_file *file, t_all *a);
+void	ft_file(t_tree *node, t_all *a);
+void	reset_redir(t_all *a);
 /* PIPE */
-void	ft_pipe(t_operator *op, t_all *a);
+void	ft_pipe(t_all *a);
 /* REDIR */
 void	ft_redir(t_operator *op, t_all *a);
 /* EXEC_LINE */
