@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:39:30 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/18 15:29:40 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 15:07:31 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ void	ft_exec_tree(t_tree *node, t_all *a)
 	}
 	else if (node->type && node->type == command)
 	{
-		a->pipe->another_pipe = 0;
-		ft_is_another_pipe(node, a);
+		ft_is_another_cmd(node, a);
 		ft_exec_cmd(node->exec->cmd, a);
 	}
 	else if (node->type && node->type == file)
@@ -91,20 +90,21 @@ void	ft_file(t_tree *node, t_all *a)
 void	ft_pipe(t_all *a)
 {
 	init_pipe(a->pipe);
-	a->pipe->count++;
+	a->pipe->count += 1;
+	a->pipe->is_pipe = 1;
 }
 
-void	ft_is_another_pipe(t_tree *node, t_all *a)
+void	ft_is_another_cmd(t_tree *node, t_all *a)
 {
-	if (node->e_type == op_pipe)
+	if (node->e_type == command)
 	{
-		a->pipe->another_pipe = 1;
+		a->pipe->another_cmd = 1;
 		return ;
 	}
 	if (node->left)
-		ft_is_another_pipe(node->left, a);
+		ft_is_another_cmd(node->left, a);
 	if (node->right)
-		ft_is_another_pipe(node->right, a);
+		ft_is_another_cmd(node->right, a);
 }
 
 void	ft_redir(t_operator *op, t_all *a)

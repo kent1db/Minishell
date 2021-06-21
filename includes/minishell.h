@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/18 15:27:59 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 14:59:54 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ int				ft_is_our_cmd(t_command *cmd, t_all *a, char **cmd_done);
 void			ft_status_cmd(t_all *a, int *status_cmd);
 void			ft_exec_cmd_main(t_command *cmd, t_all *a);
 void			ft_exec_cmd(t_command *cmd, t_all *a);
+void			ft_is_another_cmd(t_tree *node, t_all *a);
 /* FILL_PATH_CMD */
 int				ft_is_a_directory(char *cmd_path);
 int				ft_test_with_path(t_command *cmd, t_all *a);

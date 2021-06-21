@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/18 15:27:46 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 15:07:05 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ typedef struct	s_redir
 typedef struct	s_pipe
 {
 	int				count;
-	int				count_cmd;
+	int				is_pipe;
 	int				*fd_backup;
 	int				backup_tmp;
 	int				*fd;
-	int				another_pipe;
+	int				another_cmd;
 }				t_pipe;
 
 typedef struct s_all
