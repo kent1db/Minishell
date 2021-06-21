@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/18 15:27:46 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 15:30:07 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_tree
 	t_type_enum		e_type;
 	t_type_union	*exec;
 	int				count;
-	int				loop;
 	int				start;
 	int				end;
 	char			*line;
@@ -59,6 +58,7 @@ typedef struct	s_redir
 {
 	int				fd_backup;
 	int				chevron;
+	int				input;
 	int				fd;
 	int				count;
 }				t_redir;

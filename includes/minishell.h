@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/18 15:27:59 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 13:48:50 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,8 @@ void			init_redir(t_redir *redir);
 void			init_pipe(t_pipe *pipe);
 void			reset_pipe(t_pipe *pipe);
 void			reset_redir(t_redir *redir);
+/* UTILS_EXEC */
+void	ft_init_tree(t_all *a);
 /*		---------- EXEC_CMD ---------- */
 /*	EXEC_CMD */
 int				ft_is_our_cmd(t_command *cmd, t_all *a, char **cmd_done);

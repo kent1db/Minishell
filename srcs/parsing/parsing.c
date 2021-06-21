@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:19 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/18 13:41:38 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 13:54:00 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ t_tree	*ft_binary_tree(char *line, int start, int end, t_all *a)
 	ft_parsing(line, array, node, a);
 	if (node->type == op_pipe || node->type == redir)
 	{
-		a->tree->loop++;
 		node->left = ft_binary_tree(line, start, op_pos[0] - 1, a);
 		node->right = ft_binary_tree(line, op_pos[1] + 1, end, a);
 	}

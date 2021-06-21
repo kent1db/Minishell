@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/18 15:29:56 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 14:55:14 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	ft_exec_cmd_main(t_command *cmd, t_all *a)
 	}
 	// if (pipe(a->pipe->fd) == -1)
 		// ft_error_msg("PIPE INIT", a->gc);
-	ft_printf(1, "pipe: %d\n", a->pipe->another_pipe);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -96,6 +95,9 @@ void	ft_exec_cmd(t_command *cmd, t_all *a)
 	a->in_cmd = 0;
 	ft_status_cmd(a, &a->status);
 	if (a->redir->fd != -1)
+	{
+		
+	}
 		reset_redir(a->redir);
 	a->pipe->count_cmd += 1;
 }
