@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/21 14:55:14 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 16:27:45 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,18 @@ void	ft_exec_cmd_main(t_command *cmd, t_all *a)
 			ft_error_is_a_directory(a, cmd->cmd);
 		return ;
 	}
-	// if (pipe(a->pipe->fd) == -1)
-		// ft_error_msg("PIPE INIT", a->gc);
+	if (pipe(a->pipe->fd) == -1)
+		ft_error_msg("PIPE INIT", a->gc);
 	pid = fork();
 	if (pid == 0)
 	{
+		if (a->pipe->is_pipe)
+		{
+			dup2(a->pipe->backup_tmp, 0);
+			if (a->pipe->count != 0)
+				dup2(a->pipe->fd[1], 1);
+			close(a->pipe->fd[0]);
+		}
 		if (cmd->our_cmd)
 		{
 			ft_cmd = init_array_instruction_function(&a->gc);
@@ -57,6 +64,9 @@ void	ft_exec_cmd_main(t_command *cmd, t_all *a)
 			execve(cmd->cmd, cmd->handle_arg, convert_env_to_strs(&a->gc, a->env));
 		exit(0);
 	}
+	a->pipe->count -= 1;
+	close(a->pipe->fd[1]);
+	a->pipe->backup_tmp = a->pipe->fd[0];
 	wait(&status);
 	a->status = WEXITSTATUS(status);
 }
@@ -84,13 +94,9 @@ void	ft_exec_cmd(t_command *cmd, t_all *a)
 	cmd->handle_arg = parse_argument(a, cmd->args);
 	cmd->error = 0;
 	cmd_done = list_cmd_done(&a->gc);
-	if (ft_is_our_cmd(cmd, a, cmd_done))
-		cmd->our_cmd = 1;
-	else
-	{
-		cmd->our_cmd = 0;
+	cmd->our_cmd = ft_is_our_cmd(cmd, a, cmd_done);
+	if (!cmd->our_cmd)
 		fill_cmd_with_path(cmd, a);
-	}
 	ft_exec_cmd_main(cmd, a);
 	a->in_cmd = 0;
 	ft_status_cmd(a, &a->status);
@@ -99,5 +105,4 @@ void	ft_exec_cmd(t_command *cmd, t_all *a)
 		
 	}
 		reset_redir(a->redir);
-	a->pipe->count_cmd += 1;
 }
