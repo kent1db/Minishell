@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:22:33 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 16:34:24 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 16:09:39 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,23 @@ int	ft_reverse_boolean(int boolean)
 	return (1);
 }
 
-int	is_option(char *args)
+int	is_option(char *arg)
 {
 	int	i;
 
-	if (!args)
+	dprintf(1, "J'ADORE LA VIE\n");
+	if (!arg)
 		return (0);
 	i = -1;
-	while (args[++i])
+	while (arg[++i])
 	{
-		if (ft_is_backslash_before(args, i, '-'))
+	ft_printf(1, "arg[%d]: %c\n", i, arg[i]);
+		if (ft_is_backslash_before(arg, i, '-'))
 		{
-			while (args[i] == 'n' && args[i])
+			ft_printf(1, "maybe a option\n");
+			while (arg[i] == 'n' && arg[i])
 				i++;
-			if (args[i])
+			if (arg[i])
 				return (0);
 			else
 				return (1);

@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:30:07 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/21 16:27:57 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 16:30:25 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	reset_pipe(t_pipe *pipe)
 {
-	pipe->another_cmd = 0;
 	pipe->count = 0;
 	pipe->is_pipe = 0;
 	init_pipe(pipe);

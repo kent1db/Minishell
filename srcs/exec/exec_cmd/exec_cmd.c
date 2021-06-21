@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/21 16:27:45 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 16:30:17 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,6 @@ void	ft_exec_cmd_main(t_command *cmd, t_all *a)
 	pid_t	pid;
 	int		(**ft_cmd)(t_all *a, char **args);
 
-	(void)pid;
-	(void)status;
-	(void)cmd;
-	(void)a;
 	if (cmd->error)
 	{
 		if (cmd->error == 127)

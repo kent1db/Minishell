@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 11:34:43 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/17 13:13:12 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 15:50:11 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	ft_export(t_all *a, char **args)
 
 	i = -1;
 	(void)new_elem;
-	(void)a;
-	(void)args;
 	if (!args)
 		return (ft_print_alphabetic_env(a->env));
 	// while (args[++i])
@@ -51,9 +49,9 @@ int	ft_unset(t_all *a, char **args)
 	i = -1;
 	(void)a;
 	(void)args;
-	// if (!args)
-	// 	return ;
+	if (!args)
+		return (0);
 	// while (args[++i])
-	// 	ft_lst_remove_key(env, args[i]);
+	// 	ft_lst_remove_key(a->env, args[i]);
 	return (0);
 }

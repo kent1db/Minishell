@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 11:56:26 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 16:28:27 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 16:10:34 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	ft_echo(t_all *a, char **args)
 	int		option;
 
 	option = 0;
-	(void)args;
-	(void)a;
+	for(int i = 0; args[i] != NULL ; i++)
+		dprintf(1, "args: %s\n", args[i]);
 	args = delete_option(&option, args);
 	ft_strs_add_to_gc(args, &a->gc);
 	main_echo(args);
