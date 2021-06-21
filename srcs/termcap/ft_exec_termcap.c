@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:53:58 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/18 14:40:36 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 15:44:33 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_exec_termcap(t_all *a, int *cursor, char **line)
 	apply_termios(a->input->saved);
 	if (*line)
 		ft_parse_and_exec(*line, a);
-	if (a->input->read)
+	if (a->read)
 		display_line(a);
 	reset_variable_termcap(a, cursor, line);
 }

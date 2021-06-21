@@ -42,14 +42,14 @@ t_all	*init_all(char **envp, char *name_prg)
 	a->input->historic_current = ft_lstnew("");
 	ft_lstadd_front(&a->gc, ft_lstnew(a->input->historic_current));
 	a->input->ptr_historic = NULL;
-	a->input->read = 1;
+	a->read = 1;
 	a->in_cmd = 0;
 	a->redir = malloc_gc(&a->gc, sizeof(t_redir));
-	init_redir(a->redir);
+	reset_redir(a->redir);
 	a->pipe = malloc_gc(&a->gc, sizeof(t_pipe));
 	a->pipe->fd = malloc_gc(&a->gc, sizeof(int) * 2);
 	a->pipe->fd_backup = malloc_gc(&a->gc, sizeof(int) * 3);
-	init_pipe(a->pipe);
+	reset_pipe(a->pipe);
 	a->name_prg = name_prg;
 	ft_lstadd_back_env(&a->env, ft_lstnew_env("?", "0", status_none));
 	set_all(a);

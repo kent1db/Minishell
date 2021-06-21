@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 14:42:57 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/18 14:17:26 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 16:16:21 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	read_command_line(t_all *a)
 	a->input->cursor = &cursor;
 	ft_bzero(buf, 256);
 	display_line(a);
-	while (a->input->read && read(0, buf, 255))
+	while (read(0, buf, 255) && a->read)
 	{
 		if (ft_switch_keyboard(a, buf, &cursor, &line))
-			break ;
+			break;
 		ft_bzero(buf, 256);
 	}
 }
@@ -60,6 +60,11 @@ int	ft_switch_keyboard(t_all *a, char buf[4], int *cursor, char **line)
 		ft_ctrl_l(a, *line);
 	else if (buf[1] == '[')
 		ft_arrow_key(a, buf[2], cursor, line);
+	else if (buf[0] == '\n' && *line && !ft_strcmp(*line, "exit"))
+	{
+		ft_printf(1, "\n");
+		return (1);
+	}
 	else if (buf[0] == '\n')
 		ft_exec_termcap(a, cursor, line);
 	else
