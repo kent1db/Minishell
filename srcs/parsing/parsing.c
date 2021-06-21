@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:19 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/17 13:37:54 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/18 13:41:38 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,37 +99,4 @@ t_tree	*ft_binary_tree(char *line, int start, int end, t_all *a)
 		node->right = NULL;
 	}
 	return (node);
-}
-
-void	ft_lexing_command_line(char *line, t_all *a)
-{
-	int	i;
-	int start;
-	int	quote;
-
-	i = 0;
-	quote = 0;
-	while (line[i])
-	{
-		start = i;
-		a->tree = malloc_gc(&a->gc, sizeof(t_tree));
-		a->tree->type = -1;
-		while (line[i])
-		{
-			ft_is_quote(line[i], &quote);
-			if (line[i] == ';' && !quote &&\
-			!ft_is_bs_before(line, i))
-				break ;
-			i++;
-		}
-		a->tree->loop = 0;
-		a->tree = ft_binary_tree(line, start, i, a);
-		exec_line(a->tree, a);
-		dup2(a->pipe->fd_backup[0], 0);
-		a->pipe->boolean = 1;
-		// ft_print_tree(a->tree, 0);
-		/* delete tree */
-		if (line[i])
-			i++;
-	}
 }

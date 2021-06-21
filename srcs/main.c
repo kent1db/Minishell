@@ -35,7 +35,7 @@ t_all	*init_all(char **envp, char *name_prg)
 	a = malloc(sizeof(t_all));
 	a->gc = NULL;
 	ft_lstadd_front(&a->gc, ft_lstnew(a));
-	a->status_cmd = 0;
+	a->status = 0;
 	a->env = parse_env(envp, &a->gc);
 	a->input = malloc_gc(&a->gc, (sizeof(t_input)));
 	a->input->historic = NULL;
@@ -43,20 +43,13 @@ t_all	*init_all(char **envp, char *name_prg)
 	ft_lstadd_front(&a->gc, ft_lstnew(a->input->historic_current));
 	a->input->ptr_historic = NULL;
 	a->input->read = 1;
-	a->input->ctrl_c = 0;
 	a->in_cmd = 0;
 	a->redir = malloc_gc(&a->gc, sizeof(t_redir));
-	a->redir->fd_backup = -1;
-	a->redir->chevron = 0;
-	a->redir->fd = -1;
 	a->pipe = malloc_gc(&a->gc, sizeof(t_pipe));
 	a->pipe->fd = malloc_gc(&a->gc, sizeof(int) * 2);
 	a->pipe->fd_backup = malloc_gc(&a->gc, sizeof(int) * 3);
 	a->name_prg = name_prg;
-	a->pipe->fd[0] = -1;
-	a->pipe->fd[1] = -1;
-	a->redir->count = -12;
-	ft_exit_status_cmd(a);
+	ft_lstadd_back_env(&a->env, ft_lstnew_env("?", "0", status_none));
 	set_all(a);
 	return (a);
 }

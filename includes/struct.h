@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/17 12:32:25 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/18 15:27:46 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ typedef struct s_input
 	struct termios	saved;
 	t_list			*historic;
 	t_list			*historic_current;
-	t_list			*ptr_historic;	
+	t_list			*ptr_historic;
+	char			**line;
+	int				*cursor;
 }				t_input;
 
 typedef struct	s_redir
@@ -63,9 +65,12 @@ typedef struct	s_redir
 
 typedef struct	s_pipe
 {
-	int				boolean;
+	int				count;
+	int				count_cmd;
 	int				*fd_backup;
+	int				backup_tmp;
 	int				*fd;
+	int				another_pipe;
 }				t_pipe;
 
 typedef struct s_all
@@ -76,8 +81,8 @@ typedef struct s_all
 	t_input			*input;
 	t_pipe			*pipe;
 	t_redir			*redir;
-	int				status_cmd;
 	int				in_cmd;
+	int				status;
 	char			*name_prg;
 }				t_all;
 

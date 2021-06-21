@@ -6,27 +6,27 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/06/17 13:12:03 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/06/18 14:14:23 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 
 FILES_GENERAL	= garbage_collector.c error.c main.c display.c 
-FILES_EXEC		= exec_line.c ft_file.c ft_pipe.c ft_redir.c
-FILES_LAUNCH	= pointer_array_fct_cmd.c launch_cmd.c launch_execve.c
+FILES_EXEC		= ft_exec.c init_exec.c
+FILES_EXEC_CMD	= pointer_array_fct_cmd.c exec_cmd.c fill_path_cmd.c
 FILES_CMD		= exit.c  easter_egg.c cd.c
 FILES_ECHO		= echo.c utility_echo.c
 FILES_ENV		= export_unset.c utility_lst_env.c convert_env_to_strs.c env.c sort.c
 FILES_TERMCAP	= arrow_key.c delete.c init_terms.c print_buf_and_stock.c \
-				  read_cmd_line.c termios.c utility.c reset_line_and_stock.c
+				  read_cmd_line.c termios.c utility.c ft_exec_termcap.c
 FILES_PARSING	= utils_parsing.c cmd_parsing.c env_parsing.c file_parsing.c parsing.c print.c priority_op.c redir_parsing.c
 FILES_ARG		= parse_argument.c quote.c ft_split_quote.c is_backslash.c backslash.c utility_arg.c
 
 FILES			= $(addprefix display/, ${FILES_DISPLAY}) \
-				  ${addprefix exec/, ${FILES_EXEC}} \
+				  ${addprefix exec/, ${FILES_EXEC} ${addprefix exec_cmd/, ${FILES_EXEC_CMD}}} \
 				  ${addprefix parsing/, ${FILES_PARSING}} \
-				  ${addprefix cmd/, ${FILES_CMD} ${addprefix env/, ${FILES_ENV}} ${addprefix launch/, ${FILES_LAUNCH}} ${addprefix echo/, ${FILES_ECHO}}} \
+				  ${addprefix cmd/, ${FILES_CMD} ${addprefix env/, ${FILES_ENV}} ${addprefix echo/, ${FILES_ECHO}}} \
 				  ${addprefix termcap/, ${FILES_TERMCAP}} \
 				  ${addprefix special_char/, ${FILES_QUOTES}} \
 				  ${addprefix arg/, ${FILES_ARG}} \

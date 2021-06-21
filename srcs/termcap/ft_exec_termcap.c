@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reset_line_and_stock.c                             :+:      :+:    :+:   */
+/*   ft_exec_termcap.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/04 12:39:20 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/17 13:11:51 by alafranc         ###   ########lyon.fr   */
+/*   Created: 2021/06/18 13:53:58 by alafranc          #+#    #+#             */
+/*   Updated: 2021/06/18 14:40:36 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	stock_to_historic(t_all *a, char *line)
 {
@@ -25,28 +24,23 @@ void	stock_to_historic(t_all *a, char *line)
 	}
 }
 
-void	reset_variable_new_line(t_all *a, int *cursor, char **line)
+void	ft_exec_termcap(t_all *a, int *cursor, char **line)
+{
+	ft_printf(1, "\n");
+	stock_to_historic(a, *line);
+	apply_termios(a->input->saved);
+	if (*line)
+		ft_parse_and_exec(*line, a);
+	if (a->input->read)
+		display_line(a);
+	reset_variable_termcap(a, cursor, line);
+}
+
+void	reset_variable_termcap(t_all *a, int *cursor, char **line)
 {
 	*cursor = 0;
 	init_terms(a);
 	*line = NULL;
-	a->input->ctrl_c = 0;
 	a->input->historic_current->content = "";
 	a->input->ptr_historic = NULL;
-	a->redir->chevron = 0;
-}
-
-void	ft_launch_cmd_and_reset(t_all *a, int *cursor, char **line)
-{
-	ft_printf(1, "\n");
-	if (*line && (*line)[0] != '\0')
-	{
-		stock_to_historic(a, *line);
-		apply_termios(a->input->saved);
-		stock_to_historic(a, *line);
-		ft_lexing_command_line(*line, a);
-	}
-	if (a->input->read)// && !a->input->ctrl_c)
-		display_line(a);
-	reset_variable_new_line(a, cursor, line);
 }

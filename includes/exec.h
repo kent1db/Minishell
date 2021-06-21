@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:44:55 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/17 10:00:55 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/18 14:15:23 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ typedef struct s_command
 {
 	char			*cmd;
 	char			*args;
+	char			**handle_arg;
+	int				our_cmd;
+	int				error;
 }					t_command;
 
 typedef struct s_operator

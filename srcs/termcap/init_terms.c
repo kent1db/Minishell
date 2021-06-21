@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 14:07:44 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/04 13:01:12 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/18 14:40:41 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	ctrl_c(int signal)
 {
 	t_all	*a;
-
 	(void)signal;
 	a = get_all();
-	a->status_cmd = 1;
-	a->input->ctrl_c = 1;
-	ft_exit_status_cmd(a);
+	*a->input->line = NULL;
+	*a->input->cursor = 0;
+	signal = 1;
+	ft_status_cmd(a, &signal);
 	ft_printf(1, "\n");
 	if (!a->in_cmd)
 		display_line(a);

@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/17 13:13:06 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/18 15:27:59 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 void			*malloc_gc(t_list **gc, size_t size);
 char			*ft_strdup_gc(t_list **gc, char *src);
 void			ft_lst_add_to_gc(t_list **gc, t_list *lst);
-void			ft_error_msg(char *msg_error, t_list *gc);
 t_all			*set_all(t_all *tmp);
 t_all			*get_all(void);
 void			read_command_line(t_all *a);
@@ -51,6 +50,8 @@ void			display_line(t_all *a);
 void			ft_cmd_not_found(t_all *a, char *cmd);
 void			ft_no_such_file(t_all *a, char *cmd);
 void			ft_error_is_a_directory(t_all *a, char *cmd);
+void			ft_error_pipe(t_all *a);
+void			ft_error_msg(char *msg_error, t_list *gc);
 /* ---------- TERMCAP ---------- */
 /*	ARROW_KEY */
 void			ft_arrow_key(t_all *a, char c, int *cursor, char **line);
@@ -71,6 +72,10 @@ void			ft_init_input(t_all *a);
 /*	PRINT */
 int				ft_print_buf(char *str, int *cursor);
 void			ft_print_buf_and_stock(t_all *a, char **line, char *buf, int *cursor);
+/*	FT_EXEC_TERMCAP */
+void			stock_to_historic(t_all *a, char *line);
+void			ft_exec_termcap(t_all *a, int *cursor, char **line);
+void			reset_variable_termcap(t_all *a, int *cursor, char **line);
 /*	READ_CMD_LINE */
 void			read_command_line(t_all *a);
 int				ft_switch_keyboard(t_all *a, char buf[4], int *cursor, char **line);
@@ -102,21 +107,6 @@ int				ft_print_alphabetic_env(t_env *env);
 /* CONVERT */
 int				ft_lstsize_env_status(t_env *env, t_status status);
 char			**convert_env_to_strs(t_list **gc, t_env *env);
-/*		---------- LAUNCH ---------- */
-int				launch_if_is_our_cmd(t_command *cmd, t_all *a, char **cmd_done,
-					int	(**ft_cmd)(t_all *a, char **args));
-void			ft_launch_cmd(t_command *cmd, t_all *all);
-void			ft_launch_execve_main(char **arg, t_all *a, t_command *cmd);
-void			ft_exit_status_cmd(t_all *a);
-int				ft_launch_execve_with_path(char *path_cmd, t_all *a,
-					char **arg);
-void			ft_launch_execve(t_command *cmd, t_all *a);
-void			ft_point_on_split(t_list **gc, char **split);
-char			**list_cmd_done(t_list **gc);
-void			*init_array_instruction_function(t_list **gc);
-char			**fill_argument_execve(t_all *a, char *args);
-void			ft_point_gc_on_split(t_list **gc, char **split);
-void			ft_fill_exit_status(t_all *a);
 /*
 ** 		---------- ECHO ----------
 */
@@ -160,44 +150,60 @@ int				ft_ccmp(char c, char *str);
 /*	
 ** ---------- PARSING ----------
 */
-void			ft_lexing_command_line(char *line, t_all *a);
+/* ENV_PARSING */
 t_env			*parse_env(char **env, t_list **gc);
 t_env			*pick_key_and_content(char *envp, t_list **gc, t_status status);
-void			ft_lexing_command_line(char *line, t_all *a);
+/* PARSING */
+int				ft_check_cmd_after(int **array, t_tree *node, t_all *a);
+void			ft_put_in_array(int **array, int *op_pos, t_tree *node, t_all *a);
+void			ft_parsing(char *line, int *array, t_tree *node, t_all *a);
+t_tree			*ft_binary_tree(char *line, int start, int end, t_all *a);
 /* UTILS_PARSING */
-void	ft_skip_whitespace(char *line, int *i);
-int		ft_is_bs_before(char *line, int i);
-void	ft_is_quote(char c, int *quote);
-int	    ft_delimiter(char c, char *del);
-char	*ft_substr_sw(char *s, int w, size_t len);
+void			ft_skip_whitespace(char *line, int *i);
+int				ft_is_bs_before(char *line, int i);
+void			ft_is_quote(char c, int *quote);
+int	   			 ft_delimiter(char c, char *del);
+char			*ft_substr_sw(char *s, int w, size_t len);
 /* CMD_PARSING */
-int		ft_malloc_command(char *line, int *array, t_tree *node, t_all *a);
+int				ft_malloc_command(char *line, int *array, t_tree *node, t_all *a);
 /*	ENV_PARSING */
-t_env	*parse_env(char **env, t_list **gc);
-t_env	*pick_key_and_content(char *envp, t_list **gc, t_status status);
-
+t_env			*parse_env(char **env, t_list **gc);
+t_env			*pick_key_and_content(char *envp, t_list **gc, t_status status);
 /* FILE_PARSING */
-void	ft_malloc_file(char *line, int *array, t_tree *node, t_all *a);
-
+void			ft_malloc_file(char *line, int *array, t_tree *node, t_all *a);
 /* PRINT */
-void	ft_print_tree(t_tree *node, int count);
-
+void			ft_print_tree(t_tree *node, int count);
 /* PRIORITY_OP */
-void	ft_priority(char *line, int start, int end,  t_tree *node);
-int     *ft_op_pos(char *line, int end, t_tree *node, t_all *a);
-void	ft_print_start_to_end(char *line, int start, int end);
-
+void			ft_priority(char *line, int start, int end,  t_tree *node);
+int				*ft_op_pos(char *line, int end, t_tree *node, t_all *a);
+void			ft_print_start_to_end(char *line, int start, int end);
 /* REDIR_PARSING */
-void	ft_malloc_redir(t_tree *node, t_all *a, int *array, char *line);
-
+void			ft_malloc_redir(t_tree *node, t_all *a, int *array, char *line);
 /*	---------- EXEC ---------- */
-/* FILE */
-void	ft_file(t_tree *node, t_all *a);
-void	reset_redir(t_all *a);
-/* PIPE */
-void	ft_pipe(t_all *a);
-/* REDIR */
-void	ft_redir(t_operator *op, t_all *a);
-/* EXEC_LINE */
-void	exec_line(t_tree *node, t_all *a);
+/* FT_PARSE_AND_EXEC */
+void			ft_parse_and_exec(char *line, t_all *a);
+void			ft_exec_tree(t_tree *node, t_all *a);
+void			ft_file(t_tree *node, t_all *a);
+void			ft_pipe(t_all *a);
+void			ft_redir(t_operator *op, t_all *a);
+void			ft_is_another_pipe(t_tree *node, t_all *a);
+/* INIT_EXEC */
+void			init_redir(t_redir *redir);
+void			init_pipe(t_pipe *pipe);
+void			reset_pipe(t_pipe *pipe);
+void			reset_redir(t_redir *redir);
+/*		---------- EXEC_CMD ---------- */
+/*	EXEC_CMD */
+int				ft_is_our_cmd(t_command *cmd, t_all *a, char **cmd_done);
+void			ft_status_cmd(t_all *a, int *status_cmd);
+void			ft_exec_cmd_main(t_command *cmd, t_all *a);
+void			ft_exec_cmd(t_command *cmd, t_all *a);
+/* FILL_PATH_CMD */
+int				ft_is_a_directory(char *cmd_path);
+int				ft_test_with_path(t_command *cmd, t_all *a);
+void			ft_test_with_path_directly(t_command *cmd, t_all *a);
+void			fill_cmd_with_path(t_command *cmd, t_all *a);
+/* PTR_ARRAY_FUNCTION */
+char			**list_cmd_done(t_list **gc);
+void			*init_array_instruction_function(t_list **gc);
 #endif
