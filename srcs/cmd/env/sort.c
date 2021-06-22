@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 11:34:28 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/21 15:49:45 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/22 16:14:02 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,13 @@ void    ft_print_env(t_env *env)
 	}
 }
 
-t_env *ft_sort_alphabetic_env(t_env *env)
+int	ft_print_alphabetic_env(t_env *env)
 {
 	t_env *current;
 	t_env *previous;
-	t_env *begin;
 
 	previous = NULL;
 	current = env;
-	begin = env;
-	ft_print_env(env);
-	ft_printf(1, "\n\n");
 	while (current && current->next)
 	{
 		if (ft_strcmp(current->key, current->next->key) > 0)
@@ -61,9 +57,9 @@ t_env *ft_sort_alphabetic_env(t_env *env)
 			if (previous)
 				ft_switch_link(&previous->next, &current->next, &current->next->next);
 			else
-				ft_switch_link_begin(&begin);
+				ft_switch_link_begin(&env);
 			previous = NULL;
-			current = begin;
+			current = env;
 		}
 		else
 		{
@@ -71,13 +67,6 @@ t_env *ft_sort_alphabetic_env(t_env *env)
 			current = current->next;
 		}
 	}
-	return (begin);
-}
-
-int	ft_print_alphabetic_env(t_env *env)
-{
-	env = ft_sort_alphabetic_env(env);
-	// ft_env(a, NULL);
 	ft_print_env(env);
 	return (0);
 }
