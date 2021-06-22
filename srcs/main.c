@@ -45,6 +45,8 @@ t_all	*init_all(char **envp, char *name_prg)
 	a->read = 1;
 	a->in_cmd = 0;
 	a->redir = malloc_gc(&a->gc, sizeof(t_redir));
+	a->fd = NULL;
+	a->redir->input = 0;
 	reset_redir(a->redir);
 	a->pipe = malloc_gc(&a->gc, sizeof(t_pipe));
 	a->pipe->fd = malloc_gc(&a->gc, sizeof(int) * 2);

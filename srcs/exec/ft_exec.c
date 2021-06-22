@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:39:30 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/21 16:30:03 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/22 16:47:35 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ void	ft_parse_and_exec(char *line, t_all *a)
 			i++;
 		}
 		a->tree = ft_binary_tree(line, start, i, a);
-		reset_redir(a->redir);
-		reset_pipe(a->pipe);
 		ft_exec_tree(a->tree, a);
+		ft_reset(a);
 		if (line[i])
 			i++;
 	}
@@ -74,6 +73,9 @@ void	ft_file(t_tree *node, t_all *a)
 	if (a->redir->input)
 	{
 		fd = open(node->exec->file->file, O_RDONLY, 0777);
+		if (fd == -1)
+			ft_error_a(node->exec->file->file, "No such file or directory", a);
+		a->redir->fd = fd;
 		a->redir->fd_backup = dup(0);
 		dup2(fd, 0);
 		close(fd);
@@ -88,7 +90,6 @@ void	ft_file(t_tree *node, t_all *a)
 
 void	ft_pipe(t_all *a)
 {
-	init_pipe(a->pipe);
 	a->pipe->count += 1;
 	a->pipe->is_pipe = 1;
 }
@@ -102,7 +103,7 @@ void	ft_redir(t_operator *op, t_all *a)
 		a->redir->chevron = 0;
 	if (!ft_strcmp(op->op, "<"))
 		a->redir->input = 1;
-	if (!a->redir->fd)
+	else if (!a->redir->fd)
 		a->redir->fd = 1;
 	a->redir->count++;
 }

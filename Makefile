@@ -6,14 +6,14 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/06/22 16:16:11 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/06/22 17:06:24 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 
-FILES_GENERAL	= garbage_collector.c error.c main.c display.c 
-FILES_EXEC		= ft_exec.c init_exec.c utils_exec.c
+FILES_GENERAL	= garbage_collector.c error.c main.c display.c
+FILES_EXEC		= ft_exec.c init_exec.c utils_exec.c reset.c
 FILES_EXEC_CMD	= pointer_array_fct_cmd.c exec_cmd.c fill_path_cmd.c
 FILES_CMD		= exit.c  easter_egg.c cd.c
 FILES_ECHO		= echo.c utility_echo.c
