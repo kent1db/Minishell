@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:30:07 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/21 16:30:25 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/22 14:17:52 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	reset_pipe(t_pipe *pipe)
 void	reset_redir(t_redir *redir)
 {
 	redir->count = 0;
-	dup2(redir->fd_backup, redir->fd);
+	if (redir->fd != -1)
+		dup2(redir->fd_backup, redir->fd);
 	init_redir(redir);
 }
 
