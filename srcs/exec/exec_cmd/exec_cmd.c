@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/21 16:30:17 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/22 15:40:14 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,32 +39,40 @@ void	ft_exec_cmd_main(t_command *cmd, t_all *a)
 			ft_error_is_a_directory(a, cmd->cmd);
 		return ;
 	}
-	if (pipe(a->pipe->fd) == -1)
-		ft_error_msg("PIPE INIT", a->gc);
-	pid = fork();
-	if (pid == 0)
+	if (cmd->our_cmd != -1 && !a->pipe->is_pipe)
 	{
-		if (a->pipe->is_pipe)
+		ft_cmd = init_array_instruction_function(&a->gc);
+		ft_cmd[cmd->our_cmd](a, cmd->handle_arg);
+	}
+	else
+	{
+		if (pipe(a->pipe->fd) == -1)
+			ft_error_msg("PIPE INIT", a->gc);
+		pid = fork();
+		if (pid == 0)
 		{
-			dup2(a->pipe->backup_tmp, 0);
-			if (a->pipe->count != 0)
-				dup2(a->pipe->fd[1], 1);
-			close(a->pipe->fd[0]);
-		}
-		if (cmd->our_cmd)
+			if (a->pipe->is_pipe)
+			{
+				dup2(a->pipe->backup_tmp, 0);
+				if (a->pipe->count != 0)
+					dup2(a->pipe->fd[1], 1);
+				close(a->pipe->fd[0]);
+			}
+		if (cmd->our_cmd != -1)
 		{
 			ft_cmd = init_array_instruction_function(&a->gc);
 			ft_cmd[cmd->our_cmd](a, cmd->handle_arg);
 		}
-		else
-			execve(cmd->cmd, cmd->handle_arg, convert_env_to_strs(&a->gc, a->env));
-		exit(0);
+			else
+				execve(cmd->cmd, cmd->handle_arg, convert_env_to_strs(&a->gc, a->env));
+			exit(0);
+		}
+		a->pipe->count -= 1;
+		close(a->pipe->fd[1]);
+		a->pipe->backup_tmp = a->pipe->fd[0];
+		wait(&status);
+		a->status = WEXITSTATUS(status);
 	}
-	a->pipe->count -= 1;
-	close(a->pipe->fd[1]);
-	a->pipe->backup_tmp = a->pipe->fd[0];
-	wait(&status);
-	a->status = WEXITSTATUS(status);
 }
 
 void	ft_status_cmd(t_all *a, int *status_cmd)
@@ -91,7 +99,7 @@ void	ft_exec_cmd(t_command *cmd, t_all *a)
 	cmd->error = 0;
 	cmd_done = list_cmd_done(&a->gc);
 	cmd->our_cmd = ft_is_our_cmd(cmd, a, cmd_done);
-	if (!cmd->our_cmd)
+	if (cmd->our_cmd == -1)
 		fill_cmd_with_path(cmd, a);
 	ft_exec_cmd_main(cmd, a);
 	a->in_cmd = 0;

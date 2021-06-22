@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 14:42:57 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/21 16:29:55 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/22 15:42:47 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	read_command_line(t_all *a)
 			break;
 		ft_bzero(buf, 256);
 	}
-	dprintf(1, "ici\n");
 }
 
 void	ft_ctrl_l(t_all *a, char *line)
