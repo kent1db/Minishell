@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 14:42:57 by alafranc          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/06/22 13:45:21 by qurobert         ###   ########lyon.fr   */
+=======
+/*   Updated: 2021/06/22 15:42:47 by alafranc         ###   ########lyon.fr   */
+>>>>>>> 3ff1653b95e4159678c037f4d1d2de02f2d60bfa
 /*                                                                            */
 /* ************************************************************************** */
 
