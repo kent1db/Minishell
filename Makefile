@@ -6,7 +6,7 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/06/23 16:58:04 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/06/23 17:17:47 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ FILES_ECHO		= echo.c utility_echo.c
 FILES_ENV		= export_unset.c utility_lst_env.c convert_env_to_strs.c env.c sort.c push_export.c
 FILES_TERMCAP	= arrow_key.c delete.c init_terms.c print_buf_and_stock.c \
 				  read_cmd_line.c termios.c utility.c ft_exec_termcap.c
-FILES_PARSING	= utils_parsing.c cmd_parsing.c env_parsing.c file_parsing.c parsing.c print.c priority_op.c redir_parsing.c
+FILES_PARSING	= utils_parsing.c cmd_parsing.c env_parsing.c file_parsing.c parsing.c print.c priority_op.c redir_parsing.c check_error.c
 FILES_ARG		= parse_argument.c quote.c ft_split_quote.c is_backslash.c backslash.c utility_arg.c
 
 FILES			= $(addprefix display/, ${FILES_DISPLAY}) \
@@ -48,7 +48,7 @@ LIBFT			= $(addprefix ${LIBFT_PATH}, ${NAME_LIBFT})
 
 CC				= clang
 RM				= rm -rf
-FLAGS			= #-fsanitize=address -g3 -Wall -Wextra  -Werror
+FLAGS			= -fsanitize=address -g3 -Wall -Wextra  -Werror
 
 all: 			${NAME}
 

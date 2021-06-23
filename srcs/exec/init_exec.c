@@ -6,29 +6,25 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:30:07 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/22 14:17:52 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 14:13:12 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	reset_pipe(t_pipe *pipe)
+void	reset_redir(t_all *a)
 {
-	pipe->count = 0;
-	pipe->is_pipe = 0;
-	init_pipe(pipe);
-}
-
-void	reset_redir(t_redir *redir)
-{
-	redir->count = 0;
-	if (redir->fd != -1)
-		dup2(redir->fd_backup, redir->fd);
-	init_redir(redir);
+	// dprintf(1, "1\n");
+	dup2(a->pipe->fd_backup[0],0);
+	dup2(a->pipe->fd_backup[1],1);
+	dup2(a->pipe->fd_backup[2],2);
+	init_redir(a->redir);
 }
 
 void	init_pipe(t_pipe *pipe)
 {
+	pipe->count = 0;
+	pipe->is_pipe = 0;
 	pipe->fd_backup[0] = dup(0);
 	pipe->fd_backup[1] = dup(1);
 	pipe->fd_backup[2] = dup(2);
@@ -37,6 +33,7 @@ void	init_pipe(t_pipe *pipe)
 
 void	init_redir(t_redir *redir)
 {
+	redir->count = 0;
 	redir->chevron = 0;
 	redir->fd = -1;
 }

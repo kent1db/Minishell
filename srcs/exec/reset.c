@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 15:57:57 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/23 10:43:03 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 14:11:01 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	ft_close_fd(t_all *a)
 
 void	ft_reset(t_all *a)
 {
-	reset_redir(a->redir);
-	reset_pipe(a->pipe);
+	reset_redir(a);
+	init_pipe(a->pipe);
 	ft_close_fd(a);
 }
 

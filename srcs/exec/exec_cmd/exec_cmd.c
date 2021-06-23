@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 16:04:44 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 17:17:55 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ void	ft_exec_cmd_main(t_command *cmd, t_all *a)
 				execve(cmd->cmd, cmd->handle_arg, convert_env_to_strs(&a->gc, a->env));
 			exit(0);
 		}
+		wait(&status);
 		a->pipe->count -= 1;
 		close(a->pipe->fd[1]);
 		ft_lst_add_fd(a, a->pipe->fd[0]);
 		a->pipe->backup_tmp = a->pipe->fd[0];
-		wait(&status);
 		a->status = WEXITSTATUS(status);
 	}
 }
@@ -109,5 +109,5 @@ void	ft_exec_cmd(t_command *cmd, t_all *a)
 	}
 	ft_status_cmd(a, &a->status);
 	if (a->redir->fd != -1)
-		reset_redir(a->redir);
+		reset_redir(a);
 }

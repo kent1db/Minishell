@@ -47,11 +47,11 @@ t_all	*init_all(char **envp, char *name_prg)
 	a->redir = malloc_gc(&a->gc, sizeof(t_redir));
 	a->fd = NULL;
 	a->redir->input = 0;
-	reset_redir(a->redir);
+	init_redir(a->redir);
 	a->pipe = malloc_gc(&a->gc, sizeof(t_pipe));
 	a->pipe->fd = malloc_gc(&a->gc, sizeof(int) * 2);
 	a->pipe->fd_backup = malloc_gc(&a->gc, sizeof(int) * 3);
-	reset_pipe(a->pipe);
+	init_pipe(a->pipe);
 	a->name_prg = name_prg;
 	ft_lstadd_back_env(&a->env, ft_lstnew_env("?", "0", status_none));
 	set_all(a);
