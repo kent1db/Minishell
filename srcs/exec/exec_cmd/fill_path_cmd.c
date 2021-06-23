@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/21 13:10:27 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 11:45:59 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	fill_cmd_with_path(t_command *cmd, t_all *a)
 {
 	cmd->handle_arg = ft_strsjoin_begin(cmd->handle_arg, a->name_prg);
 	ft_strs_add_to_gc(cmd->handle_arg, &a->gc);
-	if (ft_strchr(cmd->cmd, '/'))
+	if (cmd->cmd && ft_strchr(cmd->cmd, '/'))
 		ft_test_with_path_directly(cmd, a);
 	else
 		ft_test_with_path(cmd, a);

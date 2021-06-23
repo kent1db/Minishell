@@ -47,11 +47,11 @@ t_all	*init_all(char **envp, char *name_prg)
 	a->redir = malloc_gc(&a->gc, sizeof(t_redir));
 	a->fd = NULL;
 	a->redir->input = 0;
-	reset_redir(a->redir);
+	init_redir(a->redir);
 	a->pipe = malloc_gc(&a->gc, sizeof(t_pipe));
 	a->pipe->fd = malloc_gc(&a->gc, sizeof(int) * 2);
 	a->pipe->fd_backup = malloc_gc(&a->gc, sizeof(int) * 3);
-	reset_pipe(a->pipe);
+	init_pipe(a->pipe);
 	a->name_prg = name_prg;
 	ft_lstadd_back_env(&a->env, ft_lstnew_env("?", "0", status_none));
 	set_all(a);
@@ -60,15 +60,20 @@ t_all	*init_all(char **envp, char *name_prg)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_all	*a;	
-
 	(void)ac;
-	(void)av;
-	errno = 0;
+	t_all	*a;
+	char	buf[2];
+	char	*line;
+
 	a = init_all(envp, av[0]);
+	line = NULL;
+	buf[1] = '\0';
 	init_terms(a);
 	print_banner();
 	read_command_line(a);
+	// while (read(0, buf, 1))
+		// line = ft_strjoin(line, buf);
+	// ft_parse_and_exec(line, a);
 	ft_printf(1, "exit\n");
 	apply_termios(a->input->saved);
 	ft_lstclear(&a->gc, free);

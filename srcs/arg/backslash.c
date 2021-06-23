@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 13:01:18 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 16:37:41 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 11:18:42 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char	*add_backslash_quote(t_list **gc, char *str)
 	int		j;
 	int		quote;
 
+	if (!str)
+		return (NULL);
 	new_str = malloc_gc(gc, sizeof(char) * count_add_backslash_quote(str));
 	i = -1;
 	j = -1;

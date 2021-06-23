@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   priority_op.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 12:59:58 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/23 13:26:39 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 13:30:10 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

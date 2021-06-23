@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:39:30 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/22 16:47:35 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 16:11:01 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ void	ft_parse_and_exec(char *line, t_all *a)
 			i++;
 		}
 		a->tree = ft_binary_tree(line, start, i, a);
-		ft_exec_tree(a->tree, a);
+		i += ft_check_error(a, line, i);
+		if (line[i])
+			ft_exec_tree(a->tree, a);
 		ft_reset(a);
 		if (line[i])
 			i++;
