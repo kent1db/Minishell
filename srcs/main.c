@@ -57,23 +57,46 @@ t_all	*init_all(char **envp, char *name_prg)
 	set_all(a);
 	return (a);
 }
+// MAIN FOR TESTER
+// int	main(int ac, char **av, char **envp)
+// {
+// 	(void)ac;
+// 	t_all	*a;
+// 	char	buf[2];
+// 	char	*line;
+
+// 	line = NULL;
+// 	a = init_all(envp, av[0]);
+// 	while (read(0, buf, 1))
+// 		line = ft_strjoin(line, buf);
+// 	ft_parse_and_exec(line, a);
+// 	ft_lstclear(&a->gc, free);
+// 	return (0);
+// }
+// MAIN FOR TESTER
+
+// int	main(int ac, char **av, char **envp)
+// {
+// 	(void)ac;
+// 	t_all	*a;
+
+// 	a = init_all(envp, av[0]);
+// 	a->status = 0;
+// 	if (ac >= 3)
+// 		ft_parse_and_exec(av[2], a);
+// 	// ft_lstclear(&a->gc, free);
+// 	return (ft_atoi(ft_keyshr(a->env, "?")->content));
+// }
 
 int	main(int ac, char **av, char **envp)
 {
 	(void)ac;
 	t_all	*a;
-	char	buf[2];
-	char	*line;
 
 	a = init_all(envp, av[0]);
-	line = NULL;
-	buf[1] = '\0';
 	init_terms(a);
 	print_banner();
 	read_command_line(a);
-	// while (read(0, buf, 1))
-		// line = ft_strjoin(line, buf);
-	// ft_parse_and_exec(line, a);
 	ft_printf(1, "exit\n");
 	apply_termios(a->input->saved);
 	ft_lstclear(&a->gc, free);

@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 14:42:57 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 13:30:14 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 13:43:56 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,6 @@ int	ft_switch_keyboard(t_all *a, char buf[4], int *cursor, char **line)
 		ft_ctrl_l(a, *line);
 	else if (buf[1] == '[')
 		ft_arrow_key(a, buf[2], cursor, line);
-	else if (buf[0] == '\n' && *line && !ft_strcmp(*line, "exit"))
-	{
-		ft_printf(1, "\n");
-		return (1);
-	}
 	else if (buf[0] == '\n')
 		ft_exec_termcap(a, cursor, line);
 	else

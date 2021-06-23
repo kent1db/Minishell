@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 11:34:43 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/22 16:38:52 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 16:44:03 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,28 @@ t_env *duplicate_env(t_env *env)
 int	ft_export(t_all *a, char **args)
 {
 	int		i;
-	t_env *new_elem;
+	t_env	*new_elem;
+	char	*chr;
 
 	i = -1;
 	if (!args)
 		return (ft_print_alphabetic_env(duplicate_env(a->env)));
 	while (args[++i])
 	{
-		if (ft_strchr(args[i], '='))
-			push_variable(args[i], a, status_env);
+		if ((chr = ft_strchr(args[i], '+')) && chr && chr[1] == '=')
+			push_variable(args[i], a, status_env, 1);
+		else if (ft_strchr(args[i], '='))
+			push_variable(args[i], a, status_env, 0);
 		else
 		{
 			new_elem = ft_keyshr(a->env, args[i]);
 			if (new_elem)
 				new_elem->status = status_env;
 			else
-				push_variable(args[i], a, status_export);
+				push_variable(args[i], a, status_export, 0);
 		}
 	}
-	return (0);
+	return (a->status);
 }
 
 int	ft_unset(t_all *a, char **args)

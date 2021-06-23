@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 11:56:26 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/22 15:25:22 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 15:26:47 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,16 @@ int	count_delete_option(char **args)
 	int count;
 
 	count = 0;
-	i = -1;
+	i = 0;
 	if (!args)
 		return (0);
-	while (args[++i])
-		if (!is_option(args[i]))
-			count++;
+	while (args[i] && is_option(args[i]))
+		i++;
+	while (args[i])
+	{
+		count++;
+		i++;
+	}
 	return (count);
 }
 
@@ -34,17 +38,17 @@ char	**delete_option(int *option, char **args)
 	char	**new_args;
 
 	new_args = malloc(sizeof(char *) * (count_delete_option(args) + 1));
-	i = -1;
+	i = 0;
 	j = -1;
 	if (!args)
 		return (0);
-	while (args[++i])
+	while (args[i] && is_option(args[i]))
 	{
-		if (is_option(args[i]))
-			*option = 1;
-		else
-			new_args[++j] = ft_strdup(args[i]);			
+		*option = 1;
+		i++;
 	}
+	while (args[i])
+			new_args[++j] = ft_strdup(args[i++]);
 	new_args[++j] = NULL;
 	return (new_args);
 }

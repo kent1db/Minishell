@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 15:46:45 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 16:33:24 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 13:56:55 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ char	**ft_split_quote(char *str, char del)
 	{
 		while (ft_is_backslash_before(str, i, del) && str[i])
 			i++;
-		r = i;	
+		r = i;
 		while (!ft_is_backslash_before(str, i, del) && str[i])
 		{
-			if (ft_is_backslash_before(str, i, '\''))
+			if (ft_is_backslash_before(str, i, '\'') || ft_is_backslash_before(str, i, '\"'))
 				jump_to_next_quote(&i, str, str[i]);
 			else
 				i++;

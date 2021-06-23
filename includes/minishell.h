@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 11:53:43 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 16:37:00 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char			**convert_env_to_strs(t_list **gc, t_env *env);
 /* PUSH_EXPORT */
 void			push_variable_whitout_export(t_command *cmd, t_all *a);
 void			declare_env_var(t_command *cmd, t_all *a);
-void			push_variable(char *str, t_all *a, t_status status);
+int				push_variable(char *str, t_all *a, t_status status, int is_join);
 /*
 ** 		---------- ECHO ----------
 */
@@ -156,7 +156,7 @@ int				ft_ccmp(char c, char *str);
 */
 /* ENV_PARSING */
 t_env			*parse_env(char **env, t_list **gc);
-t_env			*pick_key_and_content(char *envp, t_list **gc, t_status status);
+t_env			*pick_key_and_content(char *envp, t_list **gc, t_status status, int separator);
 /* PARSING */
 int				ft_check_cmd_after(int **array, t_tree *node, t_all *a);
 void			ft_put_in_array(int **array, int *op_pos, t_tree *node, t_all *a);
@@ -170,9 +170,6 @@ int	   			 ft_delimiter(char c, char *del);
 char			*ft_substr_sw(char *s, int w, size_t len);
 /* CMD_PARSING */
 int				ft_malloc_command(char *line, int *array, t_tree *node, t_all *a);
-/*	ENV_PARSING */
-t_env			*parse_env(char **env, t_list **gc);
-t_env			*pick_key_and_content(char *envp, t_list **gc, t_status status);
 /* FILE_PARSING */
 void			ft_malloc_file(char *line, int *array, t_tree *node, t_all *a);
 /* PRINT */

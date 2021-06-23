@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:04:12 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 11:37:19 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 15:30:16 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_env  	*find_env(t_all *a, char *arg,  int *i)
 	if (ft_ccmp(arg[*i], "0123456789?"))	
 		str_env = ft_substr(arg, (*i)++, 1);
 	else
-		while (arg[*i] && !ft_ccmp(arg[*i], " =+-\\?") && !is_quote_or_d_quote(arg, *i)
+		while (arg[*i] && !ft_ccmp(arg[*i], " =+-/\\?") && !is_quote_or_d_quote(arg, *i)
 				&& !ft_is_backslash_before(arg, *i, '$'))
 			(*i)++;
 	str_env = ft_substr(arg, r, *i - r);

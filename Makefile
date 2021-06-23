@@ -6,7 +6,7 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/06/22 17:06:24 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/06/23 16:58:04 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ LIBFT			= $(addprefix ${LIBFT_PATH}, ${NAME_LIBFT})
 
 CC				= clang
 RM				= rm -rf
-FLAGS			= -fsanitize=address -g3 -Wall -Wextra  -Werror
+FLAGS			= #-fsanitize=address -g3 -Wall -Wextra  -Werror
 
 all: 			${NAME}
 

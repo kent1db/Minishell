@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 13:46:05 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/23 12:05:22 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 16:45:50 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void fill_env_(t_command *cmd, t_all *a)
 		ft_lstadd_back_env(&a->env, env);
 	}
 	if (cmd->cmd && !ft_strcmp(cmd->cmd, "env"))
-		env->content = ft_strdup_gc(&a->gc, "usr/bin/env");
+		env->content = ft_strdup_gc(&a->gc, "/usr/bin/env");
 	else if (cmd->handle_arg && cmd->handle_arg[0])
 		env->content = cmd->handle_arg[ft_strslen(cmd->handle_arg) - 1];
 	else if (cmd->cmd)
