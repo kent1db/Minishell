@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 13:29:21 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 13:30:40 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ void	ft_status_cmd(t_all *a, int *status_cmd)
 	ft_lstadd_front(&a->gc, ft_lstnew(env->content));
 	*status_cmd = 0;
 }
-
-
 
 void	ft_exec_cmd(t_command *cmd, t_all *a)
 {
