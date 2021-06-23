@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/22 17:08:59 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 12:01:50 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_is_our_cmd(t_command *cmd, char **cmd_done)
 
 	i = -1;
 	while (cmd_done[++i])
-		if (!ft_strcmp(cmd->cmd, cmd_done[i]))
+		if (cmd->cmd && !ft_strcmp(cmd->cmd, cmd_done[i]))
 			return (i);
 	return (-1);
 }
@@ -88,7 +88,6 @@ void	ft_status_cmd(t_all *a, int *status_cmd)
 }
 
 
-
 void	ft_exec_cmd(t_command *cmd, t_all *a)
 {
 	if (!cmd || !cmd->cmd)
@@ -97,7 +96,8 @@ void	ft_exec_cmd(t_command *cmd, t_all *a)
 	cmd->cmd = parse_argument(a, cmd->cmd)[0];
 	cmd->handle_arg = parse_argument(a, cmd->args);
 	cmd->error = 0;
-	if (ft_strchr(cmd->cmd, '='))
+	fill_env_(cmd, a);
+	if (cmd->cmd && ft_strchr(cmd->cmd, '='))
 		push_variable_whitout_export(cmd, a);
 	else
 	{

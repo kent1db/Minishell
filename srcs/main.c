@@ -60,15 +60,20 @@ t_all	*init_all(char **envp, char *name_prg)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_all	*a;	
-
 	(void)ac;
-	(void)av;
-	errno = 0;
+	t_all	*a;
+	char	buf[2];
+	char	*line;
+
 	a = init_all(envp, av[0]);
+	line = NULL;
+	buf[1] = '\0';
 	init_terms(a);
 	print_banner();
 	read_command_line(a);
+	// while (read(0, buf, 1))
+		// line = ft_strjoin(line, buf);
+	// ft_parse_and_exec(line, a);
 	ft_printf(1, "exit\n");
 	apply_termios(a->input->saved);
 	ft_lstclear(&a->gc, free);

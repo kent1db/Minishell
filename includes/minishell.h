@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/22 17:06:31 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 11:53:43 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void			main_echo(char **arg_split);
 int				ft_reverse_boolean(int boolean);
 int				is_option(char *args);
 char			*delete_backslash(t_list **gc, char *str);
-
 /*
 **		---------- ROOT ----------
 */
@@ -201,6 +200,7 @@ void			ft_reset(t_all *a);
 void			ft_lst_add_fd(t_all *a, int fd);
 /* UTILS_EXEC */
 void	ft_init_tree(t_all *a);
+void	fill_env_(t_command *cmd, t_all *a);
 /*		---------- EXEC_CMD ---------- */
 /*	EXEC_CMD */
 int				ft_is_our_cmd(t_command *cmd, char **cmd_done);

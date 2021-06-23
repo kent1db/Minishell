@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 11:34:28 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/22 16:14:02 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 09:53:08 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void    ft_print_env(t_env *env)
 	while (env)
 	{
 		if (env->status == status_env)
-			ft_printf(1, "declare -x %s=%s\n", env->key, env->content);
+			ft_printf(1, "declare -x %s=\"%s\"\n", env->key, env->content);
 		env = env->next;
 	}
 }
