@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/22 16:37:04 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/22 17:06:31 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,10 @@ int				ft_print_alphabetic_env(t_env *env);
 /* CONVERT */
 int				ft_lstsize_env_status(t_env *env, t_status status);
 char			**convert_env_to_strs(t_list **gc, t_env *env);
+/* PUSH_EXPORT */
+void			push_variable_whitout_export(t_command *cmd, t_all *a);
+void			declare_env_var(t_command *cmd, t_all *a);
+void			push_variable(char *str, t_all *a, t_status status);
 /*
 ** 		---------- ECHO ----------
 */
@@ -199,7 +203,7 @@ void			ft_lst_add_fd(t_all *a, int fd);
 void	ft_init_tree(t_all *a);
 /*		---------- EXEC_CMD ---------- */
 /*	EXEC_CMD */
-int				ft_is_our_cmd(t_command *cmd, t_all *a, char **cmd_done);
+int				ft_is_our_cmd(t_command *cmd, char **cmd_done);
 void			ft_status_cmd(t_all *a, int *status_cmd);
 void			ft_exec_cmd_main(t_command *cmd, t_all *a);
 void			ft_exec_cmd(t_command *cmd, t_all *a);
