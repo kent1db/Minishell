@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/06/22 17:04:49 by qurobert         ###   ########lyon.fr   */
-=======
-/*   Updated: 2021/06/22 15:40:14 by alafranc         ###   ########lyon.fr   */
->>>>>>> 3ff1653b95e4159678c037f4d1d2de02f2d60bfa
+/*   Updated: 2021/06/23 13:25:20 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,22 +65,18 @@ void	ft_exec_cmd_main(t_command *cmd, t_all *a)
 			else
 				execve(cmd->cmd, cmd->handle_arg, convert_env_to_strs(&a->gc, a->env));
 			exit(0);
-		}
 		a->pipe->count -= 1;
 		close(a->pipe->fd[1]);
 		a->pipe->backup_tmp = a->pipe->fd[0];
 		wait(&status);
 		a->status = WEXITSTATUS(status);
 	}
-<<<<<<< HEAD
 	a->pipe->count -= 1;
 	close(a->pipe->fd[1]);
 	ft_lst_add_fd(a, a->pipe->fd[0]);
 	a->pipe->backup_tmp = a->pipe->fd[0];
 	wait(&status);
 	a->status = WEXITSTATUS(status);
-=======
->>>>>>> 3ff1653b95e4159678c037f4d1d2de02f2d60bfa
 }
 
 void	ft_status_cmd(t_all *a, int *status_cmd)
