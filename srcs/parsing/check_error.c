@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 14:42:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/24 14:06:58 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:29:43 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,8 @@ int	ft_check_redir(t_all *a, char *line)
 	{
 		count = 0;
 		ft_is_quote(line[i], &quote);
-		while (line[i] == '<' && !quote)
-		{
-			count++;
-			i++;
-			if (count > 2)
-				return (ft_print_error_msg(a, "<"));
-		}
+		if (ft_chevron(line, &i, quote, count))
+			return (ft_print_error_msg(a, "<"));
 		count = 0;
 		while (line[i] == '>' && !quote)
 		{
@@ -77,14 +72,17 @@ int	ft_check_redir(t_all *a, char *line)
 	return (0);
 }
 
-int	ft_check_error(t_all *a, char *line)
+int	ft_check_error(t_all *a, char *line, int *i)
 {
-	if (a->tree->type == op_pipe && (a->tree->left->type != command ||\
+	if (a->tree->type == op_pipe && (a->tree->left->type != command || \
 	a->tree->right->type != command))
 		return (ft_print_error_msg(a, "|"));
 	if (a->tree->type == redir && a->tree->right->type != file)
 		return (ft_print_error_msg(a, a->tree->exec->file->file));
-	if (ft_check_redir(a, line))
+	if (ft_check_redir(a, line) || ft_check_empty_op(a, line))
+	{
+		ft_skip(line, i);
 		return (1);
-	return (ft_check_empty_op(a, line));
+	}
+	return (0);
 }

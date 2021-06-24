@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 13:14:32 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/10 15:01:41 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:45:53 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 void	ft_print_tree(t_tree *node, int count)
 {
 	if (node->type && node->type == op_pipe)
-		ft_printf(1, BLU "node %d : "RESET"pipe\n" , count);
+		ft_printf(1, BLU "node %d : "RESET"pipe\n", count);
 	else if (node->type && node->type == redir)
-		ft_printf(1, BLU "node %d : "RESET"redir : %s\n" , count, node->exec->op->op);
+		ft_printf(1, BLU "node %d : "RESET"redir : %s\n", \
+		count, node->exec->op->op);
 	else if (node->type && node->type == command)
-		ft_printf(1, BLU "node %d : "RESET"cmd = %s\t arg = %s\n" ,
+		ft_printf(1, BLU "node %d : "RESET"cmd = %s\t arg = %s\n", \
 		count, node->exec->cmd->cmd, node->exec->cmd->args);
 	else if (node->type && node->type == file)
-			ft_printf(1, BLU "node %d : "RESET"file name : %s\n" ,
-			count, node->exec->file->file);
+		ft_printf(1, BLU "node %d : "RESET"file name : %s\n", \
+		count, node->exec->file->file);
 	ft_printf(1, "\n");
 	if (node->left != NULL)
 		ft_print_tree(node->left, count + 1);

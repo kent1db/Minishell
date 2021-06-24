@@ -6,13 +6,13 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 12:59:58 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/24 13:26:41 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 16:04:50 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_is_file(char *line, int start)
+int	ft_is_file(char *line, int start)
 {
 	if (start > 0)
 	{
@@ -20,42 +20,29 @@ int		ft_is_file(char *line, int start)
 			start--;
 		while (start > 0 && line[start] == ' ')
 			start--;
-		if (line[start] && (line[start] == '>' || line[start] == '<') &&\
+		if (line[start] && (line[start] == '>' || line[start] == '<') && \
 		!ft_is_bs_before(line, start))
 			return (1);
 	}
 	return (0);
 }
 
-int		*ft_array_op(char *line, int end, t_tree *node, t_all *a)
+int	*ft_array_op(char *line, int end, t_all *a)
 {
-	int count;
+	int	count;
 	int	pos;
 	int	*op_pos;
 	int	plus;
 
-	(void)node;
 	count = 0;
 	pos = 0;
 	plus = 0;
 	op_pos = malloc_gc(&a->gc, sizeof(int) * 2);
-	if (end > -1 && line[end] && (line[end] == '<' ||\
+	if (end > -1 && line[end] && (line[end] == '<' || \
 	line[end] == '>' || line[end] == '|') && !ft_is_bs_before(line, end))
 	{
 		op_pos[1] = end;
-		while (end > -1 && line[end] && line[end] != ' ' && ((line[end] == '>' &&\
-		!ft_is_bs_before(line, end)) || (ft_isdigit(line[end]) && count < 2 &&\
-		(end == 0 || (end > 0 && line[end - 1] == ' ')))))
-		{
-			if (ft_isdigit(line[end]))
-			{
-				if (count == 0)
-					pos = end;
-				count++;
-			}
-			plus = 1;
-			end--;
-		}
+		plus = ft_check_name(&pos, &end, &count, line);
 		if (count > 1)
 			op_pos[0] = pos + plus;
 		else
@@ -82,7 +69,7 @@ void	ft_priority(char *line, int start, int end, t_tree *node)
 		ft_is_quote(line[start], &quote);
 		if (line[start] == '|' && !quote && !ft_is_bs_before(line, start))
 			node->type = op_pipe;
-		else if ((line[start] == '>'  || line[start] == '<') &&\
+		else if ((line[start] == '>' || line[start] == '<') && \
 		node->type < redir && !quote && !ft_is_bs_before(line, start))
 			node->type = redir;
 		else if (node->type < other && !quote && !ft_is_bs_before(line, start))
@@ -93,21 +80,21 @@ void	ft_priority(char *line, int start, int end, t_tree *node)
 		node->type = file;
 }
 
-int		*ft_op_pos(char *line, int end, t_tree *node, t_all *a)
+int	*ft_op_pos(char *line, int end, t_tree *node, t_all *a)
 {
-	int quote;
+	int	quote;
 
 	quote = 0;
 	while (end > -1 && line[end] && end >= node->start)
 	{
 		ft_is_quote(line[end], &quote);
-		if (line[end] == '|' && node->type == op_pipe &&\
+		if (line[end] == '|' && node->type == op_pipe && \
 		!ft_is_bs_before(line, end) && !quote)
-			return (ft_array_op(line, end, node, a));
-		if ((line[end] == '>' || line[end] == '<') &&\
+			return (ft_array_op(line, end, a));
+		if ((line[end] == '>' || line[end] == '<') && \
 		node->type == redir && !ft_is_bs_before(line, end) && !quote)
-			return (ft_array_op(line, end, node, a));
+			return (ft_array_op(line, end, a));
 		end--;
 	}
-	return (ft_array_op(line, end, node, a));
+	return (ft_array_op(line, end, a));
 }
