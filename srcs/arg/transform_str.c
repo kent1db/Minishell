@@ -6,13 +6,13 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 15:27:50 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 15:28:43 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 16:27:08 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*transform_home(char *arg, t_all *a, char *new_str, int *i)
+char	*transform_home(t_all *a, char *new_str, int *i)
 {
 	t_env	*str_env;
 
@@ -56,7 +56,6 @@ char	*transform_arg_with_env(char *arg, t_all *a)
 {
 	int		i;
 	char	quote;
-	t_env	*str_env;
 	char	*new_str;
 
 	i = 0;
@@ -69,7 +68,7 @@ char	*transform_arg_with_env(char *arg, t_all *a)
 		else if (arg[i] == quote)
 			quote = 0;
 		if (ft_is_backslash_before(arg, i, '~'))
-			new_str = transform_home(arg, a, new_str, &i);
+			new_str = transform_home(a, new_str, &i);
 		else if (ft_is_backslash_before(arg, i, '$') && quote != '\'' && \
 				arg[i + 1] && !ft_ccmp(arg[i + 1], "= $\'\""))
 			new_str = transform_var_env(arg, a, new_str, &i);

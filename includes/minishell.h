@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 16:08:02 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 16:26:59 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ int				is_quote_or_d_quote(char *str, int index);
 int				ft_is_backslash_before(char *str, int index, char c);
 int				ft_ccmp(char c, char *str);
 /* TRANSFORM_STR */
-char			*transform_home(char *arg, t_all *a, char *new_str, int *i);
+char			*transform_home(t_all *a, char *new_str, int *i);
 char			*transform_var_env(char *arg, t_all *a, char *new_str, int *i);
 char			*ft_add_char(char *arg, t_all *a, int *i, char *new_str);
 char			*transform_arg_with_env(char *arg, t_all *a);
