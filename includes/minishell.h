@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 16:07:18 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 16:08:02 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,7 +211,8 @@ int				*ft_op_pos(char *line, int end, t_tree *node, t_all *a);
 void			ft_print_start_to_end(char *line, int start, int end);
 /* REDIR_PARSING */
 void			ft_malloc_redir(t_tree *node, t_all *a, int *array, char *line);
-int				ft_re_size(char *line, int *i, int (*f)(char c, char *str), char *del);
+int				ft_re_size(char *line, int *i,
+					int (*f)(char c, char *str), char *del);
 char			*ft_strjoin_ws(char *s1, char *s2, t_all *a);
 void			ft_set_ini(int *start, int *size, int beg, int end);
 int				ft_check_name(int *pos, int *end, int *count, char *line);

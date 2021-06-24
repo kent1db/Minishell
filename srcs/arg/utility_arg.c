@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utility_arg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:33:42 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 15:11:24 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 16:08:15 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
