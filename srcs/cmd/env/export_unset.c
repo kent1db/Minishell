@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 11:34:43 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 16:44:03 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:00:30 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_export(t_all *a, char **args)
 		else
 		{
 			new_elem = ft_keyshr(a->env, args[i]);
-			if (new_elem)
+			if (new_elem && new_elem->content)
 				new_elem->status = status_env;
 			else
 				push_variable(args[i], a, status_export, 0);
@@ -55,11 +55,17 @@ int	ft_export(t_all *a, char **args)
 int	ft_unset(t_all *a, char **args)
 {
 	int	i;
+	t_env	*test;
 
 	i = -1;
 	if (!args)
 		return (0);
 	while (args[++i])
-		ft_lst_remove_key(&a->env, args[i]);
-	return (0);
+	{
+		test = pick_key_and_content(args[i], &a->gc, status_none, '=');
+		ft_lstadd_front(&a->gc, ft_lstnew(test));
+		if (!(a->status = check_error_export(args[i], test)))
+			ft_lst_remove_key(&a->env, args[i]);
+	}
+	return (a->status);
 }

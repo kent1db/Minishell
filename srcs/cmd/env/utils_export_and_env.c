@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_export.c                                      :+:      :+:    :+:   */
+/*   utils_export_and_env.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 13:58:33 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 11:33:18 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 13:57:46 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	ft_strchr_str(char *str, char *find)
 	return (0);
 }
 
-
 int	check_error_export(char *str, t_env *new_elem)
 {
 	if (new_elem && new_elem->key && ft_isdigit(new_elem->key[0]))
@@ -65,7 +64,7 @@ int	check_error_export(char *str, t_env *new_elem)
 		error_msg_export(str);
 	else if (new_elem && (new_elem->key && is_only_equal(new_elem->key)))
 		error_msg_export(str);
-	else if (new_elem && ft_strchr_str(new_elem->key, "+\\.$.+}{-*#@!^~"))
+	else if (new_elem && ft_strchr_str(new_elem->key, "+\\.$.+}{-*#@!^~/%"))
 		error_msg_export(str);
 	else
 		return (0);
@@ -97,14 +96,13 @@ int	push_variable(char *str, t_all *a, t_status status, int is_join)
 		else
 			ft_lst_remove_key(&(a->env), new_elem->key);
 	}
-	else if (new_elem)
+	if (new_elem && !is_join)
 	{
 		ft_lstadd_back_env(&a->env, new_elem);
 		ft_lstadd_front(&a->gc, ft_lstnew(new_elem));
 	}
 	return (1);
 }
-
 
 void	push_variable_whitout_export(t_command *cmd, t_all *a)
 {

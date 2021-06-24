@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 14:42:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/24 11:22:02 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 13:44:33 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_put_status(t_all *a, int status)
 
 int	ft_print_error_msg(t_all *a, char *msg)
 {
-	ft_printf(1, "minichiale: syntax error near unexpected token `%s'\n", msg);
+	ft_printf(2, "minichiale: syntax error near unexpected token `%s'\n", msg);
 	ft_put_status(a, 258);
 	return (1);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   print_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 11:34:28 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 11:24:57 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 13:00:47 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void    ft_print_export(t_env *env)
 {
 	while (env)
 	{
-		if ((env->status == status_export || env->status == status_export) && env->content)
+		if ((env->status == status_env || env->status == status_export) && env->content)
 			ft_printf(1, "declare -x %s=\"%s\"\n", env->key, env->content);
-		else if ((env->status == status_export || env->status == status_export) && !env->content)
+		else if ((env->status == status_env || env->status == status_export) && !env->content)
 			ft_printf(1, "declare -x %s\n", env->key);
 		env = env->next;
 	}

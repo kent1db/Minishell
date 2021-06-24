@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:39:30 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 11:22:27 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 12:58:12 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	ft_file(t_tree *node, t_all *a)
 {
 	int fd;
 
+	node->exec->file->file = parse_argument(a, node->exec->file->file)[0];
 	if (a->redir->chevron)
 		fd = open(node->exec->file->file, O_APPEND | O_CREAT | O_WRONLY, 0777);
 	else if (!a->redir->input)
