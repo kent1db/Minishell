@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   env_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 10:57:49 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 13:24:25 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:42:23 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*pick_key_and_content(char *envp, t_list **gc, t_status status, int separator)
+t_env	*pick_key_and_content(char *envp, t_list **gc, t_status status, \
+int separator)
 {
 	char	*key;
 	char	*content;

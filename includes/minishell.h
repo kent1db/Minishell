@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 14:22:18 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 16:03:07 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ void			ft_error_is_a_directory(t_all *a, char *cmd);
 void			ft_error_pipe(t_all *a);
 void			ft_error_msg(char *msg_error, t_list *gc);
 void			ft_error_a(char *file, char *msg_error, t_all *a);
-int				ft_check_error(t_all *a, char *line);
+int				ft_check_error(t_all *a, char *line, int *i);
+void			ft_skip(char *line, int *i);
+int				ft_chevron(char *line, int *i, int quote, int count);
 /* ---------- TERMCAP ---------- */
 /*	ARROW_KEY */
 void			ft_arrow_key(t_all *a, char c, int *cursor, char **line);
@@ -199,6 +201,10 @@ int				*ft_op_pos(char *line, int end, t_tree *node, t_all *a);
 void			ft_print_start_to_end(char *line, int start, int end);
 /* REDIR_PARSING */
 void			ft_malloc_redir(t_tree *node, t_all *a, int *array, char *line);
+int				ft_re_size(char *line, int *i, int (*f)(char c, char *str), char *del);
+char			*ft_strjoin_ws(char *s1, char *s2, t_all *a);
+void			ft_set_ini(int *start, int *size, int beg, int end);
+int				ft_check_name(int *pos, int *end, int *count, char *line);
 /*	---------- EXEC ---------- */
 /* FT_PARSE_AND_EXEC */
 void			ft_parse_and_exec(char *line, t_all *a);

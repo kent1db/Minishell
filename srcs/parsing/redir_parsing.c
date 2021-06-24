@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 13:16:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/24 13:30:05 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:49:36 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char	*ft_malloc_nb_redir(char *line, int *array, t_all *a)
 
 void	ft_malloc_redir(t_tree *node, t_all *a, int *array, char *line)
 {
-	int start;
-	int end;
+	int	start;
+	int	end;
 	int	op_pos;
 
 	start = 0;

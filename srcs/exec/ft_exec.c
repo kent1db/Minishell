@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:39:30 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 14:06:54 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 16:04:27 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void	ft_parse_and_exec(char *line, t_all *a)
 			i++;
 		}
 		a->tree = ft_binary_tree(line, start, i, a);
-		if (line && !ft_check_error(a, line))
+		if (line && !ft_check_error(a, line, &i))
 			ft_exec_tree(a->tree, a);
+		ft_print_tree(a->tree, 0);
 		ft_reset(a);
 		if (line[i])
 			i++;

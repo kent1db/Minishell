@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:33:42 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 14:34:04 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:11:24 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,11 @@ int	ft_ccmp(char c, char *str)
 			return (1);
 	}
 	return (0);
+}
+
+void	ft_skip(char *line, int *i)
+{
+	while (line[*i])
+		(*i)++;
+	(*i)--;
 }

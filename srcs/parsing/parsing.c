@@ -6,17 +6,17 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:19 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/21 13:54:00 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:44:48 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_check_cmd_after(int **array, t_tree *node, t_all *a)
+int	ft_check_cmd_after(int **array, t_tree *node, t_all *a)
 {
 	int	s;
-	int beg;
-	int end;
+	int	beg;
+	int	end;
 
 	(void)a;
 	s = node->start;

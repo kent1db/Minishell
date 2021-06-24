@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 13:16:13 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/24 13:34:45 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:44:31 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ char	*ft_substr_gc(char const *s, unsigned int start, size_t len, t_all *a)
 	return (buf);
 }
 
-int		ft_stop_index(char *line, int i)
+int	ft_stop_index(char *line, int i)
 {
 	int	quote;
 
 	quote = 0;
-	while ((line[i] && line[i] != ' ' && line[i] != '>' && line[i] != '<' &&\
-	line[i] != ';' )|| (line[i] && quote))
+	while ((line[i] && line[i] != ' ' && line[i] != '>' && line[i] != '<' && \
+	line[i] != ';' ) || (line[i] && quote))
 	{
 		ft_is_quote(line[i], &quote);
 		i++;
@@ -63,7 +63,7 @@ char	*ft_file_name(char *line, int *array, t_tree *node, t_all *a)
 	(void)a;
 	end = array[1];
 	start = array[0];
-	while (line[start] && (line[start] == '>' || line[start] == '<' ||\
+	while (line[start] && (line[start] == '>' || line[start] == '<' || \
 	line[start] == ' '))
 		start++;
 	ws = ft_stop_index(line, start);
