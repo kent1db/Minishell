@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 10:27:21 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/23 11:16:11 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:34:22 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_get_path(char *arg, char **path, t_all *a)
 	(*path)[i] = '\0';
 }
 
-int		ft_cd(t_all *a, char **arg)
+int	ft_cd(t_all *a, char **arg)
 {
 	char	*path;
 	char	*buf;

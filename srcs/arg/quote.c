@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 12:07:32 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/15 16:33:24 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:33:52 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int	count_delete_empty_quote(char *str)
 		return (0);
 	while (str[i] && str[i + 1])
 	{
-		if ((ft_is_backslash_before(str, i, '\'') && ft_is_backslash_before(str, i + 1, '\''))
-			|| (ft_is_backslash_before(str, i, '\"') && ft_is_backslash_before(str, i + 1, '\"')))
+		if ((ft_is_backslash_before(str, i, '\'') && \
+		ft_is_backslash_before(str, i + 1, '\''))
+			|| (ft_is_backslash_before(str, i, '\"') && \
+			ft_is_backslash_before(str, i + 1, '\"')))
 			i += 2;
 		else
 		{
@@ -50,7 +52,7 @@ int	count_whitout_quote(char *args)
 		if (quote == args[i])
 			quote = 0;
 		else if ((ft_is_backslash_before(args, i, '\'') && quote != '\"')
-				|| (ft_is_backslash_before(args, i, '\"') && quote != '\''))
+			|| (ft_is_backslash_before(args, i, '\"') && quote != '\''))
 			quote = args[i];
 		else
 			count++;
@@ -76,7 +78,7 @@ char	*delete_quote(t_list **gc, char *args)
 		if (quote == args[i])
 			quote = 0;
 		else if ((ft_is_backslash_before(args, i, '\'') && quote != '\"')
-				|| (ft_is_backslash_before(args, i, '\"') && quote != '\''))
+			|| (ft_is_backslash_before(args, i, '\"') && quote != '\''))
 			quote = args[i];
 		else
 			new_args[++j] = args[i];
@@ -87,8 +89,8 @@ char	*delete_quote(t_list **gc, char *args)
 
 char	*delete_empty_quote(t_list **gc, char *str)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*new_str;
 
 	if (!str)
@@ -98,8 +100,11 @@ char	*delete_empty_quote(t_list **gc, char *str)
 	j = 0;
 	while (str[i] && str[i + 1])
 	{
-		if ((ft_is_backslash_before(str, i, '\'') && ft_is_backslash_before(str, i + 1, '\''))
-			|| (ft_is_backslash_before(str, i, '\"') && ft_is_backslash_before(str, i + 1, '\"')))			i += 2;
+		if ((ft_is_backslash_before(str, i, '\'') && \
+			ft_is_backslash_before(str, i + 1, '\'')) || \
+			(ft_is_backslash_before(str, i, '\"') && \
+			ft_is_backslash_before(str, i + 1, '\"')))
+			i += 2;
 		else
 		{
 			new_str[j++] = str[i];

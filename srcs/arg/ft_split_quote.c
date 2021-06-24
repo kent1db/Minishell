@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 15:46:45 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 13:56:55 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:20:11 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	count_split_quote(char *str, char del)
 	{
 		while (ft_is_backslash_before(str, i, del) && str[i])
 			i++;
-		r = i;	
+		r = i;
 		while (!ft_is_backslash_before(str, i, del) && str[i])
 		{
 			if (ft_is_backslash_before(str, i, '\''))
@@ -47,7 +47,6 @@ int	count_split_quote(char *str, char del)
 	}
 	return (count);
 }
-
 
 char	**ft_split_quote(char *str, char del)
 {
@@ -68,7 +67,8 @@ char	**ft_split_quote(char *str, char del)
 		r = i;
 		while (!ft_is_backslash_before(str, i, del) && str[i])
 		{
-			if (ft_is_backslash_before(str, i, '\'') || ft_is_backslash_before(str, i, '\"'))
+			if (ft_is_backslash_before(str, i, '\'') || \
+			ft_is_backslash_before(str, i, '\"'))
 				jump_to_next_quote(&i, str, str[i]);
 			else
 				i++;

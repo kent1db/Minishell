@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   parse_argument.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:04:12 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 15:30:16 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:31:09 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env  	*find_env(t_all *a, char *arg,  int *i)
+t_env	*find_env(t_all *a, char *arg, int *i)
 {
 	char	*str_env;
 	t_env	*find_env;
 	int		r;
 
 	r = *i;
-	if (ft_ccmp(arg[*i], "0123456789?"))	
+	if (ft_ccmp(arg[*i], "0123456789?"))
 		str_env = ft_substr(arg, (*i)++, 1);
 	else
-		while (arg[*i] && !ft_ccmp(arg[*i], " =+-/\\?") && !is_quote_or_d_quote(arg, *i)
-				&& !ft_is_backslash_before(arg, *i, '$'))
+		while (arg[*i] && !ft_ccmp(arg[*i], " =+-/\\?") && \
+		!is_quote_or_d_quote(arg, *i) && !ft_is_backslash_before(arg, *i, '$'))
 			(*i)++;
 	str_env = ft_substr(arg, r, *i - r);
 	ft_lstadd_front(&a->gc, ft_lstnew(str_env));
@@ -58,13 +58,14 @@ char	*transform_arg_with_env(char *arg, t_all *a)
 				ft_lstadd_front(&a->gc, ft_lstnew(new_str));
 			}
 		}
-		else if (ft_is_backslash_before(arg, i, '$') && quote != '\'' && arg[i + 1] && !ft_ccmp(arg[i + 1], "= $\'\""))
+		else if (ft_is_backslash_before(arg, i, '$') && quote != '\'' && \
+		arg[i + 1] && !ft_ccmp(arg[i + 1], "= $\'\""))
 		{
 			i++;
 			str_env = find_env(a, arg, &i);
 			if (str_env && str_env->content)
 			{
-				new_str = ft_strjoin(new_str, str_env->content); 
+				new_str = ft_strjoin(new_str, str_env->content);
 				ft_lstadd_front(&a->gc, ft_lstnew(new_str));
 			}
 		}
@@ -80,7 +81,7 @@ char	*transform_arg_with_env(char *arg, t_all *a)
 	return (new_str);
 }
 
-int		ft_count_remove_null(char **strs, int size_arg)
+int	ft_count_rem_null(char **strs, int size_arg)
 {
 	int	i;
 	int	count;
@@ -94,17 +95,18 @@ int		ft_count_remove_null(char **strs, int size_arg)
 			count++;
 	return (count);
 }
+
 char	**ft_remove_null(char **strs, int size_arg)
 {
-	int	i;
-	int	j;
-	char **new_strs;
+	int		i;
+	int		j;
+	char	**new_strs;
 
 	i = 0;
 	j = -1;
 	if (!strs)
 		return (NULL);
-	new_strs = malloc(sizeof(char *) * (ft_count_remove_null(strs, size_arg) + 1));
+	new_strs = malloc(sizeof(char *) * (ft_count_rem_null(strs, size_arg) + 1));
 	while (i != size_arg)
 	{
 		if (strs[i])

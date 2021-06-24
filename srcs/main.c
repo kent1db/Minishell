@@ -1,12 +1,12 @@
-//* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/15 12:37:06 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:08:38 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ t_all	*get_all(void)
 	return (set_all(NULL));
 }
 
+void	ft_initiation(t_all *a)
+{
+	init_redir(a->redir);
+	init_pipe(a->pipe);
+}
+
 t_all	*init_all(char **envp, char *name_prg)
 {
 	t_all	*a;
@@ -47,52 +53,20 @@ t_all	*init_all(char **envp, char *name_prg)
 	a->redir = malloc_gc(&a->gc, sizeof(t_redir));
 	a->fd = NULL;
 	a->redir->input = 0;
-	init_redir(a->redir);
 	a->pipe = malloc_gc(&a->gc, sizeof(t_pipe));
 	a->pipe->fd = malloc_gc(&a->gc, sizeof(int) * 2);
 	a->pipe->fd_backup = malloc_gc(&a->gc, sizeof(int) * 3);
-	init_pipe(a->pipe);
 	a->name_prg = name_prg;
 	ft_lstadd_back_env(&a->env, ft_lstnew_env("?", "0", status_none));
 	set_all(a);
 	return (a);
 }
-// MAIN FOR TESTER
-// int	main(int ac, char **av, char **envp)
-// {
-// 	(void)ac;
-// 	t_all	*a;
-// 	char	buf[2];
-// 	char	*line;
-
-// 	line = NULL;
-// 	a = init_all(envp, av[0]);
-// 	while (read(0, buf, 1))
-// 		line = ft_strjoin(line, buf);
-// 	ft_parse_and_exec(line, a);
-// 	ft_lstclear(&a->gc, free);
-// 	return (0);
-// }
-// MAIN FOR TESTER
-
-// int	main(int ac, char **av, char **envp)
-// {
-// 	(void)ac;
-// 	t_all	*a;
-
-// 	a = init_all(envp, av[0]);
-// 	a->status = 0;
-// 	if (ac >= 3)
-// 		ft_parse_and_exec(av[2], a);
-// 	// ft_lstclear(&a->gc, free);
-// 	return (ft_atoi(ft_keyshr(a->env, "?")->content));
-// }
 
 int	main(int ac, char **av, char **envp)
 {
-	(void)ac;
 	t_all	*a;
 
+	(void)ac;
 	a = init_all(envp, av[0]);
 	init_terms(a);
 	print_banner();

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   backslash.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 13:01:18 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 11:18:42 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:19:06 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		count_add_backslash_quote(char *str)
+int	count_add_backslash_quote(char *str)
 {
 	int	i;
 	int	quote;
@@ -23,7 +23,8 @@ int		count_add_backslash_quote(char *str)
 	count = 0;
 	while (str[++i])
 	{
-		if (ft_is_backslash_before(str, i, '\'') || ft_is_backslash_before(str, i, '\"'))
+		if (ft_is_backslash_before(str, i, '\'') || \
+		ft_is_backslash_before(str, i, '\"'))
 			quote = ft_reverse_boolean(quote);
 		else if (str[i] == '\\' && quote)
 			count++;
@@ -47,7 +48,8 @@ char	*add_backslash_quote(t_list **gc, char *str)
 	quote = 0;
 	while (str[++i])
 	{
-		if (ft_is_backslash_before(str, i, '\'') || ft_is_backslash_before(str, i, '\"'))
+		if (ft_is_backslash_before(str, i, '\'') || \
+		ft_is_backslash_before(str, i, '\"'))
 			quote = ft_reverse_boolean(quote);
 		else if (str[i] == '\\' && quote)
 			new_str[++j] = str[i];
@@ -56,7 +58,7 @@ char	*add_backslash_quote(t_list **gc, char *str)
 	return (str);
 }
 
-int		count_delete_backslash(char *str)
+int	count_delete_backslash(char *str)
 {
 	int	i;
 	int	count;
@@ -108,10 +110,7 @@ char	*delete_backslash(t_list **gc, char *str)
 			i += 2;
 		}
 		else
-		{
-			new_str[++j] = str[i];
-			i++;
-		}
+			new_str[++j] = str[i++];
 	}
 	new_str[++j] = '\0';
 	return (new_str);
