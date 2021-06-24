@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 11:22:14 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:22:18 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,10 @@ void			push_variable_whitout_export(t_command *cmd, t_all *a);
 void			declare_env_var(t_command *cmd, t_all *a);
 int				push_variable(char *str, t_all *a,
 					t_status status, int is_join);
+int				check_error_export(char *str, t_env *new_elem);
+/* UTILITY_LST_LINKED */
+void			ft_lstadd_linked_env(t_all **a);
+
 /*
 ** 		---------- ECHO ----------
 */

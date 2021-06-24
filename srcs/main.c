@@ -6,13 +6,11 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 09:39:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/24 14:08:38 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:37:34 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <readline/history.h>
-#include <readline/readline.h>
 
 t_all	*set_all(t_all *tmp)
 {
@@ -56,8 +54,9 @@ t_all	*init_all(char **envp, char *name_prg)
 	a->pipe = malloc_gc(&a->gc, sizeof(t_pipe));
 	a->pipe->fd = malloc_gc(&a->gc, sizeof(int) * 2);
 	a->pipe->fd_backup = malloc_gc(&a->gc, sizeof(int) * 3);
+	ft_initiation(a);
+	ft_lstadd_linked_env(&a);
 	a->name_prg = name_prg;
-	ft_lstadd_back_env(&a->env, ft_lstnew_env("?", "0", status_none));
 	set_all(a);
 	return (a);
 }
@@ -76,3 +75,4 @@ int	main(int ac, char **av, char **envp)
 	ft_lstclear(&a->gc, free);
 	return (0);
 }
+
