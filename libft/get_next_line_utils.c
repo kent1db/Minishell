@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 00:03:45 by alafranc          #+#    #+#             */
-/*   Updated: 2021/05/28 19:56:58 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 11:04:16 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,39 +53,29 @@ int	ft_memchr_g(const void *s, int c, size_t n)
 	return (-1);
 }
 
+int	calculate_size(char *s1, char *s2)
+{
+	if (s1 && s2)
+		return (ft_strlen(s1) + ft_strlen(s2));
+	else if (!s1)
+		return (ft_strlen(s2));
+	else
+		return (ft_strlen(s1));
+}
+
 char	*ft_strjoin_free(char *s1, char *s2)
 {
 	char	*str;
-	int		i;
-	int		c1;
 
-	i = 0;
 	if (!s1 && !s2)
 		return (NULL);
-	if (s1 && s2)
-		c1 = ft_strlen(s1) + ft_strlen(s2);
-	else if (!s1)
-		c1 = ft_strlen(s2);
-	else
-		c1 = ft_strlen(s1);
-	str = ft_calloc(c1 + 1, 1);
-	c1 = 0;
+	str = ft_calloc(calculate_size(s1, s2) + 1, 1);
 	if (!(str))
 		return (NULL);
 	if (s1)
-	{
-		while (s1[i] != '\0')
-		{
-			str[i] = s1[i];
-			i++;
-		}
-		free(s1);
-	}
+		ft_strcpy(str, s1);
 	if (s2)
-	{
-		while (s2[c1] != '\0')
-			str[i++] = s2[c1++];
-	}
-	str[i] = '\0';
+		ft_strcpy(str + ft_strlen(s1), s2);
+	free(s1);
 	return (str);
 }

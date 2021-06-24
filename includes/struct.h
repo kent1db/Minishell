@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/22 15:13:06 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 10:04:04 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_input
 	int				*cursor;
 }				t_input;
 
-typedef struct	s_redir
+typedef struct s_redir
 {
 	int				fd_backup;
 	int				chevron;
@@ -62,7 +62,7 @@ typedef struct	s_redir
 	int				count;
 }				t_redir;
 
-typedef struct	s_pipe
+typedef struct s_pipe
 {
 	int				count;
 	int				is_pipe;
@@ -71,7 +71,7 @@ typedef struct	s_pipe
 	int				*fd;
 }				t_pipe;
 
-typedef struct	s_fd
+typedef struct s_fd
 {
 	int			content;
 	struct s_fd	*next;
@@ -85,12 +85,11 @@ typedef struct s_all
 	t_input			*input;
 	t_pipe			*pipe;
 	t_redir			*redir;
-	t_fd 			*fd;
+	t_fd			*fd;
 	int				in_cmd;
 	int				status;
 	int				read;
 	char			*name_prg;
 }				t_all;
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 17:17:50 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 11:22:14 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void			print_banner(void);
 int				ft_switch_keyboard(t_all *a, char buf[4],
 					int *cursor, char **line);
 void			ft_launch_cmd_and_reset(t_all *a, int *cursor, char **line);
-void			ft_print_line_and_stock(t_all *a, char **line, char *buf, int *cursor);
+void			ft_print_line_and_stock(t_all *a, char **line, char *buf,
+					int *cursor);
 int				ft_putchar_int(int c);
 void			display_line(t_all *a);
 void			ft_cmd_not_found(t_all *a, char *cmd);
@@ -53,18 +54,21 @@ void			ft_error_is_a_directory(t_all *a, char *cmd);
 void			ft_error_pipe(t_all *a);
 void			ft_error_msg(char *msg_error, t_list *gc);
 void			ft_error_a(char *file, char *msg_error, t_all *a);
-int				ft_check_error(t_all *a, char *line, int index);
+int				ft_check_error(t_all *a, char *line);
 /* ---------- TERMCAP ---------- */
 /*	ARROW_KEY */
 void			ft_arrow_key(t_all *a, char c, int *cursor, char **line);
 void			ft_left_arrow(int *cursor);
 void			ft_right_arrow(int *cursor, int size_line);
-void			ft_up_arrow(t_input *term, int *cursor, char **line, t_list **gc);
-void			ft_down_arrow(t_input *term, int *cursor, char **line, t_list **gc);
+void			ft_up_arrow(t_input *term, int *cursor, char **line,
+					t_list **gc);
+void			ft_down_arrow(t_input *term, int *cursor, char **line,
+					t_list **gc);
 /*	DELETE */
 char			*delete_char(int index_char, char *str, t_list **gc);
 void			ft_delete_line_to_cursor(t_list **gc, int *cursor, char **line);
-void			ft_delete_line_from_cursor_into_line(t_list **gc, int *cursor, char **line);
+void			ft_delete_line_from_cursor_into_line(t_list **gc, int *cursor,
+					char **line);
 void			ft_delete_line(t_list **gc, int *cursor, char **line);
 void			ft_backspace(t_list **gc, int *cursor, char **line);
 /*	INIT */
@@ -73,22 +77,27 @@ void			init_terms(t_all *a);
 void			ft_init_input(t_all *a);
 /*	PRINT */
 int				ft_print_buf(char *str, int *cursor);
-void			ft_print_buf_and_stock(t_all *a, char **line, char *buf, int *cursor);
+void			ft_print_buf_and_stock(t_all *a, char **line, char *buf,
+					int *cursor);
 /*	FT_EXEC_TERMCAP */
 void			stock_to_historic(t_all *a, char *line);
 void			ft_exec_termcap(t_all *a, int *cursor, char **line);
 void			reset_variable_termcap(t_all *a, int *cursor, char **line);
 /*	READ_CMD_LINE */
 void			read_command_line(t_all *a);
-int				ft_switch_keyboard(t_all *a, char buf[4], int *cursor, char **line);
+int				ft_switch_keyboard(t_all *a, char buf[4],
+					int *cursor, char **line);
 void			ft_launch_cmd_and_reset(t_all *a, int *cursor, char **line);
 /*	TERMIOS */
 struct termios	get_termios(void);
 void			apply_termios(struct termios termios);
 /*	UTILITY */
-t_list			*previous_current(t_list *lst, t_list *current, t_list *historic_current);
-void			ft_change_line(t_list **gc, int *cursor, char **line, char *new_line);
-char			*ft_add_string_in_index(t_list **gc, char **str_split, char *add);
+t_list			*previous_current(t_list *lst, t_list *current,
+					t_list *historic_current);
+void			ft_change_line(t_list **gc, int *cursor, char **line,
+					char *new_line);
+char			*ft_add_string_in_index(t_list **gc, char **str_split,
+					char *add);
 char			**split_str_into_index(t_list **gc, char *str, int index);
 
 /*
@@ -112,12 +121,14 @@ char			**convert_env_to_strs(t_list **gc, t_env *env);
 /* PUSH_EXPORT */
 void			push_variable_whitout_export(t_command *cmd, t_all *a);
 void			declare_env_var(t_command *cmd, t_all *a);
-int				push_variable(char *str, t_all *a, t_status status, int is_join);
+int				push_variable(char *str, t_all *a,
+					t_status status, int is_join);
 /*
 ** 		---------- ECHO ----------
 */
 int				ft_echo(t_all *a, char **args);
-void			delete_option_and_empty_quote(t_list **arg_split, t_all *a, int *option);
+void			delete_option_and_empty_quote(t_list **arg_split,
+					t_all *a, int *option);
 void			main_echo(char **arg_split);
 int				ft_reverse_boolean(int boolean);
 int				is_option(char *args);
@@ -135,7 +146,7 @@ int				ft_pwd(t_all *a, char **args);
 ** ARG_PARSING
 */
 char			**parse_argument(t_all *a, char *args);
-t_env  			*find_env(t_all *a, char *arg, int *i);
+t_env			*find_env(t_all *a, char *arg, int *i);
 char			*transform_arg_with_env(char *arg, t_all *a);
 /* BACKSLASH */
 int				count_delete_backslash(char *str);
@@ -157,26 +168,29 @@ int				ft_ccmp(char c, char *str);
 */
 /* ENV_PARSING */
 t_env			*parse_env(char **env, t_list **gc);
-t_env			*pick_key_and_content(char *envp, t_list **gc, t_status status, int separator);
+t_env			*pick_key_and_content(char *envp, t_list **gc,
+					t_status status, int separator);
 /* PARSING */
 int				ft_check_cmd_after(int **array, t_tree *node, t_all *a);
-void			ft_put_in_array(int **array, int *op_pos, t_tree *node, t_all *a);
+void			ft_put_in_array(int **array, int *op_pos,
+					t_tree *node, t_all *a);
 void			ft_parsing(char *line, int *array, t_tree *node, t_all *a);
 t_tree			*ft_binary_tree(char *line, int start, int end, t_all *a);
 /* UTILS_PARSING */
 void			ft_skip_whitespace(char *line, int *i);
 int				ft_is_bs_before(char *line, int i);
 void			ft_is_quote(char c, int *quote);
-int	   			 ft_delimiter(char c, char *del);
+int				ft_delimiter(char c, char *del);
 char			*ft_substr_sw(char *s, int w, size_t len);
 /* CMD_PARSING */
-int				ft_malloc_command(char *line, int *array, t_tree *node, t_all *a);
+int				ft_malloc_command(char *line, int *array,
+					t_tree *node, t_all *a);
 /* FILE_PARSING */
 void			ft_malloc_file(char *line, int *array, t_tree *node, t_all *a);
 /* PRINT */
 void			ft_print_tree(t_tree *node, int count);
 /* PRIORITY_OP */
-void			ft_priority(char *line, int start, int end,  t_tree *node);
+void			ft_priority(char *line, int start, int end, t_tree *node);
 int				*ft_op_pos(char *line, int end, t_tree *node, t_all *a);
 void			ft_print_start_to_end(char *line, int start, int end);
 /* REDIR_PARSING */
@@ -197,8 +211,8 @@ void			reset_redir(t_all *a);
 void			ft_reset(t_all *a);
 void			ft_lst_add_fd(t_all *a, int fd);
 /* UTILS_EXEC */
-void	ft_init_tree(t_all *a);
-void	fill_env_(t_command *cmd, t_all *a);
+void			ft_init_tree(t_all *a);
+void			fill_env_(t_command *cmd, t_all *a);
 /*		---------- EXEC_CMD ---------- */
 /*	EXEC_CMD */
 int				ft_is_our_cmd(t_command *cmd, char **cmd_done);

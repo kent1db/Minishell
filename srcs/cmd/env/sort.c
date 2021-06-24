@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 11:34:28 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 09:53:08 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 11:24:57 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ void	ft_switch_link(t_env **previous, t_env **current, t_env **next)
 	(*next) = tmp;
 }
 
-void    ft_print_env(t_env *env)
+void    ft_print_export(t_env *env)
 {
 	while (env)
 	{
-		if (env->status == status_env)
+		if ((env->status == status_export || env->status == status_export) && env->content)
 			ft_printf(1, "declare -x %s=\"%s\"\n", env->key, env->content);
+		else if ((env->status == status_export || env->status == status_export) && !env->content)
+			ft_printf(1, "declare -x %s\n", env->key);
 		env = env->next;
 	}
 }
@@ -67,6 +69,6 @@ int	ft_print_alphabetic_env(t_env *env)
 			current = current->next;
 		}
 	}
-	ft_print_env(env);
+	ft_print_export(env);
 	return (0);
 }
