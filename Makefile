@@ -6,7 +6,7 @@
 #    By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 14:11:52 by alafranc          #+#    #+#              #
-#    Updated: 2021/06/24 13:00:21 by alafranc         ###   ########lyon.fr    #
+#    Updated: 2021/06/24 14:21:47 by alafranc         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ FILES_EXEC		= ft_exec.c init_exec.c utils_exec.c reset.c
 FILES_EXEC_CMD	= pointer_array_fct_cmd.c exec_cmd.c fill_path_cmd.c
 FILES_CMD		= exit.c  easter_egg.c cd.c
 FILES_ECHO		= echo.c utility_echo.c
-FILES_ENV		= export_unset.c utility_lst_env.c convert_env_to_strs.c env.c print_export.c utils_export_and_env.c
+FILES_ENV		= export_unset.c utility_lst_env.c convert_env_to_strs.c env.c \
+					print_export.c utils_export_and_env.c utility_lst_linked.c
 FILES_TERMCAP	= arrow_key.c delete.c init_terms.c print_buf_and_stock.c \
 				  read_cmd_line.c termios.c utility.c ft_exec_termcap.c
 FILES_PARSING	= utils_parsing.c cmd_parsing.c env_parsing.c file_parsing.c parsing.c print.c priority_op.c redir_parsing.c check_error.c
@@ -48,7 +49,7 @@ LIBFT			= $(addprefix ${LIBFT_PATH}, ${NAME_LIBFT})
 
 CC				= clang
 RM				= rm -rf
-FLAGS			= -fsanitize=address -g3 -Wall -Wextra  -Werror
+FLAGS			= #-fsanitize=address -g3 -Wall -Wextra  -Werror
 
 all: 			${NAME}
 

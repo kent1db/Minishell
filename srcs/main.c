@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <readline/history.h>
-#include <readline/readline.h>
 
 t_all	*set_all(t_all *tmp)
 {
@@ -52,43 +50,11 @@ t_all	*init_all(char **envp, char *name_prg)
 	a->pipe->fd = malloc_gc(&a->gc, sizeof(int) * 2);
 	a->pipe->fd_backup = malloc_gc(&a->gc, sizeof(int) * 3);
 	init_pipe(a->pipe);
+	ft_lstadd_linked_env(&a);
 	a->name_prg = name_prg;
-	ft_lstadd_back_env(&a->env, ft_lstnew_env("?", "0", status_none));
 	set_all(a);
 	return (a);
 }
-
-// MAIN FOR TESTER
-// int	main(int ac, char **av, char **envp)
-// {
-// 	(void)ac;
-// 	t_all	*a;
-// 	char	buf[2];
-// 	char	*line;
-
-// 	line = NULL;
-// 	a = init_all(envp, av[0]);
-// 	while (read(0, buf, 1))
-// 		line = ft_strjoin(line, buf);
-// 	ft_parse_and_exec(line, a);
-// 	ft_lstclear(&a->gc, free);
-// 	return (0);
-// }
-
-
-// MAIN FOR TESTER THALLARD
-// int	main(int ac, char **av, char **envp)
-// {
-// 	(void)ac;
-// 	t_all	*a;
-
-// 	a = init_all(envp, av[0]);
-// 	a->status = 0;
-// 	if (ac >= 3)
-// 		ft_parse_and_exec(av[2], a);
-// 	// ft_lstclear(&a->gc, free);
-// 	return (ft_atoi(ft_keyshr(a->env, "?")->content));
-// }
 
 int	main(int ac, char **av, char **envp)
 {
