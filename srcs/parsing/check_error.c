@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 14:42:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/24 13:44:33 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:06:58 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,17 @@ int	ft_check_empty_op(t_all *a, char *line)
 {
 	int	n;
 	int	i;
+	int	quote;
 
 	i = 0;
 	n = ft_strlen(line);
+	quote = 0;
 	if (line[0] == ';' && ((line[1] && line[1] != ';') || !line[1]))
 		return (ft_print_error_msg(a, ";"));
 	while (line[i])
 	{
-		if (line[i] == ';' && line[i + 1] && line[i + 1] == ';')
+		ft_is_quote(line[i], &quote);
+		if (line[i] == ';' && line[i + 1] && line[i + 1] == ';' && !quote)
 			return (ft_print_error_msg(a, ";;"));
 		i++;
 	}
@@ -47,23 +50,27 @@ int	ft_check_redir(t_all *a, char *line)
 {
 	int	i;
 	int	count;
+	int	quote;
 
 	i = -1;
-	count = 0;
+	quote = 0;
 	while (line[++i])
 	{
-		while (line[i] == '<')
+		count = 0;
+		ft_is_quote(line[i], &quote);
+		while (line[i] == '<' && !quote)
 		{
 			count++;
 			i++;
-			if (count >= 2)
+			if (count > 2)
 				return (ft_print_error_msg(a, "<"));
 		}
-		while (line[i] == '>')
+		count = 0;
+		while (line[i] == '>' && !quote)
 		{
 			count++;
 			i++;
-			if (count >= 2)
+			if (count > 2)
 				return (ft_print_error_msg(a, ">"));
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 13:16:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/15 10:59:29 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 13:30:05 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

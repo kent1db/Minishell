@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   priority_op.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 12:59:58 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/23 13:30:10 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 13:26:41 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int		*ft_array_op(char *line, int end, t_tree *node, t_all *a)
 	{
 		op_pos[1] = end;
 		while (end > -1 && line[end] && line[end] != ' ' && ((line[end] == '>' &&\
-		!ft_is_bs_before(line, end)) || (ft_isdigit(line[end]) && count < 2)))
+		!ft_is_bs_before(line, end)) || (ft_isdigit(line[end]) && count < 2 &&\
+		(end == 0 || (end > 0 && line[end - 1] == ' ')))))
 		{
 			if (ft_isdigit(line[end]))
 			{
@@ -94,13 +95,17 @@ void	ft_priority(char *line, int start, int end, t_tree *node)
 
 int		*ft_op_pos(char *line, int end, t_tree *node, t_all *a)
 {
+	int quote;
+
+	quote = 0;
 	while (end > -1 && line[end] && end >= node->start)
 	{
+		ft_is_quote(line[end], &quote);
 		if (line[end] == '|' && node->type == op_pipe &&\
-		!ft_is_bs_before(line, end))
+		!ft_is_bs_before(line, end) && !quote)
 			return (ft_array_op(line, end, node, a));
 		if ((line[end] == '>' || line[end] == '<') &&\
-		node->type == redir && !ft_is_bs_before(line, end))
+		node->type == redir && !ft_is_bs_before(line, end) && !quote)
 			return (ft_array_op(line, end, node, a));
 		end--;
 	}
