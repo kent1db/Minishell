@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:39:30 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 14:06:54 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:46:36 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_parse_and_exec(char *line, t_all *a)
 {
 	int	i;
-	int start;
+	int	start;
 	int	quote;
 
 	i = 0;
@@ -42,7 +42,7 @@ void	ft_parse_and_exec(char *line, t_all *a)
 
 void	ft_exec_tree(t_tree *node, t_all *a)
 {
-    if (node->type && node->type == op_pipe)
+	if (node->type && node->type == op_pipe)
 		ft_pipe(a);
 	else if (node->type && node->type == redir)
 	{
@@ -65,7 +65,7 @@ void	ft_exec_tree(t_tree *node, t_all *a)
 
 void	ft_file(t_tree *node, t_all *a)
 {
-	int fd;
+	int	fd;
 
 	node->exec->file->file = parse_argument(a, node->exec->file->file)[0];
 	if (a->redir->chevron)

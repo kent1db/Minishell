@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 17:11:02 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 14:22:18 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:54:14 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,13 @@ char			**convert_env_to_strs(t_list **gc, t_env *env);
 /* PUSH_EXPORT */
 void			push_variable_whitout_export(t_command *cmd, t_all *a);
 void			declare_env_var(t_command *cmd, t_all *a);
-int				push_variable(char *str, t_all *a,
-					t_status status, int is_join);
+int				push_variable_plus(char *str, t_all *a, t_status status);
+int				push_variable_equal(char *str, t_all *a, t_status status);
 int				check_error_export(char *str, t_env *new_elem);
 /* UTILITY_LST_LINKED */
 void			ft_lstadd_linked_env(t_all **a);
+int				is_only_equal(char *str);
+int				ft_strchr_str(char *str, char *find);
 
 /*
 ** 		---------- ECHO ----------
@@ -143,6 +145,9 @@ char			*delete_backslash(t_list **gc, char *str);
 int				ft_exit(t_all *a, char **args);
 int				ft_alexis(t_all *a, char **args);
 int				ft_quentin(t_all *a, char **args);
+void			ft_init_old_pwd(t_all *a);
+void			update_path(char **path, int *ret, t_all *a);
+char			*ft_content_shr(t_env *env, char *key);
 int				ft_cd(t_all *a, char **args);
 int				ft_pwd(t_all *a, char **args);
 /*	
@@ -167,6 +172,11 @@ char			*delete_quote(t_list **gc, char *args);
 int				is_quote_or_d_quote(char *str, int index);
 int				ft_is_backslash_before(char *str, int index, char c);
 int				ft_ccmp(char c, char *str);
+/* TRANSFORM_STR */
+char			*transform_home(char *arg, t_all *a, char *new_str, int *i);
+char			*transform_var_env(char *arg, t_all *a, char *new_str, int *i);
+char			*ft_add_char(char *arg, t_all *a, int *i, char *new_str);
+char			*transform_arg_with_env(char *arg, t_all *a);
 /*	
 ** ---------- PARSING ----------
 */
@@ -232,4 +242,8 @@ void			fill_cmd_with_path(t_command *cmd, t_all *a);
 /* PTR_ARRAY_FUNCTION */
 char			**list_cmd_done(t_list **gc);
 void			*init_array_instruction_function(t_list **gc);
+/* EXEC_CMD */
+int				ft_is_our_cmd(t_command *cmd, char **cmd_done);
+int				ft_exec_cmd_error(t_command *cmd, t_all *a);
+void			ft_dup_for_pipe(t_all *a);
 #endif

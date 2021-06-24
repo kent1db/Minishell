@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 14:45:11 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/16 11:35:07 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:33:13 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_env(t_all *a, char **args)
 {
-	(void)args;
-	t_env *begin_env;
+	t_env	*begin_env;
 
+	(void)args;
 	begin_env = a->env;
 	while (a->env)
 	{

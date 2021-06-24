@@ -6,57 +6,15 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:10:22 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 11:45:59 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:48:11 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// int	ft_launch_execve_with_path(char *path_cmd, t_all *a, char **arg)
-// {
-// 	int			status;
-
-// 	{
-// 		if (fork() == 0)
-// 		{
-// 			if (a->pipe->boolean == 1)
-// 			{
-// 				// close(a->pipe->fd[0]);
-// 				dup2(a->pipe->fd[1], 1);
-// 				close(a->pipe->fd[0]);
-// 				// close(a->pipe->fd[1]);
-// 			}
-// 			else if (a->pipe->boolean == 2)
-// 			{
-// 				// close(a->pipe->fd[1]);
-// 				dup2(a->pipe->backup_tmp, 0);
-// 				close(a->pipe->fd[0]);
-// 			}
-// 			execve(path_cmd, arg, convert_env_to_strs(&a->gc, a->env));
-// 			exit(0);
-// 		}
-// 		wait(&status);
-// 		if (a->pipe->boolean == 1)
-// 		{
-// 			a->pipe->backup_tmp = a->pipe->fd[0];
-// 			close(a->pipe->fd[1]);
-// 			pipe(a->pipe->fd);
-// 		}
-// 		if (a->pipe->boolean == 2)
-// 		{
-// 			// close(a->pipe->fd[0]);
-// 			close(a->pipe->fd[1]);
-// 		}
-// 		if (WIFEXITED(status))
-// 			a->status_cmd = WEXITSTATUS(status);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
 int	ft_is_a_directory(char *cmd_path)
 {
-	struct stat buf;
+	struct stat	buf;
 	int			ret;
 
 	ret = lstat(cmd_path, &buf);
@@ -68,9 +26,9 @@ int	ft_is_a_directory(char *cmd_path)
 int	ft_test_with_path(t_command *cmd, t_all *a)
 {
 	struct stat	buf;
-	char	**path_cmd;
-	int		i;
-	t_env	*path;
+	char		**path_cmd;
+	int			i;
+	t_env		*path;
 
 	i = -1;
 	path = ft_keyshr(a->env, "PATH");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 15:46:45 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 14:20:11 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:17:56 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,12 @@ int	count_split_quote(char *str, char del)
 	return (count);
 }
 
-char	**ft_split_quote(char *str, char del)
+void	ft_split_quote_while(char *str, char del, char **arg)
 {
-	int		i;
-	int		j;
-	int		r;
-	char	**arg;
+	int	i;
+	int	j;
+	int	r;
 
-	if (!str)
-		return (NULL);
-	arg = malloc(sizeof(char *) * (count_split_quote(str, del) + 1));
 	i = 0;
 	j = -1;
 	while (str[i])
@@ -76,5 +72,15 @@ char	**ft_split_quote(char *str, char del)
 		arg[++j] = ft_substr(str, r, i - r);
 	}
 	arg[++j] = NULL;
+}
+
+char	**ft_split_quote(char *str, char del)
+{
+	char	**arg;
+
+	if (!str)
+		return (NULL);
+	arg = malloc(sizeof(char *) * (count_split_quote(str, del) + 1));
+	ft_split_quote_while(str, del, arg);
 	return (arg);
 }

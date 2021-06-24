@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 11:56:26 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 15:26:47 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:31:56 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	count_delete_option(char **args)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	count = 0;
 	i = 0;
@@ -48,7 +48,7 @@ char	**delete_option(int *option, char **args)
 		i++;
 	}
 	while (args[i])
-			new_args[++j] = ft_strdup(args[i++]);
+		new_args[++j] = ft_strdup(args[i++]);
 	new_args[++j] = NULL;
 	return (new_args);
 }

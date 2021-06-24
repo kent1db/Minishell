@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 13:46:05 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/23 16:45:50 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:47:20 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	ft_init_tree(t_all *a)
 	a->tree->type = -1;
 }
 
-void fill_env_(t_command *cmd, t_all *a)
+void	fill_env_(t_command *cmd, t_all *a)
 {
-	t_env *env;
+	t_env	*env;
 
 	env = ft_keyshr(a->env, "_");
 	if (!env)
@@ -33,5 +33,5 @@ void fill_env_(t_command *cmd, t_all *a)
 	else if (cmd->handle_arg && cmd->handle_arg[0])
 		env->content = cmd->handle_arg[ft_strslen(cmd->handle_arg) - 1];
 	else if (cmd->cmd)
-		env->content = cmd->cmd;	
+		env->content = cmd->cmd;
 }

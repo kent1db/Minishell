@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:30:07 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 14:13:12 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:46:47 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void	reset_redir(t_all *a)
 {
-	// dprintf(1, "1\n");
-	dup2(a->pipe->fd_backup[0],0);
-	dup2(a->pipe->fd_backup[1],1);
-	dup2(a->pipe->fd_backup[2],2);
+	dup2(a->pipe->fd_backup[0], 0);
+	dup2(a->pipe->fd_backup[1], 1);
+	dup2(a->pipe->fd_backup[2], 2);
 	init_redir(a->redir);
 }
 

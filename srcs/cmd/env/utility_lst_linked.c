@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 14:19:54 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 14:22:42 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:36:28 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_lstadd_back_env(t_env **alst, t_env *new)
 
 void	ft_lstadd_linked_env(t_all **a)
 {
-	t_env *new_elem;
+	t_env	*new_elem;
 
 	new_elem = ft_lstnew_env("?", "0", status_none);
 	ft_lstadd_back_env(&(*a)->env, new_elem);

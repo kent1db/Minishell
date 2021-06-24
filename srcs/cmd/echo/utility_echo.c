@@ -6,12 +6,11 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:22:33 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/22 15:25:16 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:32:03 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int	ft_reverse_boolean(int boolean)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 10:15:33 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/14 10:15:36 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:50:43 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_lstadd_back_env(t_env **alst, t_env *new)
 
 void	ft_lst_remove_key(t_env **env, char *key)
 {
-	t_env *begin;
+	t_env	*begin;
 
 	begin = *env;
 	if (!ft_strcmp((*env)->key, key))

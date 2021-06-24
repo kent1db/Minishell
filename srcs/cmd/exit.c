@@ -6,13 +6,13 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 15:37:25 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/23 12:02:59 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:50:18 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_exit(t_all *a, char **args)
+int	ft_exit(t_all *a, char **args)
 {
 	(void)args;
 	a->read = 0;

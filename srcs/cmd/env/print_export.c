@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 11:34:28 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 13:00:47 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:36:20 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_switch_link_begin(t_env **begin)
 {
-	t_env **second;
+	t_env	**second;
 
 	second = malloc(sizeof(t_env));
 	*second = (*begin)->next;
@@ -25,7 +25,7 @@ void	ft_switch_link_begin(t_env **begin)
 
 void	ft_switch_link(t_env **previous, t_env **current, t_env **next)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = (*previous);
 	(*previous) = (*current);
@@ -33,13 +33,15 @@ void	ft_switch_link(t_env **previous, t_env **current, t_env **next)
 	(*next) = tmp;
 }
 
-void    ft_print_export(t_env *env)
+void	ft_print_export(t_env *env)
 {
 	while (env)
 	{
-		if ((env->status == status_env || env->status == status_export) && env->content)
+		if ((env->status == status_env || env->status == status_export)
+			&& env->content)
 			ft_printf(1, "declare -x %s=\"%s\"\n", env->key, env->content);
-		else if ((env->status == status_env || env->status == status_export) && !env->content)
+		else if ((env->status == status_env || env->status == status_export)
+			&& !env->content)
 			ft_printf(1, "declare -x %s\n", env->key);
 		env = env->next;
 	}
@@ -47,8 +49,8 @@ void    ft_print_export(t_env *env)
 
 int	ft_print_alphabetic_env(t_env *env)
 {
-	t_env *current;
-	t_env *previous;
+	t_env	*current;
+	t_env	*previous;
 
 	previous = NULL;
 	current = env;
@@ -57,7 +59,8 @@ int	ft_print_alphabetic_env(t_env *env)
 		if (ft_strcmp(current->key, current->next->key) > 0)
 		{
 			if (previous)
-				ft_switch_link(&previous->next, &current->next, &current->next->next);
+				ft_switch_link(&previous->next, &current->next,
+					&current->next->next);
 			else
 				ft_switch_link_begin(&env);
 			previous = NULL;
@@ -65,7 +68,7 @@ int	ft_print_alphabetic_env(t_env *env)
 		}
 		else
 		{
-			previous = current;	
+			previous = current;
 			current = current->next;
 		}
 	}

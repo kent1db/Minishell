@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 10:24:44 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/03 11:09:11 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:32:42 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_lstsize_env_status(t_env *env, t_status status)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (env)
@@ -32,7 +32,8 @@ char	**convert_env_to_strs(t_list **gc, t_env *env)
 	int		i;
 
 	i = 0;
-	strs_env = malloc_gc(gc, sizeof(char *) * (ft_lstsize_env_status(env, status_env) + 1));
+	strs_env = malloc_gc(gc, sizeof(char *) * \
+			(ft_lstsize_env_status(env, status_env) + 1));
 	while (env)
 	{
 		if (env->status == status_env)

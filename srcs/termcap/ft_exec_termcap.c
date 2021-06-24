@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:53:58 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/21 15:44:33 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:43:51 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	stock_to_historic(t_all *a, char *line)
 {
-	t_list  *new_historic;
+	t_list	*new_historic;
 
 	if (line && line[0] != '\0')
 	{

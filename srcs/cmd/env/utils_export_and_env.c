@@ -6,16 +6,11 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 13:58:33 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/24 13:57:46 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 15:49:40 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	error_msg_export(char *error)
-{
-	ft_printf(2, "minichiale: `%s': not a valid identifier\n", error);
-}
 
 int	is_only_equal(char *str)
 {
@@ -54,49 +49,44 @@ int	ft_strchr_str(char *str, char *find)
 	return (0);
 }
 
-int	check_error_export(char *str, t_env *new_elem)
-{
-	if (new_elem && new_elem->key && ft_isdigit(new_elem->key[0]))
-		error_msg_export(str);
-	else if (new_elem && !new_elem->key)
-		error_msg_export(str);
-	else if (new_elem && (new_elem->content && is_only_equal(new_elem->content)))
-		error_msg_export(str);
-	else if (new_elem && (new_elem->key && is_only_equal(new_elem->key)))
-		error_msg_export(str);
-	else if (new_elem && ft_strchr_str(new_elem->key, "+\\.$.+}{-*#@!^~/%"))
-		error_msg_export(str);
-	else
-		return (0);
-	return (1);
-}
-
-int	push_variable(char *str, t_all *a, t_status status, int is_join)
+int	push_variable_plus(char *str, t_all *a, t_status status)
 {
 	t_env	*new_elem;
 	t_env	*env;
 
-	if (is_join)
-		new_elem = pick_key_and_content(str, &a->gc, status, '+');
-	else
-		new_elem = pick_key_and_content(str, &a->gc, status, '=');
+	new_elem = pick_key_and_content(str, &a->gc, status, '+');
 	if (check_error_export(str, new_elem))
 	{
 		a->status = 1;
-		return (0);		
+		return (0);
 	}
 	if (new_elem)
 		env = ft_keyshr(a->env, new_elem->key);
 	else
 		env = NULL;
 	if (new_elem && env)
+		env->content = ft_strjoin(env->content, new_elem->content);
+	return (1);
+}
+
+int	push_variable_equal(char *str, t_all *a, t_status status)
+{
+	t_env	*new_elem;
+	t_env	*env;
+
+	new_elem = pick_key_and_content(str, &a->gc, status, '=');
+	if (check_error_export(str, new_elem))
 	{
-		if (is_join)
-			env->content = ft_strjoin(env->content, new_elem->content);
-		else
-			ft_lst_remove_key(&(a->env), new_elem->key);
+		a->status = 1;
+		return (0);
 	}
-	if (new_elem && !is_join)
+	if (new_elem)
+		env = ft_keyshr(a->env, new_elem->key);
+	else
+		env = NULL;
+	if (new_elem && env)
+		ft_lst_remove_key(&a->env, env->key);
+	if (new_elem)
 	{
 		ft_lstadd_back_env(&a->env, new_elem);
 		ft_lstadd_front(&a->gc, ft_lstnew(new_elem));
@@ -109,8 +99,8 @@ void	push_variable_whitout_export(t_command *cmd, t_all *a)
 	int	i;
 
 	i = -1;
-	push_variable(cmd->cmd, a, status_none, 0);
+	push_variable_equal(cmd->cmd, a, status_none);
 	if (cmd->handle_arg)
-		while(cmd->handle_arg[++i])
-			push_variable(cmd->handle_arg[i], a, status_none, 0);
+		while (cmd->handle_arg[++i])
+			push_variable_equal(cmd->handle_arg[i], a, status_none);
 }

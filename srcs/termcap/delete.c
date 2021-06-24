@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 14:08:59 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/02 11:09:55 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:42:25 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ void	ft_delete_line_to_cursor(t_list **gc, int *cursor, char **line)
 		ft_backspace(gc, cursor, line);
 }
 
-void	ft_delete_line_from_cursor_into_line(t_list **gc, int *cursor, char **line)
+void	ft_delete_line_from_cursor_into_line(t_list **gc, int *cursor,
+			char **line)
 {
-	int cursor_remember;
+	int	cursor_remember;
 
 	if (!line || !(*line))
 		return ;
@@ -60,7 +61,6 @@ void	ft_delete_line(t_list **gc, int *cursor, char **line)
 	while (*cursor > 0)
 		ft_backspace(gc, cursor, line);
 }
-
 
 void	ft_backspace(t_list **gc, int *cursor, char **line)
 {

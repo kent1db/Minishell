@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 18:08:36 by alafranc          #+#    #+#             */
-/*   Updated: 2021/06/18 14:41:02 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 14:44:45 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_print_buf_and_stock(t_all *a, char **line, char *buf, int *cursor)
 		else
 		{
 			*line = ft_strjoin(*line, buf);
-			ft_lstadd_front(&a->gc, ft_lstnew(*line));			
+			ft_lstadd_front(&a->gc, ft_lstnew(*line));
 		}
 		a->input->historic_current = ft_lstnew(*line);
 		ft_lstadd_front(&a->gc, ft_lstnew(a->input->historic_current));
