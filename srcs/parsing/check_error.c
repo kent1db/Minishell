@@ -6,7 +6,7 @@
 /*   By: qurobert <qurobert@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 14:42:47 by qurobert          #+#    #+#             */
-/*   Updated: 2021/06/24 15:29:43 by qurobert         ###   ########lyon.fr   */
+/*   Updated: 2021/06/24 18:42:52 by qurobert         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int	ft_check_redir(t_all *a, char *line)
 
 int	ft_check_error(t_all *a, char *line, int *i)
 {
-	if (a->tree->type == op_pipe && (a->tree->left->type != command || \
-	a->tree->right->type != command))
+	if (a->tree->type == op_pipe && (a->tree->left->type < command || \
+	a->tree->right->type < command))
 		return (ft_print_error_msg(a, "|"));
 	if (a->tree->type == redir && a->tree->right->type != file)
 		return (ft_print_error_msg(a, a->tree->exec->file->file));
